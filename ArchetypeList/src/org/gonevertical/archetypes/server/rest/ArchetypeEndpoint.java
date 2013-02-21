@@ -31,7 +31,7 @@ import com.google.appengine.api.search.ScoredDocument;
 import com.google.appengine.api.search.SearchServiceFactory;
 import com.google.appengine.datanucleus.query.JDOCursorHelper;
 
-@Api(name = "archetype", description = "This entity represents a Archetype.", version = "v1")
+@Api(name = "archetypeendpoint", description = "This entity represents a Archetype.", version = "v1")
 public class ArchetypeEndpoint {
 
   private static final Index INDEX = getIndex();

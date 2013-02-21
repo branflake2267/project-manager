@@ -7,7 +7,7 @@ import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
-import javax.persistence.Id;
+import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.datastore.Key;
@@ -17,7 +17,7 @@ import com.google.appengine.api.datastore.Text;
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Archetype {
 
-  @Id
+  @PrimaryKey
   @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
   private Key key;
 
