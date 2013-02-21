@@ -14,7 +14,8 @@ public class ArchetypeEndpointTest extends TestCase {
   }
 
   public void testInsert() {
-    String json = "{\"name\":\"name\",\"repository\":\"repository\",\"groupId\":\"groupId\",\"artifactId\":\"artifactId\",\"version\":\"version\"}";
+    String json = "{\"name\":\"name\",\"repository\":\"repository\",\"groupId\":\"groupId\"," +
+    		"\"artifactId\":\"artifactId\",\"version\":\"version\"}";
 
     RestAssured.given().contentType(ContentType.JSON).content(json).expect().statusCode(200).when().post(url).print();
   }
