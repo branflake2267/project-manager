@@ -16,7 +16,7 @@ public class Tag {
   @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
   private Key key;
   
-  private Category name;
+  private String name;
 
   public String getKey() {
     return KeyFactory.keyToString(key);
@@ -26,11 +26,11 @@ public class Tag {
     this.key = KeyFactory.stringToKey(key);
   }
 
-  public Category getName() {
+  public String getName() {
     return name;
   }
 
-  public void setName(Category name) {
+  public void setName(String name) {
     this.name = name;
   }
   
