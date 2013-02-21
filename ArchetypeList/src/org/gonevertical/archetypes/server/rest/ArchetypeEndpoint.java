@@ -48,7 +48,7 @@ public class ArchetypeEndpoint {
         .addField(Field.newBuilder().setName("name").setText(o.getName() != null ? o.getName() : ""))
         .addField(
             Field.newBuilder().setName("description")
-                .setText(o.getDescription().getValue() != null ? o.getDescription().getValue() : ""))
+                .setText(o.getDescription() != null ? o.getDescription() : ""))
          .addField(Field.newBuilder().setName("repository").setText(o.getRepository() != null ? o.getRepository() : ""))
          .addField(Field.newBuilder().setName("groupId").setText(o.getGroupId() != null ? o.getGroupId() : ""))
          .addField(Field.newBuilder().setName("artifactId").setText(o.getArtifactId() != null ? o.getArtifactId() : ""))
@@ -126,15 +126,12 @@ public class ArchetypeEndpoint {
    * @return The inserted entity.
    */
   public Archetype insertArchetype(Archetype archetype, com.google.appengine.api.users.User guser) throws Exception {
-    if (guser == null) {
-      throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
-    }
+//    if (guser == null) {
+//      throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
+//    }
 
     PersistenceManager mgr = getPersistenceManager();
     try {
-      if (containsArchetype(archetype)) {
-        throw new EntityExistsException("Object already exists");
-      }
       mgr.makePersistent(archetype);
     } finally {
       mgr.close();

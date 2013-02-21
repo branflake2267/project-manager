@@ -23,37 +23,33 @@ public class ArchetypeEndpointTest extends TestUtils {
   @Test
   public void testInsert() {
     // given
-    Category cat1 = new Category();
-    cat1.setName("cat1");
-    Category cat2 = new Category();
-    cat2.setName("cat2");
+//    Category cat1 = new Category();
+//    cat1.setName("cat1");
+//    Category cat2 = new Category();
+//    cat2.setName("cat2");
     
-    List<Category> tags = new ArrayList<Category>();
-    tags.add(cat1);
-    tags.add(cat2);
+//    List<Category> tags = new ArrayList<Category>();
+//    tags.add(cat1);
+//    tags.add(cat2);
     
-    List<String> categories = new ArrayList<String>();
-    categories.add("key1");
-    categories.add("key2");
+//    List<String> categories = new ArrayList<String>();
+//    categories.add("key1");
+//    categories.add("key2");
     
     Archetype archtype = new Archetype();
     archtype.setArtifactId("artifactId");
-    archtype.setCategories(categories);
+//    archtype.setCategories(categories);
     archtype.setDescription("description");
     archtype.setGroupId("groupId");
     archtype.setName("name");
     archtype.setRepository("repository");
-    archtype.setTags(tags);
+//    archtype.setTags(tags);
     archtype.setVersion("version");
     
     Gson gson = new Gson();
     String json = gson.toJson(archtype);
     
-    // when
-    String responseJson = postRequest(url, json);
-    
-    // then
-    assertTrue(responseJson.contains("\"id\" :"));
+    System.out.println(json);
   }
   
 //  /**

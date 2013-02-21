@@ -39,6 +39,9 @@ public class Archetype {
   }
 
   public void setKey(String key) {
+    if (key == null) {
+      return;
+    }
     this.key = KeyFactory.stringToKey(key);
   }
 
@@ -55,8 +58,11 @@ public class Archetype {
     this.name = name;
   }
 
-  public Text getDescription() {
-    return description;
+  public String getDescription() {
+    if (description == null) {
+      return null;
+    }
+    return description.getValue();
   }
 
   public void setDescription(String description) {

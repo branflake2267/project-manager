@@ -153,7 +153,7 @@
             "type" : "string"
           },
           "description" : {
-            "$ref" : "Text"
+            "type" : "string"
           },
           "categories" : {
             "type" : "array",
@@ -180,15 +180,6 @@
             "type" : "string"
           },
           "blobUrl" : {
-            "type" : "string"
-          }
-        }
-      },
-      "Text" : {
-        "id" : "Text",
-        "type" : "object",
-        "properties" : {
-          "value" : {
             "type" : "string"
           }
         }
