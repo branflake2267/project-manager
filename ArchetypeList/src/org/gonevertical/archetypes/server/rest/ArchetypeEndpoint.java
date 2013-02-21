@@ -48,7 +48,11 @@ public class ArchetypeEndpoint {
         .addField(Field.newBuilder().setName("name").setText(o.getName() != null ? o.getName() : ""))
         .addField(
             Field.newBuilder().setName("description")
-                .setText(o.getDescription().getValue() != null ? o.getDescription().getValue() : ""));
+                .setText(o.getDescription().getValue() != null ? o.getDescription().getValue() : ""))
+         .addField(Field.newBuilder().setName("repository").setText(o.getRepository() != null ? o.getRepository() : ""))
+         .addField(Field.newBuilder().setName("groupId").setText(o.getGroupId() != null ? o.getGroupId() : ""))
+         .addField(Field.newBuilder().setName("artifactId").setText(o.getArtifactId() != null ? o.getArtifactId() : ""))
+         .addField(Field.newBuilder().setName("version").setText(o.getVersion() != null ? o.getVersion() : ""));
     docBuilder.setId(o.getKey());
     Document doc = docBuilder.build();
     INDEX.putAsync(doc);

@@ -2,10 +2,16 @@ package org.gonevertical.archetypes.server;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.gonevertical.archetypes.server.domain.Archetype;
+import org.gonevertical.archetypes.server.domain.Category;
 import org.gonevertical.archetypes.utils.TestUtils;
 import org.junit.Test;
 
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.gson.Gson;
 
 public class ArchetypeEndpointTest extends TestUtils {
@@ -19,15 +25,28 @@ public class ArchetypeEndpointTest extends TestUtils {
   @Test
   public void testInsert() {
     // given
+    Category cat1 = new Category();
+    cat1.setName("cat1");
+    Category cat2 = new Category();
+    cat2.setName("cat2");
+    
+    List<Category> tags = new ArrayList<Category>();
+    tags.add(cat1);
+    tags.add(cat2);
+    
+    List<Key> categories = new ArrayList<Key>();
+    categories.add(KeyFactory.createKey(Archetype.class.getSimpleName(), 1));
+    categories.add(KeyFactory.createKey(Archetype.class.getSimpleName(), 2));
+    
     Archetype archtype = new Archetype();
     archtype.setArtifactId("artifactId");
-    archtype.setCategories(null);
+    archtype.setCategories(categories);
     archtype.setDescription("description");
     archtype.setGroupId("groupId");
-    // archtype.setKey(null);
     archtype.setName("name");
     archtype.setRepository("repository");
-    archtype.setTags(null);
+    archtype.setTags(tags);
+    archtype.setVersion("version");
     
     Gson gson = new Gson();
     String json = gson.toJson(archtype);
