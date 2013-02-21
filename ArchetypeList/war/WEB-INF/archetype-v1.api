@@ -1,0 +1,296 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://myapp.appspot.com/_ah/api",
+  "name" : "archetype",
+  "version" : "v1",
+  "description" : "This entity represents a Archetype.",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "http://myapp.appspot.com/_ah/spi",
+    "deadline" : 10.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "archetype.updateArchetype" : {
+      "path" : "archetype",
+      "httpMethod" : "PUT",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "ArchetypeEndpoint.updateArchetype",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "archetype.listArchetype" : {
+      "path" : "archetype",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "ArchetypeEndpoint.listArchetype",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "archetype.archetype.search" : {
+      "path" : "archetype/search/{queryString}",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "ArchetypeEndpoint.search",
+      "request" : {
+        "parameters" : {
+          "queryString" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "archetype.insertArchetype" : {
+      "path" : "archetype",
+      "httpMethod" : "POST",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "ArchetypeEndpoint.insertArchetype",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "archetype.getArchetype" : {
+      "path" : "archetype/{id}",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "ArchetypeEndpoint.getArchetype",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "archetype.removeArchetype" : {
+      "path" : "archetype/{id}",
+      "httpMethod" : "DELETE",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "ArchetypeEndpoint.removeArchetype",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Archetype" : {
+        "id" : "Archetype",
+        "type" : "object",
+        "properties" : {
+          "key" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "description" : {
+            "$ref" : "Text"
+          },
+          "categories" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Category"
+            }
+          },
+          "repository" : {
+            "type" : "string"
+          },
+          "groupId" : {
+            "type" : "string"
+          },
+          "artifactId" : {
+            "type" : "string"
+          },
+          "version" : {
+            "type" : "string"
+          },
+          "blobUrl" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Text" : {
+        "id" : "Text",
+        "type" : "object",
+        "properties" : {
+          "value" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Category" : {
+        "id" : "Category",
+        "type" : "object",
+        "properties" : {
+          "key" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "User" : {
+        "id" : "User",
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "authDomain" : {
+            "type" : "string"
+          },
+          "userId" : {
+            "type" : "string"
+          },
+          "federatedIdentity" : {
+            "type" : "string"
+          },
+          "nickname" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CollectionResponse_Archetype" : {
+        "id" : "CollectionResponse_Archetype",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Archetype"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
+      "ArchetypeCollection" : {
+        "id" : "ArchetypeCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Archetype"
+            }
+          }
+        }
+      }
+    },
+    "methods" : {
+      "ArchetypeEndpoint.updateArchetype" : {
+        "request" : {
+          "$ref" : "Archetype"
+        },
+        "response" : {
+          "$ref" : "Archetype"
+        }
+      },
+      "ArchetypeEndpoint.listArchetype" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Archetype"
+        }
+      },
+      "ArchetypeEndpoint.search" : {
+        "response" : {
+          "$ref" : "ArchetypeCollection"
+        }
+      },
+      "ArchetypeEndpoint.insertArchetype" : {
+        "request" : {
+          "$ref" : "Archetype"
+        },
+        "response" : {
+          "$ref" : "Archetype"
+        }
+      },
+      "ArchetypeEndpoint.getArchetype" : {
+        "response" : {
+          "$ref" : "Archetype"
+        }
+      },
+      "ArchetypeEndpoint.removeArchetype" : {
+        "response" : {
+          "$ref" : "Archetype"
+        }
+      }
+    }
+  }
+}
