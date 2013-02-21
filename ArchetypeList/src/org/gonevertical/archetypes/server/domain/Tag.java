@@ -23,6 +23,9 @@ public class Tag {
   }
 
   public void setKey(String key) {
+    if (key == null) {
+      return;
+    }
     this.key = KeyFactory.stringToKey(key);
   }
 

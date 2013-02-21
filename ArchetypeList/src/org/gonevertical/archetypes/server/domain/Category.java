@@ -5,7 +5,6 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
-import javax.persistence.Id;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
@@ -24,6 +23,9 @@ public class Category {
   }
 
   public void setKey(String key) {
+    if (key == null) {
+      return;
+    }
     this.key = KeyFactory.stringToKey(key);
   }
 

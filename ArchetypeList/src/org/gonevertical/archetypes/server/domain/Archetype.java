@@ -66,12 +66,15 @@ public class Archetype {
   }
 
   public void setDescription(String description) {
+    if (description == null) {
+      return;
+    }
     this.description = new Text(description);
   }
 
   public List<String> getCategories() {
     if (categories == null) {
-      return null;
+      return new ArrayList<String>();
     }
     
     ArrayList<String> list = new ArrayList<String>();
@@ -94,10 +97,16 @@ public class Archetype {
   }
 
   public List<Category> getTags() {
+    if (tags == null) {
+      return new ArrayList<Category>();
+    }
     return new ArrayList<Category>(tags);
   }
 
   public void setTags(List<Category> tags) {
+    if (tags == null) {
+      return;
+    }
     this.tags = new HashSet<Category>(tags);
   }
 
