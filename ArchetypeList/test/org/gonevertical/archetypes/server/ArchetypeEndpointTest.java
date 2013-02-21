@@ -10,8 +10,6 @@ import org.gonevertical.archetypes.server.domain.Category;
 import org.gonevertical.archetypes.utils.TestUtils;
 import org.junit.Test;
 
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
 import com.google.gson.Gson;
 
 public class ArchetypeEndpointTest extends TestUtils {
@@ -34,9 +32,9 @@ public class ArchetypeEndpointTest extends TestUtils {
     tags.add(cat1);
     tags.add(cat2);
     
-    List<Key> categories = new ArrayList<Key>();
-    categories.add(KeyFactory.createKey(Archetype.class.getSimpleName(), 1));
-    categories.add(KeyFactory.createKey(Archetype.class.getSimpleName(), 2));
+    List<String> categories = new ArrayList<String>();
+    categories.add("key1");
+    categories.add("key2");
     
     Archetype archtype = new Archetype();
     archtype.setArtifactId("artifactId");

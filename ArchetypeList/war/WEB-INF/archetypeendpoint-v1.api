@@ -2,7 +2,7 @@
   "extends" : "thirdParty.api",
   "abstract" : false,
   "root" : "https://myapp.appspot.com/_ah/api",
-  "name" : "archetype",
+  "name" : "archetypeendpoint",
   "version" : "v1",
   "description" : "This entity represents a Archetype.",
   "defaultVersion" : false,
@@ -25,7 +25,7 @@
     "maxAge" : 0
   },
   "methods" : {
-    "archetype.updateArchetype" : {
+    "archetypeendpoint.updateArchetype" : {
       "path" : "archetype",
       "httpMethod" : "PUT",
       "scopes" : [ ],
@@ -40,7 +40,7 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "archetype.listArchetype" : {
+    "archetypeendpoint.listArchetype" : {
       "path" : "archetype",
       "httpMethod" : "GET",
       "scopes" : [ ],
@@ -64,7 +64,7 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "archetype.archetype.search" : {
+    "archetypeendpoint.archetype.search" : {
       "path" : "archetype/search/{queryString}",
       "httpMethod" : "GET",
       "scopes" : [ ],
@@ -84,7 +84,7 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "archetype.insertArchetype" : {
+    "archetypeendpoint.insertArchetype" : {
       "path" : "archetype",
       "httpMethod" : "POST",
       "scopes" : [ ],
@@ -99,7 +99,7 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "archetype.getArchetype" : {
+    "archetypeendpoint.getArchetype" : {
       "path" : "archetype/{id}",
       "httpMethod" : "GET",
       "scopes" : [ ],
@@ -119,7 +119,7 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "archetype.removeArchetype" : {
+    "archetypeendpoint.removeArchetype" : {
       "path" : "archetype/{id}",
       "httpMethod" : "DELETE",
       "scopes" : [ ],

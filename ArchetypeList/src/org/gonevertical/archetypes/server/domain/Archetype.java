@@ -1,6 +1,8 @@
 package org.gonevertical.archetypes.server.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
@@ -24,8 +26,8 @@ public class Archetype {
   private BlobKey blobKey;
   private String name;
   private Text description;
-  private List<Key> categories;
-  private List<Category> tags;
+  private LinkedHashSet<Key> categories;
+  private HashSet<Category> tags;
 
   private String repository;
   private String groupId;
@@ -74,16 +76,23 @@ public class Archetype {
     return list;
   }
 
-  public void setCategories(List<Key> categories) {
-    this.categories = categories;
+  public void setCategories(List<String> categories) {
+    if (categories == null) {
+      return;
+    }
+    
+    categories.clear();
+    for (String skey : categories) {
+      this.categories.add(KeyFactory.stringToKey(skey));
+    }
   }
 
   public List<Category> getTags() {
-    return tags;
+    return new ArrayList<Category>(tags);
   }
 
   public void setTags(List<Category> tags) {
-    this.tags = tags;
+    this.tags = new HashSet<Category>(tags);
   }
 
   public String getRepository() {
