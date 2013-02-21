@@ -8,7 +8,6 @@ import javax.annotation.Nullable;
 import javax.inject.Named;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 
 import org.gonevertical.archetypes.server.domain.Archetype;
@@ -47,22 +46,16 @@ public class ArchetypeEndpoint {
         .addField(Field.newBuilder().setName("key").setText(o.getKey()))
         .addField(Field.newBuilder().setName("name").setText(o.getName() != null ? o.getName() : ""))
         .addField(
-            Field.newBuilder().setName("description")
-                .setText(o.getDescription() != null ? o.getDescription() : ""))
-         .addField(Field.newBuilder().setName("repository").setText(o.getRepository() != null ? o.getRepository() : ""))
-         .addField(Field.newBuilder().setName("groupId").setText(o.getGroupId() != null ? o.getGroupId() : ""))
-         .addField(Field.newBuilder().setName("artifactId").setText(o.getArtifactId() != null ? o.getArtifactId() : ""))
-         .addField(Field.newBuilder().setName("version").setText(o.getVersion() != null ? o.getVersion() : ""));
+            Field.newBuilder().setName("description").setText(o.getDescription() != null ? o.getDescription() : ""))
+        .addField(Field.newBuilder().setName("repository").setText(o.getRepository() != null ? o.getRepository() : ""))
+        .addField(Field.newBuilder().setName("groupId").setText(o.getGroupId() != null ? o.getGroupId() : ""))
+        .addField(Field.newBuilder().setName("artifactId").setText(o.getArtifactId() != null ? o.getArtifactId() : ""))
+        .addField(Field.newBuilder().setName("version").setText(o.getVersion() != null ? o.getVersion() : ""));
     docBuilder.setId(o.getKey());
     Document doc = docBuilder.build();
     INDEX.putAsync(doc);
   }
 
-  /**
-   * This method lists all the entities inserted in datastore. It uses HTTP GET method and paging support.
-   * 
-   * @return A CollectionResponse class containing the list of all entities persisted and a cursor to the next page.
-   */
   public CollectionResponse<Archetype> listArchetype(@Nullable @Named("cursor") String cursorString,
       @Nullable @Named("limit") Integer limit) {
 
@@ -90,8 +83,6 @@ public class ArchetypeEndpoint {
         cursorString = cursor.toWebSafeString();
       }
 
-      // Tight loop for fetching all entities from datastore and accomodate
-      // for lazy fetch.
       for (Archetype obj : execute)
         ;
     } finally {
@@ -101,12 +92,6 @@ public class ArchetypeEndpoint {
     return CollectionResponse.<Archetype> builder().setItems(execute).setNextPageToken(cursorString).build();
   }
 
-  /**
-   * This method gets the entity having primary key id. It uses HTTP GET method.
-   * 
-   * @param id the primary key of the java bean.
-   * @return The entity with primary key id.
-   */
   public Archetype getArchetype(@Named("id") Long id) {
     PersistenceManager mgr = getPersistenceManager();
     Archetype archetype = null;
@@ -118,17 +103,10 @@ public class ArchetypeEndpoint {
     return archetype;
   }
 
-  /**
-   * This inserts a new entity into App Engine datastore. If the entity already exists in the datastore, an exception is
-   * thrown. It uses HTTP POST method.
-   * 
-   * @param archetype the entity to be inserted.
-   * @return The inserted entity.
-   */
   public Archetype insertArchetype(Archetype archetype, com.google.appengine.api.users.User guser) throws Exception {
-//    if (guser == null) {
-//      throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
-//    }
+    // if (guser == null) {
+    // throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
+    // }
 
     PersistenceManager mgr = getPersistenceManager();
     try {
@@ -139,13 +117,6 @@ public class ArchetypeEndpoint {
     return archetype;
   }
 
-  /**
-   * This method is used for updating an existing entity. If the entity does not exist in the datastore, an exception is
-   * thrown. It uses HTTP PUT method.
-   * 
-   * @param archetype the entity to be updated.
-   * @return The updated entity.
-   */
   public Archetype updateArchetype(Archetype archetype, com.google.appengine.api.users.User guser) throws Exception {
     if (guser == null) {
       throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
@@ -153,9 +124,6 @@ public class ArchetypeEndpoint {
 
     PersistenceManager mgr = getPersistenceManager();
     try {
-      if (!containsArchetype(archetype)) {
-        throw new EntityNotFoundException("Object does not exist");
-      }
       mgr.makePersistent(archetype);
       addToSearchIndex(archetype);
     } finally {
@@ -164,17 +132,11 @@ public class ArchetypeEndpoint {
     return archetype;
   }
 
-  /**
-   * This method removes the entity with primary key id. It uses HTTP DELETE method.
-   * 
-   * @param id the primary key of the entity to be deleted.
-   * @return The deleted entity.
-   */
   public Archetype removeArchetype(@Named("id") Long id, com.google.appengine.api.users.User guser) throws Exception {
     if (guser == null) {
       throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
     }
-    
+
     PersistenceManager mgr = getPersistenceManager();
     Archetype archetype = null;
     try {
@@ -185,19 +147,6 @@ public class ArchetypeEndpoint {
       mgr.close();
     }
     return archetype;
-  }
-
-  private boolean containsArchetype(Archetype archetype) {
-    PersistenceManager mgr = getPersistenceManager();
-    boolean contains = true;
-    try {
-      mgr.getObjectById(Archetype.class, archetype.getKey());
-    } catch (javax.jdo.JDOObjectNotFoundException ex) {
-      contains = false;
-    } finally {
-      mgr.close();
-    }
-    return contains;
   }
 
   @ApiMethod(httpMethod = "GET", name = "archetype.search", path = "archetype/search/{queryString}")
