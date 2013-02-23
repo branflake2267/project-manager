@@ -24,12 +24,6 @@ public class ArchetypeEndpointTest {
   }
 
   @Test
-  public void testLogin() {
-    RestAssured.given().param("email", "branfake2267@gmail.com").param("continue", "/").param("action", "Log In")
-        .then().expect().statusCode(302).when().post("http://localhost:8888/_ah/login?continue=%2F");
-  }
-
-  @Test
   public void testList() {
     RestAssured.given().param("limit", "2").expect().statusCode(200).when().get(url);
   }
@@ -43,6 +37,7 @@ public class ArchetypeEndpointTest {
     archetype.setArtifactId("artifactid");
     archetype.setVersion("version");
 
+    // insert
     RestAssured.given().contentType(ContentType.JSON).cookie("dev_appserver_login", devAppserverLoginCookie).and()
         .content(archetype).expect().statusCode(200).when().post(url);
   }
@@ -122,6 +117,7 @@ public class ArchetypeEndpointTest {
         .cookie("dev_appserver_login", devAppserverLoginCookie).and().content(archetype).expect().statusCode(200)
         .when().post(url).as(Archetype.class);
 
+    // retrieve 
     Archetype getArchetype = RestAssured.given().contentType(ContentType.JSON)
         .cookie("dev_appserver_login", devAppserverLoginCookie).and().when().get(url + "/" + newArchetype.getKey())
         .as(Archetype.class);
