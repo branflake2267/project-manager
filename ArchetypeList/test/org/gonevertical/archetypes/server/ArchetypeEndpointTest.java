@@ -1,16 +1,8 @@
 package org.gonevertical.archetypes.server;
 
-import static org.junit.Assert.assertTrue;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.gonevertical.archetypes.server.domain.Archetype;
-import org.gonevertical.archetypes.server.domain.Category;
 import org.gonevertical.archetypes.utils.TestUtils;
 import org.junit.Test;
-
-import com.google.gson.Gson;
 
 public class ArchetypeEndpointTest extends TestUtils {
   
@@ -46,10 +38,10 @@ public class ArchetypeEndpointTest extends TestUtils {
 //    archtype.setTags(tags);
     archtype.setVersion("version");
     
-    Gson gson = new Gson();
-    String json = gson.toJson(archtype);
-    
-    System.out.println(json);
+//    Gson gson = new Gson();
+//    String json = gson.toJson(archtype);
+//    
+//    System.out.println(json);
   }
   
 //  /**

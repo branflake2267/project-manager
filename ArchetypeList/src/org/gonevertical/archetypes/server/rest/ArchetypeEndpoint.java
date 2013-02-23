@@ -8,7 +8,6 @@ import javax.annotation.Nullable;
 import javax.inject.Named;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
-import javax.persistence.EntityNotFoundException;
 
 import org.gonevertical.archetypes.server.domain.Archetype;
 import org.gonevertical.archetypes.server.domain.dao.PMF;
@@ -104,9 +103,9 @@ public class ArchetypeEndpoint {
   }
 
   public Archetype insertArchetype(Archetype archetype, com.google.appengine.api.users.User guser) throws Exception {
-    // if (guser == null) {
-    // throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
-    // }
+    if (guser == null) {
+      throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
+    }
 
     PersistenceManager mgr = getPersistenceManager();
     try {
