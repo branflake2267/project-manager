@@ -100,7 +100,7 @@ public class ArchetypeEndpointTest {
   @Test
   public void testRemoveWithOutAuthentication() {
     RestAssured.given().contentType(ContentType.JSON).content(new Archetype()).expect().statusCode(401).when()
-        .delete(url);
+        .delete(url + "/asdf");
   }
 
   @Test
