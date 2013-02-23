@@ -100,7 +100,7 @@
       }
     },
     "archetypeendpoint.getArchetype" : {
-      "path" : "archetype/{id}",
+      "path" : "archetype/{key}",
       "httpMethod" : "GET",
       "scopes" : [ ],
       "audiences" : [ ],
@@ -108,8 +108,8 @@
       "rosyMethod" : "ArchetypeEndpoint.getArchetype",
       "request" : {
         "parameters" : {
-          "id" : {
-            "type" : "int64",
+          "key" : {
+            "type" : "string",
             "required" : true
           }
         },
@@ -120,7 +120,7 @@
       }
     },
     "archetypeendpoint.removeArchetype" : {
-      "path" : "archetype/{id}",
+      "path" : "archetype/{key}",
       "httpMethod" : "DELETE",
       "scopes" : [ ],
       "audiences" : [ ],
@@ -128,8 +128,8 @@
       "rosyMethod" : "ArchetypeEndpoint.removeArchetype",
       "request" : {
         "parameters" : {
-          "id" : {
-            "type" : "int64",
+          "key" : {
+            "type" : "string",
             "required" : true
           }
         },

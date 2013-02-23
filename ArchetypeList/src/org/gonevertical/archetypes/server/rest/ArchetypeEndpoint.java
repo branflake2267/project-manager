@@ -91,15 +91,8 @@ public class ArchetypeEndpoint {
     return CollectionResponse.<Archetype> builder().setItems(execute).setNextPageToken(cursorString).build();
   }
 
-  public Archetype getArchetype(@Named("id") Long id) {
-    PersistenceManager mgr = getPersistenceManager();
-    Archetype archetype = null;
-    try {
-      archetype = mgr.getObjectById(Archetype.class, id);
-    } finally {
-      mgr.close();
-    }
-    return archetype;
+  public Archetype getArchetype(@Named("key") String key) {
+    return getArchetype(KeyFactory.stringToKey(key));
   }
 
   public Archetype insertArchetype(Archetype archetype, com.google.appengine.api.users.User guser) throws Exception {
@@ -131,7 +124,7 @@ public class ArchetypeEndpoint {
     return archetype;
   }
 
-  public Archetype removeArchetype(@Named("id") Long id, com.google.appengine.api.users.User guser) throws Exception {
+  public Archetype removeArchetype(@Named("key") String key, com.google.appengine.api.users.User guser) throws Exception {
     if (guser == null) {
       throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
     }
@@ -139,13 +132,13 @@ public class ArchetypeEndpoint {
     PersistenceManager mgr = getPersistenceManager();
     Archetype archetype = null;
     try {
-      archetype = mgr.getObjectById(Archetype.class, id);
-      mgr.deletePersistent(archetype);
+      archetype = mgr.getObjectById(Archetype.class, KeyFactory.stringToKey(key).getId());
       INDEX.delete(archetype.getKey());
+      mgr.deletePersistent(archetype);
     } finally {
       mgr.close();
     }
-    return archetype;
+    return null;
   }
 
   @ApiMethod(httpMethod = "GET", name = "archetype.search", path = "archetype/search/{queryString}")
@@ -162,11 +155,20 @@ public class ArchetypeEndpoint {
       String skey = fieldKey.getText();
       if (skey != null) {
         Key key = KeyFactory.stringToKey(skey);
-        Archetype o = getArchetype(key.getId());
+        Archetype o = getArchetype(key);
         returnList.add(o);
       }
     }
     return returnList;
+  }
+  
+  private Archetype getArchetype(Key key) {
+    PersistenceManager mgr = getPersistenceManager();
+    try {
+      return mgr.getObjectById(Archetype.class, key);
+    } finally {
+      mgr.close();
+    }
   }
 
   private static PersistenceManager getPersistenceManager() {
