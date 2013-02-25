@@ -61,7 +61,6 @@ public class ArchetypeEndpoint {
 
   public CollectionResponse<Archetype> listArchetype(@Nullable @Named("cursor") String cursorString,
       @Nullable @Named("limit") Integer limit) {
-
     PersistenceManager mgr = null;
     Cursor cursor = null;
     List<Archetype> execute = null;
