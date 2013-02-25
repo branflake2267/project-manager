@@ -129,12 +129,7 @@ public class ArchetypeEndpointTest {
 
   @Test
   public void testAllProperties() {
-    Archetype archetype = new Archetype();
-    archetype.setName("test1");
-    archetype.setRepository("repository2");
-    archetype.setGroupId("groupid3");
-    archetype.setArtifactId("artifactid4");
-    archetype.setVersion("version5");
+    Archetype archetype = createBasicArchetype();
     
     // TODO categories
     // TODO tags
@@ -160,10 +155,11 @@ public class ArchetypeEndpointTest {
   private Archetype createBasicArchetype() {
     Archetype archetype = new Archetype();
     archetype.setName("test");
-    archetype.setRepository("repository");
-    archetype.setGroupId("groupid");
-    archetype.setArtifactId("artifactid");
-    archetype.setVersion("version");
+    archetype.setRepository("testRepository");
+    archetype.setGroupId("testGroupid");
+    archetype.setArtifactId("testArtifactid");
+    archetype.setVersion("testVersion");
     return archetype;
   }
+  
 }
