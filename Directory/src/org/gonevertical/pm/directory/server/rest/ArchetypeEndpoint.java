@@ -50,6 +50,10 @@ public class ArchetypeEndpoint {
         .addField(Field.newBuilder().setName("groupId").setText(o.getGroupId() != null ? o.getGroupId() : ""))
         .addField(Field.newBuilder().setName("artifactId").setText(o.getArtifactId() != null ? o.getArtifactId() : ""))
         .addField(Field.newBuilder().setName("version").setText(o.getVersion() != null ? o.getVersion() : ""));
+    
+    // TODO add categories
+    // TODO add tags
+
     docBuilder.setId(o.getKey());
     Document doc = docBuilder.build();
     INDEX.putAsync(doc);
@@ -103,6 +107,7 @@ public class ArchetypeEndpoint {
     PersistenceManager mgr = getPersistenceManager();
     try {
       mgr.makePersistent(archetype);
+      addToSearchIndex(archetype);
     } finally {
       mgr.close();
     }
@@ -124,7 +129,8 @@ public class ArchetypeEndpoint {
     return archetype;
   }
 
-  public Archetype removeArchetype(@Named("key") String key, com.google.appengine.api.users.User guser) throws Exception {
+  public Archetype removeArchetype(@Named("key") String key, com.google.appengine.api.users.User guser)
+      throws Exception {
     if (guser == null) {
       throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
     }
@@ -142,10 +148,12 @@ public class ArchetypeEndpoint {
   }
 
   @ApiMethod(httpMethod = "GET", name = "archetype.search", path = "archetype/search/{queryString}")
-  public List<Archetype> search(@Named("queryString") String queryString) {
+  public CollectionResponse<Archetype> search(@Named("queryString") String queryString,
+      @Nullable @Named("limit") Integer limit) {
     List<Archetype> returnList = new ArrayList<Archetype>();
     Results<ScoredDocument> searchResults = INDEX.search(queryString);
 
+    int count = 0;
     for (ScoredDocument scoredDoc : searchResults) {
       Field fieldKey = scoredDoc.getOnlyField("key");
       if (fieldKey == null || fieldKey.getText() == null) {
@@ -158,10 +166,15 @@ public class ArchetypeEndpoint {
         Archetype o = getArchetype(key);
         returnList.add(o);
       }
+      
+      count++;
+      if (count >= limit) {
+        break;
+      }
     }
-    return returnList;
+    return CollectionResponse.<Archetype> builder().setItems(returnList).build();
   }
-  
+
   private Archetype getArchetype(Key key) {
     PersistenceManager mgr = getPersistenceManager();
     try {

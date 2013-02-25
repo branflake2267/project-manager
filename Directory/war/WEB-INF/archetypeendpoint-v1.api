@@ -25,21 +25,6 @@
     "maxAge" : 0
   },
   "methods" : {
-    "archetypeendpoint.updateArchetype" : {
-      "path" : "archetype",
-      "httpMethod" : "PUT",
-      "scopes" : [ ],
-      "audiences" : [ ],
-      "clientIds" : [ ],
-      "rosyMethod" : "ArchetypeEndpoint.updateArchetype",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "archetypeendpoint.listArchetype" : {
       "path" : "archetype",
       "httpMethod" : "GET",
@@ -64,6 +49,21 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "archetypeendpoint.updateArchetype" : {
+      "path" : "archetype",
+      "httpMethod" : "PUT",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "ArchetypeEndpoint.updateArchetype",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "archetypeendpoint.archetype.search" : {
       "path" : "archetype/search/{queryString}",
       "httpMethod" : "GET",
@@ -76,6 +76,10 @@
           "queryString" : {
             "type" : "string",
             "required" : true
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
           }
         },
         "body" : "empty"
@@ -142,6 +146,21 @@
   },
   "descriptor" : {
     "schemas" : {
+      "CollectionResponse_Archetype" : {
+        "id" : "CollectionResponse_Archetype",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Archetype"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
       "Archetype" : {
         "id" : "Archetype",
         "type" : "object",
@@ -216,36 +235,14 @@
             "type" : "string"
           }
         }
-      },
-      "CollectionResponse_Archetype" : {
-        "id" : "CollectionResponse_Archetype",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Archetype"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
-      },
-      "ArchetypeCollection" : {
-        "id" : "ArchetypeCollection",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Archetype"
-            }
-          }
-        }
       }
     },
     "methods" : {
+      "ArchetypeEndpoint.listArchetype" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Archetype"
+        }
+      },
       "ArchetypeEndpoint.updateArchetype" : {
         "request" : {
           "$ref" : "Archetype"
@@ -254,14 +251,9 @@
           "$ref" : "Archetype"
         }
       },
-      "ArchetypeEndpoint.listArchetype" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Archetype"
-        }
-      },
       "ArchetypeEndpoint.search" : {
         "response" : {
-          "$ref" : "ArchetypeCollection"
+          "$ref" : "CollectionResponse_Archetype"
         }
       },
       "ArchetypeEndpoint.insertArchetype" : {

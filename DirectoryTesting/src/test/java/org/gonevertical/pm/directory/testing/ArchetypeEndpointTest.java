@@ -1,6 +1,9 @@
 package org.gonevertical.pm.directory.testing;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 
 import org.gonevertical.pm.server.domain.directory.Archetype;
 import org.junit.Before;
@@ -30,12 +33,7 @@ public class ArchetypeEndpointTest {
 
   @Test
   public void testInsertWithAuthentication() {
-    Archetype archetype = new Archetype();
-    archetype.setName("name");
-    archetype.setRepository("repository");
-    archetype.setGroupId("groupid");
-    archetype.setArtifactId("artifactid");
-    archetype.setVersion("version");
+    Archetype archetype = createBasicArchetype();
 
     // insert
     RestAssured.given().contentType(ContentType.JSON).cookie("dev_appserver_login", devAppserverLoginCookie).and()
@@ -50,12 +48,7 @@ public class ArchetypeEndpointTest {
 
   @Test
   public void testUpdateWithCredentials() {
-    Archetype archetype = new Archetype();
-    archetype.setName("name");
-    archetype.setRepository("repository");
-    archetype.setGroupId("groupid");
-    archetype.setArtifactId("artifactid");
-    archetype.setVersion("version");
+    Archetype archetype = createBasicArchetype();
 
     // created
     Archetype newArchetype = RestAssured.given().contentType(ContentType.JSON)
@@ -80,12 +73,7 @@ public class ArchetypeEndpointTest {
 
   @Test
   public void testRemoveWithCredentials() {
-    Archetype archetype = new Archetype();
-    archetype.setName("name");
-    archetype.setRepository("repository");
-    archetype.setGroupId("groupid");
-    archetype.setArtifactId("artifactid");
-    archetype.setVersion("version");
+    Archetype archetype = createBasicArchetype();
 
     // created
     Archetype newArchetype = RestAssured.given().contentType(ContentType.JSON)
@@ -105,34 +93,77 @@ public class ArchetypeEndpointTest {
 
   @Test
   public void testGetArchetype() {
-    Archetype archetype = new Archetype();
-    archetype.setName("name");
-    archetype.setRepository("repository");
-    archetype.setGroupId("groupid");
-    archetype.setArtifactId("artifactid");
-    archetype.setVersion("version");
+    Archetype archetype = createBasicArchetype();
 
     // created
     Archetype newArchetype = RestAssured.given().contentType(ContentType.JSON)
         .cookie("dev_appserver_login", devAppserverLoginCookie).and().content(archetype).expect().statusCode(200)
         .when().post(url).as(Archetype.class);
 
-    // retrieve 
+    // retrieve
     Archetype getArchetype = RestAssured.given().contentType(ContentType.JSON)
-        .cookie("dev_appserver_login", devAppserverLoginCookie).and().when().get(url + "/" + newArchetype.getKey())
-        .as(Archetype.class);
+        .cookie("dev_appserver_login", devAppserverLoginCookie).expect().statusCode(200).when()
+        .get(url + "/" + newArchetype.getKey()).as(Archetype.class);
 
     assertEquals(newArchetype.getKey(), getArchetype.getKey());
   }
 
   @Test
   public void testSearch() {
+    Archetype archetype = createBasicArchetype();
+    archetype.setName("zebra");
 
+    // created
+    for (int i = 0; i < 4; i++) {
+      RestAssured.given().contentType(ContentType.JSON).cookie("dev_appserver_login", devAppserverLoginCookie).and()
+          .content(archetype).expect().statusCode(200).when().post(url).as(Archetype.class);
+    }
+
+    // retrieve
+    List<Archetype> list = RestAssured.given().param("limit", "2").contentType(ContentType.JSON)
+        .cookie("dev_appserver_login", devAppserverLoginCookie).expect().statusCode(200).when()
+        .get(url + "/search/zebra").jsonPath().getList("items");
+
+    assertTrue(list.size() == 2);
   }
-  
+
   @Test
   public void testAllProperties() {
+    Archetype archetype = new Archetype();
+    archetype.setName("name1");
+    archetype.setRepository("repository2");
+    archetype.setGroupId("groupid3");
+    archetype.setArtifactId("artifactid4");
+    archetype.setVersion("version5");
     
+    // TODO categories
+    // TODO tags
+
+    // created
+    Archetype newArchetype = RestAssured.given().contentType(ContentType.JSON)
+        .cookie("dev_appserver_login", devAppserverLoginCookie).and().content(archetype).expect().statusCode(200)
+        .when().post(url).as(Archetype.class);
+
+    // retrieve
+    Archetype getArchetype = RestAssured.given().contentType(ContentType.JSON)
+        .cookie("dev_appserver_login", devAppserverLoginCookie).expect().statusCode(200).when()
+        .get(url + "/" + newArchetype.getKey()).as(Archetype.class);
+    
+    assertEquals(archetype.getName(), getArchetype.getName());
+    assertEquals(archetype.getRepository(), getArchetype.getRepository());
+    assertEquals(archetype.getGroupId(), getArchetype.getGroupId());
+    assertEquals(archetype.getArtifactId(), getArchetype.getArtifactId());
+    assertEquals(archetype.getVersion(), getArchetype.getVersion());
+
   }
 
+  private Archetype createBasicArchetype() {
+    Archetype archetype = new Archetype();
+    archetype.setName("name");
+    archetype.setRepository("repository");
+    archetype.setGroupId("groupid");
+    archetype.setArtifactId("artifactid");
+    archetype.setVersion("version");
+    return archetype;
+  }
 }
