@@ -130,7 +130,7 @@ public class ArchetypeEndpointTest {
   @Test
   public void testAllProperties() {
     Archetype archetype = new Archetype();
-    archetype.setName("name1");
+    archetype.setName("test1");
     archetype.setRepository("repository2");
     archetype.setGroupId("groupid3");
     archetype.setArtifactId("artifactid4");
@@ -159,7 +159,7 @@ public class ArchetypeEndpointTest {
 
   private Archetype createBasicArchetype() {
     Archetype archetype = new Archetype();
-    archetype.setName("name");
+    archetype.setName("test");
     archetype.setRepository("repository");
     archetype.setGroupId("groupid");
     archetype.setArtifactId("artifactid");
