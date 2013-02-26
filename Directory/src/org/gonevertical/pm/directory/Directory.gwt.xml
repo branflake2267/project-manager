@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<module rename-to='directory'>
+    <!-- Inherit the core Web Toolkit stuff. -->
+    <inherits name='com.google.gwt.user.User' />
+    <inherits name='com.google.gwt.inject.Inject' />
+
+    <!-- Default css -->
+    <inherits name='com.google.gwt.user.theme.standard.Standard' />
+
+    <!-- Other module inherits -->
+    
+    <inherits name='com.gwtplatform.mvp.MvpWithEntryPoint' />
+
+    <source path='client' />
+    <source path='shared' />
+
+    <set-configuration-property name="gin.ginjector.modules" 
+                                value="org.gonevertical.pm.directory.client.gin.ClientModule"/>
+</module>
