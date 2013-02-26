@@ -16,12 +16,13 @@ public class SystemUserEndpoint {
     SystemUser systemUser = null;
     try {
       systemUser = mgr.getObjectById(SystemUser.class, googleId);
+    } catch (Exception e) {
     } finally {
       mgr.close();
     }
     return systemUser;
   }
-  
+
   public SystemUser insertCategory(SystemUser systemUser) {
     PersistenceManager mgr = getPersistenceManager();
     try {
@@ -45,5 +46,5 @@ public class SystemUserEndpoint {
   private static PersistenceManager getPersistenceManager() {
     return PMF.get().getPersistenceManager();
   }
-  
+
 }

@@ -1,10 +1,9 @@
 package org.gonevertical.pm.directory.server.domain;
 
-import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.PrimaryKey;
 
-@PersistenceCapable(identityType = IdentityType.APPLICATION)
+@PersistenceCapable(detachable = "true")
 public class SystemUser {
 
   @PrimaryKey
@@ -21,5 +20,5 @@ public class SystemUser {
   public void setGoogleId(String googleId) {
     this.googleId = googleId;
   }
-  
+
 }

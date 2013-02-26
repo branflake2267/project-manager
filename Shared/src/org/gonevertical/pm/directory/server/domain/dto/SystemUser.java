@@ -5,7 +5,6 @@ public class SystemUser {
   private String googleId;
 
   public SystemUser() {
-    googleId = "";
   }
 
   public String getGoogleId() {
