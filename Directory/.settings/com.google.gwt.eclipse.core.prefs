@@ -1,2 +1,3 @@
 eclipse.preferences.version=1
-filesCopiedToWebInfLib=
+entryPointModules=org.gonevertical.pm.directory.Directory
+filesCopiedToWebInfLib=gwt-servlet.jar
