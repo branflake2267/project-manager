@@ -7,11 +7,11 @@ import com.google.gwt.i18n.client.Constants;
  * example.
  */
 public interface AppConstants extends Constants {
-    @DefaultStringValue("News")
-    String news();
+  @DefaultStringValue("News")
+  String news();
 
-    @DefaultStringValue("Home")
-    String home();
-    
-    String gwtpPlatformTitle();
+  @DefaultStringValue("Home")
+  String home();
+
+  String gwtpPlatformTitle();
 }

@@ -3,7 +3,7 @@ package org.gonevertical.pm.directory.server.domain;
 public class Session {
 
   private String loginUrl;
-  
+
   public Session() {
   }
 
@@ -14,5 +14,5 @@ public class Session {
   public void setLoginUrl(String loginUrl) {
     this.loginUrl = loginUrl;
   }
- 
+
 }

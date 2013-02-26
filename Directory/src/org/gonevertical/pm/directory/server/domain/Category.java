@@ -15,7 +15,7 @@ public class Category {
   @PrimaryKey
   @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
   private Key key;
-  
+
   private String name;
 
   public String getKey() {
@@ -36,5 +36,5 @@ public class Category {
   public void setName(String name) {
     this.name = name;
   }
-  
+
 }

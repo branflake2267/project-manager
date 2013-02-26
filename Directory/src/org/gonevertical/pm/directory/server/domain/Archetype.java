@@ -76,12 +76,12 @@ public class Archetype {
     if (categories == null) {
       return new ArrayList<String>();
     }
-    
+
     ArrayList<String> list = new ArrayList<String>();
     for (Key key : categories) {
       list.add(KeyFactory.keyToString(key));
     }
-      
+
     return list;
   }
 
@@ -89,7 +89,7 @@ public class Archetype {
     if (categories == null) {
       return;
     }
-    
+
     categories.clear();
     for (String skey : categories) {
       this.categories.add(KeyFactory.stringToKey(skey));

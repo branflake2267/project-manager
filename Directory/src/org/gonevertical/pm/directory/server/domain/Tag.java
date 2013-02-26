@@ -15,7 +15,7 @@ public class Tag {
   @PrimaryKey
   @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
   private Key key;
-  
+
   private String name;
 
   public String getKey() {
@@ -36,5 +36,5 @@ public class Tag {
   public void setName(String name) {
     this.name = name;
   }
-  
+
 }

@@ -50,7 +50,7 @@ public class ArchetypeEndpoint {
         .addField(Field.newBuilder().setName("groupId").setText(o.getGroupId() != null ? o.getGroupId() : ""))
         .addField(Field.newBuilder().setName("artifactId").setText(o.getArtifactId() != null ? o.getArtifactId() : ""))
         .addField(Field.newBuilder().setName("version").setText(o.getVersion() != null ? o.getVersion() : ""));
-    
+
     // TODO add categories
     // TODO add tags
 
@@ -165,7 +165,7 @@ public class ArchetypeEndpoint {
         Archetype o = getArchetype(key);
         returnList.add(o);
       }
-      
+
       count++;
       if (count >= limit) {
         break;

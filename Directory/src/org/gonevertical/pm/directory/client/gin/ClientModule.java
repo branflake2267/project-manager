@@ -14,6 +14,7 @@ import com.gwtplatform.mvp.client.proxy.DefaultPlaceManager;
  * href="// See more on: https://github.com/ArcBees/GWTP/wiki/PlaceManager">DefaultModule's > DefaultPlaceManager</a>
  */
 public class ClientModule extends AbstractPresenterModule {
+  
   @Override
   protected void configure() {
     install(new DefaultModule(DefaultPlaceManager.class));
@@ -27,4 +28,5 @@ public class ClientModule extends AbstractPresenterModule {
     // Load and inject CSS resources
     bind(ResourceLoader.class).asEagerSingleton();
   }
+  
 }

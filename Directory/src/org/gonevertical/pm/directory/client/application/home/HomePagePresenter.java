@@ -11,16 +11,18 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
 public class HomePagePresenter extends Presenter<HomePagePresenter.MyView, HomePagePresenter.MyProxy> {
-    public interface MyView extends View {
-    }
 
-    @ProxyStandard
-    @NameToken(NameTokens.home)
-    public interface MyProxy extends ProxyPlace<HomePagePresenter> {
-    }
+  public interface MyView extends View {
+  }
 
-    @Inject
-    public HomePagePresenter(final EventBus eventBus, final MyView view, final MyProxy proxy) {
-        super(eventBus, view, proxy, ApplicationPresenter.TYPE_SetMainContent);
-    }
+  @ProxyStandard
+  @NameToken(NameTokens.home)
+  public interface MyProxy extends ProxyPlace<HomePagePresenter> {
+  }
+
+  @Inject
+  public HomePagePresenter(final EventBus eventBus, final MyView view, final MyProxy proxy) {
+    super(eventBus, view, proxy, ApplicationPresenter.TYPE_SetMainContent);
+  }
+
 }
