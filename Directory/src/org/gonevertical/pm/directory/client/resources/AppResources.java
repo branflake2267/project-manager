@@ -1,7 +1,3 @@
-/*
- * Copyright 2012 ArcBees Inc. All rights reserved.
- */
-
 package org.gonevertical.pm.directory.client.resources;
 
 import com.google.gwt.resources.client.ClientBundle;
