@@ -1,7 +1,7 @@
 package org.gonevertical.pm.directory.client.gin;
 
-import com.gwtplatform.samples.tab.client.resources.AppConstants;
-import com.gwtplatform.samples.tab.client.resources.AppMessages;
+import org.gonevertical.pm.directory.client.resources.AppConstants;
+import org.gonevertical.pm.directory.client.resources.AppMessages;
 
 public interface GinjectorExtension {
     AppConstants getAppConstants();
