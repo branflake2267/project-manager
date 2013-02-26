@@ -1,4 +1,4 @@
-package org.gonevertical.pm.server.domain.directory;
+package org.gonevertical.pm.directory.server.domain;
 
 public class User {
 

@@ -1,6 +1,6 @@
-package org.gonevertical.pm.server.domain.directory;
+package org.gonevertical.pm.directory.server.domain;
 
-public class CurrentUserDto {
+public class CurrentUser {
     private Boolean isAdmin;
     private Boolean isLoggedIn;
     private User user;
@@ -8,7 +8,7 @@ public class CurrentUserDto {
     private String loginUrl;
     private String nickname;
 
-    public CurrentUserDto() {
+    public CurrentUser() {
         isAdmin = false;
         isLoggedIn = false;
         user = new User();
@@ -16,7 +16,7 @@ public class CurrentUserDto {
         logoutUrl = "";
     }
 
-    public CurrentUserDto(Boolean isLoggedIn, User user) {
+    public CurrentUser(Boolean isLoggedIn, User user) {
         this.isLoggedIn = isLoggedIn;
         this.user = user;
     }
@@ -57,7 +57,7 @@ public class CurrentUserDto {
         return nickname;
     }
 
-    public void copyFrom(CurrentUserDto currentUser) {
+    public void copyFrom(CurrentUser currentUser) {
         isAdmin = currentUser.isAdmin;
         isLoggedIn = currentUser.isLoggedIn;
         user = currentUser.user;

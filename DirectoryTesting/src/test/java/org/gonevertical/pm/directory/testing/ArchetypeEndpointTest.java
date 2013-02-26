@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.gonevertical.pm.server.domain.directory.Archetype;
+import org.gonevertical.pm.directory.server.domain.dto.Archetype;
 import org.junit.Before;
 import org.junit.Test;
 

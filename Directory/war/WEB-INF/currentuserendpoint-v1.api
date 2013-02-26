@@ -1,0 +1,89 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://project-manager-directory.appspot.com/_ah/api",
+  "name" : "currentuserendpoint",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "http://project-manager-directory.appspot.com/_ah/spi",
+    "deadline" : 10.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "currentuserendpoint.getCurrentUsers" : {
+      "path" : "currentuser",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "CurrentUserEndpoint.getCurrentUsers",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "CurrentUser" : {
+        "id" : "CurrentUser",
+        "type" : "object",
+        "properties" : {
+          "isAdmin" : {
+            "type" : "boolean"
+          },
+          "user" : {
+            "$ref" : "User"
+          },
+          "logoutUrl" : {
+            "type" : "string"
+          },
+          "loginUrl" : {
+            "type" : "string"
+          },
+          "nickname" : {
+            "type" : "string"
+          },
+          "loggedIn" : {
+            "type" : "boolean"
+          },
+          "admin" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "User" : {
+        "id" : "User",
+        "type" : "object",
+        "properties" : {
+          "googleId" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "CurrentUserEndpoint.getCurrentUsers" : {
+        "response" : {
+          "$ref" : "CurrentUser"
+        }
+      }
+    }
+  }
+}
