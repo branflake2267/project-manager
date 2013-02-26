@@ -1,5 +1,13 @@
 package org.gonevertical.pm.directory.server.rest;
 
+import java.util.HashMap;
+import java.util.List;
+
+import javax.annotation.Nullable;
+import javax.inject.Named;
+import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
+
 import org.gonevertical.pm.directory.server.domain.Category;
 import org.gonevertical.pm.directory.server.domain.dao.PMF;
 
@@ -7,16 +15,6 @@ import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.response.CollectionResponse;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.datanucleus.query.JDOCursorHelper;
-
-import java.util.HashMap;
-import java.util.List;
-
-import javax.annotation.Nullable;
-import javax.inject.Named;
-import javax.persistence.EntityExistsException;
-import javax.persistence.EntityNotFoundException;
-import javax.jdo.PersistenceManager;
-import javax.jdo.Query;
 
 @Api(name = "categoryendpoint")
 public class CategoryEndpoint {
@@ -64,12 +62,6 @@ public class CategoryEndpoint {
     return CollectionResponse.<Category> builder().setItems(execute).setNextPageToken(cursorString).build();
   }
 
-  /**
-   * This method gets the entity having primary key id. It uses HTTP GET method.
-   * 
-   * @param id the primary key of the java bean.
-   * @return The entity with primary key id.
-   */
   public Category getCategory(@Named("id") Long id) {
     PersistenceManager mgr = getPersistenceManager();
     Category category = null;
@@ -78,55 +70,32 @@ public class CategoryEndpoint {
     } finally {
       mgr.close();
     }
+    
     return category;
   }
 
-  /**
-   * This inserts a new entity into App Engine datastore. If the entity already exists in the datastore, an exception is
-   * thrown. It uses HTTP POST method.
-   * 
-   * @param category the entity to be inserted.
-   * @return The inserted entity.
-   */
   public Category insertCategory(Category category) {
     PersistenceManager mgr = getPersistenceManager();
     try {
-      if (containsCategory(category)) {
-        throw new EntityExistsException("Object already exists");
-      }
       mgr.makePersistent(category);
     } finally {
       mgr.close();
     }
+    
     return category;
   }
 
-  /**
-   * This method is used for updating an existing entity. If the entity does not exist in the datastore, an exception is
-   * thrown. It uses HTTP PUT method.
-   * 
-   * @param category the entity to be updated.
-   * @return The updated entity.
-   */
   public Category updateCategory(Category category) {
     PersistenceManager mgr = getPersistenceManager();
     try {
-      if (!containsCategory(category)) {
-        throw new EntityNotFoundException("Object does not exist");
-      }
       mgr.makePersistent(category);
     } finally {
       mgr.close();
     }
+    
     return category;
   }
 
-  /**
-   * This method removes the entity with primary key id. It uses HTTP DELETE method.
-   * 
-   * @param id the primary key of the entity to be deleted.
-   * @return The deleted entity.
-   */
   public Category removeCategory(@Named("id") Long id) {
     PersistenceManager mgr = getPersistenceManager();
     Category category = null;
@@ -136,20 +105,8 @@ public class CategoryEndpoint {
     } finally {
       mgr.close();
     }
+    
     return category;
-  }
-
-  private boolean containsCategory(Category category) {
-    PersistenceManager mgr = getPersistenceManager();
-    boolean contains = true;
-    try {
-      mgr.getObjectById(Category.class, category.getKey());
-    } catch (javax.jdo.JDOObjectNotFoundException ex) {
-      contains = false;
-    } finally {
-      mgr.close();
-    }
-    return contains;
   }
 
   private static PersistenceManager getPersistenceManager() {

@@ -3,7 +3,7 @@ package org.gonevertical.pm.directory.server.domain.dto;
 public class CurrentUser {
     private Boolean isAdmin;
     private Boolean isLoggedIn;
-    private User user;
+    private SystemUser systemUser;
     private String logoutUrl;
     private String loginUrl;
     private String nickname;
@@ -11,14 +11,14 @@ public class CurrentUser {
     public CurrentUser() {
         isAdmin = false;
         isLoggedIn = false;
-        user = new User();
+        systemUser = new SystemUser();
         loginUrl = "";
         logoutUrl = "";
     }
 
-    public CurrentUser(Boolean isLoggedIn, User user) {
+    public CurrentUser(Boolean isLoggedIn, SystemUser systemUser) {
         this.isLoggedIn = isLoggedIn;
-        this.user = user;
+        this.systemUser = systemUser;
     }
 
     public Boolean isAdmin() {
@@ -29,8 +29,8 @@ public class CurrentUser {
         return isLoggedIn;
     }
     
-    public User getUser() {
-        return user;
+    public SystemUser getUser() {
+        return systemUser;
     }
 
     public void setLogoutUrl(String logoutUrl) {
@@ -60,7 +60,7 @@ public class CurrentUser {
     public void copyFrom(CurrentUser currentUser) {
         isAdmin = currentUser.isAdmin;
         isLoggedIn = currentUser.isLoggedIn;
-        user = currentUser.user;
+        systemUser = currentUser.systemUser;
         logoutUrl = currentUser.logoutUrl;
         loginUrl = currentUser.loginUrl;
         nickname = currentUser.nickname;

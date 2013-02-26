@@ -1,10 +1,10 @@
-package org.gonevertical.pm.directory.server.domain;
+package org.gonevertical.pm.directory.server.domain.dto;
 
-public class User {
+public class SystemUser {
 
   private String googleId;
 
-  public User() {
+  public SystemUser() {
     googleId = "";
   }
 
