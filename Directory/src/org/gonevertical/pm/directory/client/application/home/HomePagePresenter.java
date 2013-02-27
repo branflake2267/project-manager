@@ -2,6 +2,7 @@ package org.gonevertical.pm.directory.client.application.home;
 
 import org.gonevertical.pm.directory.client.application.ApplicationPresenter;
 import org.gonevertical.pm.directory.client.place.NameTokens;
+
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;

@@ -16,7 +16,7 @@
 
 package org.gonevertical.pm.directory.client.application.widgets.login;
 
-import org.gonevertical.pm.directory.server.domain.dto.CurrentUser;
+import org.gonevertical.pm.directory.client.rest.jso.CurrentUserJso;
 
 import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.History;
@@ -37,13 +37,13 @@ public class LoginPresenter extends PresenterWidget<LoginPresenter.MyView> imple
     void displayNickname(String nickname);
   }
 
-  private final CurrentUser currentUser;
+  private final CurrentUserJso currentUserJso;
 
   @Inject
-  public LoginPresenter(final EventBus eventBus, final MyView view, final CurrentUser currentUser) {
+  public LoginPresenter(final EventBus eventBus, final MyView view, final CurrentUserJso currentUserJso) {
     super(eventBus, view);
 
-    this.currentUser = currentUser;
+    this.currentUserJso = currentUserJso;
 
     getView().setUiHandlers(this);
   }
@@ -56,12 +56,12 @@ public class LoginPresenter extends PresenterWidget<LoginPresenter.MyView> imple
   }
 
   private void displayLogin() {
-    if (currentUser.getIsLoggedIn()) {
-      String url = replaceReturnPath(currentUser.getLogoutUrl());
-      getView().displayNickname(currentUser.getNickname());
+    if (currentUserJso.getIsLoggedIn()) {
+      String url = replaceReturnPath(currentUserJso.getLogoutUrl());
+      getView().displayNickname(currentUserJso.getNickname());
       getView().displayLoggedIn(url);
     } else {
-      String url = replaceReturnPath(currentUser.getLoginUrl());
+      String url = replaceReturnPath(currentUserJso.getLoginUrl());
       getView().displayNickname("");
       getView().displayLoggedOut(url);
     }

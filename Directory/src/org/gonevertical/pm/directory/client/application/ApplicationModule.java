@@ -1,6 +1,7 @@
 package org.gonevertical.pm.directory.client.application;
 
 import org.gonevertical.pm.directory.client.application.home.HomeModule;
+
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
 public class ApplicationModule extends AbstractPresenterModule {

@@ -34,5 +34,14 @@ public class CurrentUser {
     public String getNickname() {
       return nickname;
     }
+
+    public void copyFrom(CurrentUser currentUser) {
+      this.isAdmin = currentUser.isAdmin;
+      this.isLoggedIn = currentUser.isLoggedIn;
+      this.systemUser = currentUser.systemUser;
+      this.logoutUrl = currentUser.logoutUrl;
+      this.loginUrl = currentUser.loginUrl;
+      this.nickname = currentUser.nickname;
+    }
     
 }

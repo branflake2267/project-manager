@@ -2,6 +2,8 @@ package org.gonevertical.pm.directory.client.gin;
 
 import org.gonevertical.pm.directory.client.application.ApplicationModule;
 import org.gonevertical.pm.directory.client.place.NameTokens;
+import org.gonevertical.pm.directory.client.rest.RestModule;
+
 import com.gwtplatform.mvp.client.annotations.DefaultPlace;
 import com.gwtplatform.mvp.client.annotations.ErrorPlace;
 import com.gwtplatform.mvp.client.annotations.UnauthorizedPlace;
@@ -19,8 +21,9 @@ public class ClientModule extends AbstractPresenterModule {
   protected void configure() {
     install(new DefaultModule(DefaultPlaceManager.class));
     install(new ApplicationModule());
+    install(new RestModule());
 
-    // DefaultPlaceManager Places
+    // TODO DefaultPlaceManager Places
     bindConstant().annotatedWith(DefaultPlace.class).to(NameTokens.home);
     bindConstant().annotatedWith(ErrorPlace.class).to(NameTokens.home);
     bindConstant().annotatedWith(UnauthorizedPlace.class).to(NameTokens.home);
