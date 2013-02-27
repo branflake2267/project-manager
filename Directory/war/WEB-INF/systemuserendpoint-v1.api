@@ -24,13 +24,13 @@
     "maxAge" : 0
   },
   "methods" : {
-    "systemuserendpoint.updateCategory" : {
+    "systemuserendpoint.updateSystemUser" : {
       "path" : "systemuser",
       "httpMethod" : "PUT",
       "scopes" : [ ],
       "audiences" : [ ],
       "clientIds" : [ ],
-      "rosyMethod" : "SystemUserEndpoint.updateCategory",
+      "rosyMethod" : "SystemUserEndpoint.updateSystemUser",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -39,13 +39,33 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "systemuserendpoint.insertCategory" : {
+    "systemuserendpoint.findByGoogleId" : {
+      "path" : "findByGoogleId/{googleId}",
+      "httpMethod" : "POST",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "SystemUserEndpoint.findByGoogleId",
+      "request" : {
+        "parameters" : {
+          "googleId" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "systemuserendpoint.insertSystemUser" : {
       "path" : "systemuser",
       "httpMethod" : "POST",
       "scopes" : [ ],
       "audiences" : [ ],
       "clientIds" : [ ],
-      "rosyMethod" : "SystemUserEndpoint.insertCategory",
+      "rosyMethod" : "SystemUserEndpoint.insertSystemUser",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -55,7 +75,7 @@
       }
     },
     "systemuserendpoint.getSystemUser" : {
-      "path" : "systemuser/{googleId}",
+      "path" : "systemuser/{key}",
       "httpMethod" : "GET",
       "scopes" : [ ],
       "audiences" : [ ],
@@ -63,7 +83,7 @@
       "rosyMethod" : "SystemUserEndpoint.getSystemUser",
       "request" : {
         "parameters" : {
-          "googleId" : {
+          "key" : {
             "type" : "string",
             "required" : true
           }
@@ -81,6 +101,9 @@
         "id" : "SystemUser",
         "type" : "object",
         "properties" : {
+          "key" : {
+            "type" : "string"
+          },
           "googleId" : {
             "type" : "string"
           }
@@ -88,7 +111,7 @@
       }
     },
     "methods" : {
-      "SystemUserEndpoint.updateCategory" : {
+      "SystemUserEndpoint.updateSystemUser" : {
         "request" : {
           "$ref" : "SystemUser"
         },
@@ -96,7 +119,12 @@
           "$ref" : "SystemUser"
         }
       },
-      "SystemUserEndpoint.insertCategory" : {
+      "SystemUserEndpoint.findByGoogleId" : {
+        "response" : {
+          "$ref" : "SystemUser"
+        }
+      },
+      "SystemUserEndpoint.insertSystemUser" : {
         "request" : {
           "$ref" : "SystemUser"
         },

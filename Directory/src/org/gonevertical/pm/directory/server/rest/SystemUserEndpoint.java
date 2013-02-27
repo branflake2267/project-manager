@@ -1,50 +1,36 @@
 package org.gonevertical.pm.directory.server.rest;
 
+import java.util.ArrayList;
+
 import javax.inject.Named;
-import javax.jdo.PersistenceManager;
 
 import org.gonevertical.pm.directory.server.domain.SystemUser;
-import org.gonevertical.pm.directory.server.domain.dao.PMF;
+import org.gonevertical.pm.directory.server.domain.dao.JdoUtils;
+import org.gonevertical.pm.directory.server.domain.dao.SimpleFilter;
 
 import com.google.api.server.spi.config.Api;
+import com.google.appengine.api.datastore.Query.FilterOperator;
 
 @Api(name = "systemuserendpoint", version = "v1")
 public class SystemUserEndpoint {
 
-  public SystemUser getSystemUser(@Named("googleId") String googleId) {
-    PersistenceManager mgr = getPersistenceManager();
-    SystemUser systemUser = null;
-    try {
-      systemUser = mgr.getObjectById(SystemUser.class, googleId);
-    } catch (Exception e) {
-    } finally {
-      mgr.close();
-    }
-    return systemUser;
+  public SystemUser getSystemUser(@Named("key") String encodedKey) {
+    return JdoUtils.find(SystemUser.class, encodedKey);
   }
 
-  public SystemUser insertCategory(SystemUser systemUser) {
-    PersistenceManager mgr = getPersistenceManager();
-    try {
-      mgr.makePersistent(systemUser);
-    } finally {
-      mgr.close();
-    }
-    return systemUser;
+  public SystemUser insertSystemUser(SystemUser systemUser) {
+    return JdoUtils.persist(systemUser);
   }
 
-  public SystemUser updateCategory(SystemUser systemUser) {
-    PersistenceManager mgr = getPersistenceManager();
-    try {
-      mgr.makePersistent(systemUser);
-    } finally {
-      mgr.close();
-    }
-    return systemUser;
+  public SystemUser updateSystemUser(SystemUser systemUser) {
+    return JdoUtils.persist(systemUser); 
   }
 
-  private static PersistenceManager getPersistenceManager() {
-    return PMF.get().getPersistenceManager();
+  public SystemUser findByGoogleId(@Named("googleId") String googleId) {
+    ArrayList<SimpleFilter> simpleFilter = new ArrayList<SimpleFilter>();
+    simpleFilter.add(new SimpleFilter("googleId", FilterOperator.EQUAL, googleId));
+    
+    return JdoUtils.findFirst(SystemUser.class, simpleFilter);
   }
 
 }

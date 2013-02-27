@@ -35,20 +35,20 @@ public class CurrentUserEndpoint {
     if (isLoggedIn) {
       String googleId = userService.getCurrentUser().getUserId();
 
-      systemUser = systemUserEndpoint.getSystemUser(googleId);
+      systemUser = systemUserEndpoint.findByGoogleId(googleId);
       if (systemUser == null) {
-        systemUser = createUser(googleId);
+        systemUser = createSystemUser(googleId);
       }
     }
     
     return systemUser;
   }
 
-  private SystemUser createUser(String googleId) {
+  private SystemUser createSystemUser(String googleId) {
     SystemUser systemUser = new SystemUser();
     systemUser.setGoogleId(googleId);
     
-    return systemUserEndpoint.updateCategory(systemUser);
+    return systemUserEndpoint.updateSystemUser(systemUser);
   }
 
 }

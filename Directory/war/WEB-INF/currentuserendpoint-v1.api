@@ -48,6 +48,12 @@
           "isAdmin" : {
             "type" : "boolean"
           },
+          "isLoggedIn" : {
+            "type" : "boolean"
+          },
+          "systemUser" : {
+            "$ref" : "SystemUser"
+          },
           "logoutUrl" : {
             "type" : "string"
           },
@@ -56,15 +62,6 @@
           },
           "nickname" : {
             "type" : "string"
-          },
-          "user" : {
-            "$ref" : "SystemUser"
-          },
-          "admin" : {
-            "type" : "boolean"
-          },
-          "loggedIn" : {
-            "type" : "boolean"
           }
         }
       },
@@ -72,6 +69,9 @@
         "id" : "SystemUser",
         "type" : "object",
         "properties" : {
+          "key" : {
+            "type" : "string"
+          },
           "googleId" : {
             "type" : "string"
           }

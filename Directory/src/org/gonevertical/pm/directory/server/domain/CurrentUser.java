@@ -1,8 +1,8 @@
 package org.gonevertical.pm.directory.server.domain;
 
 public class CurrentUser {
-    private Boolean isAdmin;
-    private Boolean isLoggedIn;
+    private boolean isAdmin;
+    private boolean isLoggedIn;
     private SystemUser systemUser;
     private String logoutUrl;
     private String loginUrl;
@@ -21,15 +21,15 @@ public class CurrentUser {
         this.systemUser = systemUser;
     }
 
-    public Boolean isAdmin() {
+    public Boolean getIsAdmin() {
         return isAdmin;
     }
     
-    public Boolean isLoggedIn() {
+    public Boolean getIsLoggedIn() {
         return isLoggedIn;
     }
     
-    public SystemUser getUser() {
+    public SystemUser getSystemUser() {
         return systemUser;
     }
 

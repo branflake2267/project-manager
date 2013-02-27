@@ -56,7 +56,7 @@ public class LoginPresenter extends PresenterWidget<LoginPresenter.MyView> imple
   }
 
   private void displayLogin() {
-    if (currentUser.isLoggedIn()) {
+    if (currentUser.getIsLoggedIn()) {
       String url = replaceReturnPath(currentUser.getLogoutUrl());
       getView().displayNickname(currentUser.getNickname());
       getView().displayLoggedIn(url);
