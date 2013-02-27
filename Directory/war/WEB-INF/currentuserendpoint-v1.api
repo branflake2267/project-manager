@@ -60,10 +60,10 @@
           "user" : {
             "$ref" : "SystemUser"
           },
-          "loggedIn" : {
+          "admin" : {
             "type" : "boolean"
           },
-          "admin" : {
+          "loggedIn" : {
             "type" : "boolean"
           }
         }

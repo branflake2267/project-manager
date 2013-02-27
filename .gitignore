@@ -1,6 +1,7 @@
-*.class
-*.bin
+bin**
 target**
+.gwt-log
+.gwt
 appengine-generated**
 gwt-unitCache**
 Directory/war/directory**
