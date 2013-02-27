@@ -6,27 +6,21 @@ import org.gonevertical.pm.directory.client.rest.CurrentUserJsoDao;
 import org.gonevertical.pm.directory.client.rest.jso.CurrentUserJso;
 import org.gonevertical.pm.directory.client.rest.util.RestHandler;
 
-import com.gwtplatform.mvp.client.Bootstrapper;
-import com.gwtplatform.mvp.client.annotations.Bootstrap;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
-@Bootstrap
-public class BootstrapperImpl implements Bootstrapper {
+public class BootWorkAround {
 
   private final PlaceManager placeManager;
   private final CurrentUserJso currentUser;
   private final CurrentUserJsoDao currentUserJsoDao;
 
   @Inject
-  public BootstrapperImpl(final PlaceManager placeManager, final CurrentUserJsoDao currentUserJsoDao,
+  public BootWorkAround(final PlaceManager placeManager, final CurrentUserJsoDao currentUserJsoDao,
       final CurrentUserJso currentUser) {
     this.placeManager = placeManager;
     this.currentUserJsoDao = currentUserJsoDao;
     this.currentUser = currentUser;
-  }
-
-  @Override
-  public void onBootstrap() {
+    
     fetchCurrentUser();
   }
 
@@ -46,7 +40,6 @@ public class BootstrapperImpl implements Bootstrapper {
 
   private void onFetchCurrentUserSuccess(CurrentUserJso currentUserJso) {
     currentUser.copyFrom(currentUserJso);
-    placeManager.revealCurrentPlace();
   }
 
 }

@@ -30,6 +30,8 @@ public class ClientModule extends AbstractPresenterModule {
 
     // Load and inject CSS resources
     bind(ResourceLoader.class).asEagerSingleton();
+    
+    bind(BootWorkAround.class).asEagerSingleton();
   }
   
 }
