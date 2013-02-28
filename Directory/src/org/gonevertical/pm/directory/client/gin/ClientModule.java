@@ -4,6 +4,7 @@ import org.gonevertical.pm.directory.client.application.ApplicationModule;
 import org.gonevertical.pm.directory.client.place.NameTokens;
 import org.gonevertical.pm.directory.client.rest.RestModule;
 
+import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.annotations.DefaultPlace;
 import com.gwtplatform.mvp.client.annotations.ErrorPlace;
 import com.gwtplatform.mvp.client.annotations.UnauthorizedPlace;
@@ -30,8 +31,6 @@ public class ClientModule extends AbstractPresenterModule {
 
     // Load and inject CSS resources
     bind(ResourceLoader.class).asEagerSingleton();
-    
-    bind(BootWorkAround.class).asEagerSingleton();
   }
   
 }

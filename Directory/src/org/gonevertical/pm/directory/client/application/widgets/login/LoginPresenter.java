@@ -16,7 +16,9 @@
 
 package org.gonevertical.pm.directory.client.application.widgets.login;
 
+import org.gonevertical.pm.directory.client.rest.CurrentUserJsoDao;
 import org.gonevertical.pm.directory.client.rest.jso.CurrentUserJso;
+import org.gonevertical.pm.directory.client.rest.util.RestHandler;
 
 import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.History;
@@ -28,7 +30,7 @@ import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 
 public class LoginPresenter extends PresenterWidget<LoginPresenter.MyView> implements LoginUiHandlers {
-  
+
   public interface MyView extends View, HasUiHandlers<LoginUiHandlers> {
     void displayLoggedIn(String string);
 
@@ -37,21 +39,44 @@ public class LoginPresenter extends PresenterWidget<LoginPresenter.MyView> imple
     void displayNickname(String nickname);
   }
 
+  private final CurrentUserJsoDao currentUserJsoDao;
   private final CurrentUserJso currentUserJso;
 
   @Inject
-  public LoginPresenter(final EventBus eventBus, final MyView view, final CurrentUserJso currentUserJso) {
+  public LoginPresenter(final EventBus eventBus, final MyView view, final CurrentUserJsoDao currentUserJsoDao,
+      final CurrentUserJso currentUserJso) {
     super(eventBus, view);
 
+    this.currentUserJsoDao = currentUserJsoDao;
     this.currentUserJso = currentUserJso;
 
     getView().setUiHandlers(this);
   }
 
   @Override
-  protected void onReveal() {
-    super.onReveal();
+  protected void onBind() {
+    super.onBind();
 
+    fetchCurrentUser();
+  }
+
+  private void fetchCurrentUser() {
+    currentUserJsoDao.getCurrentUser(new RestHandler<CurrentUserJso>() {
+      @Override
+      public void onSuccess(CurrentUserJso object) {
+        onFetchCurrentUserSuccess(object);
+      }
+
+      @Override
+      public void onFailure(Throwable e) {
+        e.printStackTrace();
+      }
+    });
+  }
+
+  private void onFetchCurrentUserSuccess(CurrentUserJso currentUserJso) {
+    currentUserJso.copyFrom(currentUserJso);
+    
     displayLogin();
   }
 
@@ -86,5 +111,5 @@ public class LoginPresenter extends PresenterWidget<LoginPresenter.MyView> imple
 
     return url;
   }
-  
+
 }
