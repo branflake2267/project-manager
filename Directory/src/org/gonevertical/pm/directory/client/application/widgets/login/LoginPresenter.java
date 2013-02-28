@@ -62,7 +62,7 @@ public class LoginPresenter extends PresenterWidget<LoginPresenter.MyView> imple
   }
 
   private void fetchCurrentUser() {
-    currentUserJsoDao.getCurrentUser(new RestHandler<CurrentUserJso>() {
+    currentUserJsoDao.get(new RestHandler<CurrentUserJso>() {
       @Override
       public void onSuccess(CurrentUserJso object) {
         onFetchCurrentUserSuccess(object);

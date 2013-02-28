@@ -6,8 +6,8 @@ public class HomeModule extends AbstractPresenterModule {
 
   @Override
   protected void configure() {
-    bindPresenter(HomePagePresenter.class, HomePagePresenter.MyView.class, HomePageView.class,
-        HomePagePresenter.MyProxy.class);
+    bindPresenter(HomePresenter.class, HomePresenter.MyView.class, HomeView.class,
+        HomePresenter.MyProxy.class);
   }
 
 }
