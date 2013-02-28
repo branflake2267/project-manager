@@ -2,7 +2,6 @@ package org.gonevertical.pm.directory.client.application.widgets.header;
 
 import org.gonevertical.pm.directory.client.application.widgets.login.LoginPresenter;
 
-import com.google.gwt.user.client.Window;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.HasUiHandlers;
@@ -32,11 +31,6 @@ public class HeaderPresenter extends PresenterWidget<HeaderPresenter.MyView> imp
     super.onBind();
 
     setInSlot(TYPE_LoginPresenter, loginPresenter);
-  }
-
-  @Override
-  public void onTestClick() {
-    Window.alert("The Presenter says Hi test");
   }
   
 }

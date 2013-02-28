@@ -15,6 +15,5 @@
         <a href="#home">Home</a>
         <a href="#admin">Admin</a>
         <g:SimplePanel ui:field="login" styleName="{style.inline}"/> 
-        <g:Button ui:field="test">Test</g:Button>
     </g:HTMLPanel>
 </ui:UiBinder>

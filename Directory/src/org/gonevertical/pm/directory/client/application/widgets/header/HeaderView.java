@@ -1,9 +1,7 @@
 package org.gonevertical.pm.directory.client.application.widgets.header;
 
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -30,9 +28,4 @@ public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements 
     }
   }
 
-  @UiHandler("test")
-  public void onTestClick(ClickEvent event) {
-    getUiHandlers().onTestClick();
-  }
-  
 }
