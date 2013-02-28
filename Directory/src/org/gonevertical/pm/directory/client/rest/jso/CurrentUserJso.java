@@ -55,13 +55,4 @@ public class CurrentUserJso extends JavaScriptObject {
     this.nickname = nickname;
   }-*/;
 
-  public final void copyFrom(CurrentUserJso currentUserJso) {
-    setIsAdmin(currentUserJso.getIsAdmin());
-    setIsLoggedIn(currentUserJso.getIsLoggedIn());
-    setSystemUser(currentUserJso.getSystemUser());
-    setLogoutUrl(currentUserJso.getLogoutUrl());
-    setLoginUrl(currentUserJso.getLoginUrl());
-    setNickname(currentUserJso.getNickname());
-  }
-  
 }

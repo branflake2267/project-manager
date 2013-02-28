@@ -13,7 +13,7 @@ public class CurrentUserEndpoint {
   private final UserService userService = UserServiceFactory.getUserService();
   private final SystemUserEndpoint systemUserEndpoint = new SystemUserEndpoint();
 
-  public CurrentUser getCurrentUsers() {
+  public CurrentUser getCurrentUser() {
     Boolean isLoggedIn = userService.isUserLoggedIn();
 
     CurrentUser currentUser = new CurrentUser(isLoggedIn, getUser());
@@ -39,6 +39,10 @@ public class CurrentUserEndpoint {
       if (systemUser == null) {
         systemUser = createSystemUser(googleId);
       }
+    }
+    
+    if (systemUser == null) {
+      systemUser = new SystemUser();
     }
     
     return systemUser;

@@ -24,13 +24,13 @@
     "maxAge" : 0
   },
   "methods" : {
-    "currentuserendpoint.getCurrentUsers" : {
+    "currentuserendpoint.getCurrentUser" : {
       "path" : "currentuser",
       "httpMethod" : "GET",
       "scopes" : [ ],
       "audiences" : [ ],
       "clientIds" : [ ],
-      "rosyMethod" : "CurrentUserEndpoint.getCurrentUsers",
+      "rosyMethod" : "CurrentUserEndpoint.getCurrentUser",
       "request" : {
         "body" : "empty"
       },
@@ -79,7 +79,7 @@
       }
     },
     "methods" : {
-      "CurrentUserEndpoint.getCurrentUsers" : {
+      "CurrentUserEndpoint.getCurrentUser" : {
         "response" : {
           "$ref" : "CurrentUser"
         }

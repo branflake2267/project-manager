@@ -5,7 +5,7 @@ import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.resources.client.ImageResource;
 
 /**
- * {@link ResourceLoader} injects the css on boostrapping from the {@Link ClientModule} and the resources exist
+ * {@link ResourceLoader} injects the css on boostrapping from the {@Link SecurityModule} and the resources exist
  * in src/main/resources/com.gwtplatform.samples.tab.client.resources/*
  */
 public interface AppResources extends ClientBundle {

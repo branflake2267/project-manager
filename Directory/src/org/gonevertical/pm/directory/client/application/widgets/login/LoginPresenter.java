@@ -19,6 +19,7 @@ package org.gonevertical.pm.directory.client.application.widgets.login;
 import org.gonevertical.pm.directory.client.rest.CurrentUserJsoDao;
 import org.gonevertical.pm.directory.client.rest.jso.CurrentUserJso;
 import org.gonevertical.pm.directory.client.rest.util.RestHandler;
+import org.gonevertical.pm.directory.client.security.LoggedInUser;
 
 import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.History;
@@ -40,15 +41,15 @@ public class LoginPresenter extends PresenterWidget<LoginPresenter.MyView> imple
   }
 
   private final CurrentUserJsoDao currentUserJsoDao;
-  private final CurrentUserJso currentUserJso;
+  private final LoggedInUser loggedInUser;
 
   @Inject
   public LoginPresenter(final EventBus eventBus, final MyView view, final CurrentUserJsoDao currentUserJsoDao,
-      final CurrentUserJso currentUserJso) {
+      final LoggedInUser loggedInUser) {
     super(eventBus, view);
 
     this.currentUserJsoDao = currentUserJsoDao;
-    this.currentUserJso = currentUserJso;
+    this.loggedInUser = loggedInUser;
 
     getView().setUiHandlers(this);
   }
@@ -75,18 +76,18 @@ public class LoginPresenter extends PresenterWidget<LoginPresenter.MyView> imple
   }
 
   private void onFetchCurrentUserSuccess(CurrentUserJso currentUserJso) {
-    currentUserJso.copyFrom(currentUserJso);
+    loggedInUser.copyFrom(currentUserJso);
     
     displayLogin();
   }
 
   private void displayLogin() {
-    if (currentUserJso.getIsLoggedIn()) {
-      String url = replaceReturnPath(currentUserJso.getLogoutUrl());
-      getView().displayNickname(currentUserJso.getNickname());
+    if (loggedInUser.getIsLoggedIn()) {
+      String url = replaceReturnPath(loggedInUser.getLogoutUrl());
+      getView().displayNickname(loggedInUser.getNickname());
       getView().displayLoggedIn(url);
     } else {
-      String url = replaceReturnPath(currentUserJso.getLoginUrl());
+      String url = replaceReturnPath(loggedInUser.getLoginUrl());
       getView().displayNickname("");
       getView().displayLoggedOut(url);
     }

@@ -12,18 +12,24 @@ import com.google.gwt.json.client.JSONParser;
 public abstract class RestService<T extends JavaScriptObject> {
   
   private String getUrl(String url) {
-    return GWT.getModuleBaseURL() + url;
+    return GWT.getHostPageBaseURL() + url;
   }
 
   protected void get(String url, final RestHandler<T> handler) {
     url = getUrl(url);
     
     RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
+    builder.setHeader(RestHeaders.CONTENT_TYPE__JSON.getKey(), RestHeaders.ACCEPT__JSON.getValue());
+    builder.setHeader(RestHeaders.ACCEPT__JSON.getKey(), RestHeaders.ACCEPT__JSON.getValue());
+    
     builder.setCallback(new RequestCallback() {
       @Override
       public void onResponseReceived(Request request, Response response) {
+        String json = response.getText();
+        
+        System.out.println("json=" + json);
+        
         if (response.getStatusCode() == 200) {
-          String json = response.getText();
           T jso = (T) JSONParser.parseLenient(json).isObject().getJavaScriptObject().cast();
           handler.onSuccess(jso);
         } else {
@@ -36,8 +42,7 @@ public abstract class RestService<T extends JavaScriptObject> {
         handler.onFailure(e);
       }
     });
-    builder.setHeader(RestHeaders.ACCEPT__JSON.getKey(), RestHeaders.ACCEPT__JSON.getValue());
-
+    
     try {
       builder.send();
     } catch (RequestException e) {

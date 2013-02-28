@@ -2,7 +2,6 @@ package org.gonevertical.pm.directory.testing;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.gonevertical.pm.directory.server.domain.dto.CurrentUser;
@@ -47,7 +46,7 @@ public class CurrentUserEndpointTest {
 
     // then
     assertNotNull(currentUser);
-    assertNull(currentUser.getSystemUser());
+    assertNotNull(currentUser.getSystemUser());
     assertFalse(currentUser.getIsLoggedIn());
     assertFalse(currentUser.getIsAdmin());
   }

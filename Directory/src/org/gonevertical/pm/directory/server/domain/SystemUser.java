@@ -21,11 +21,16 @@ public class SystemUser {
   }
 
   public String getKey() {
+    if (key == null) {
+      return "";
+    }
     return KeyFactory.keyToString(key);
   }
 
   public void setKey(String key) {
-    this.key = KeyFactory.stringToKey(key);
+    if (key != null) {
+      this.key = KeyFactory.stringToKey(key);
+    }
   }
 
   public String getGoogleId() {
