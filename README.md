@@ -10,7 +10,7 @@ I'm working on the desktop Archetype listing/edting for the Archetype directory.
 * [Server - GAE Rest Endpoints](https://github.com/branflake2267/Project-Manager/tree/master/Directory/src/org/gonevertical/pm/directory/server/rest) - Google App Engine endpoints used for rest communication.
 * [Testing - GAE Rest Endpoints](https://github.com/branflake2267/Project-Manager/tree/master/DirectoryTesting/src/test/java/org/gonevertical/pm/directory/testing) - Using Rest Assured for testing GAE endpoints.
 
-##Goals
+##Overall Goals
 * Provide a directory of Archetypes.
 * Provide an Eclipse plugin to create projects from the Archetype directory.
 * Provide an IDEA plugin to create projects from Archetype directory.
