@@ -22,7 +22,7 @@ I'm working on the desktop Archetype listing/edting for the Archetype directory.
 * Provide the users favorites. 
 * Provide tools/scripts to create Archetypes, build, test, deploy...
 
-##Some Ideas of the Project
+##Some Ideas for the Project
 * Setup project bare bones in minutes. 
 * Provide choice and allow others to contribute their archetype.
 * Provide tutorial archetypes.
