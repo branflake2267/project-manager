@@ -26,7 +26,7 @@ I'm working on the desktop editing of Archetype directory.
 I was working on the GWTP eclipse plugin and didn't want to rewrite the static source writers and thought it would be faster to create the project from an Archetype. But I created a few to choose from and wanted the choice to choose the Archetype. So I figured it be faster to write my own plugin than wait for someone else to make something like this. In other words, why should spend time on redundant setups.
 
 ##Source Highlights
-* [Client - GWTP Desktop Archetype Directory](https://github.com/branflake2267/Project-Manager/tree/master/Directory/src/org/gonevertical/pm/directory/client)
+* [Client - GWTP Desktop Archetype Directory or Desktop Application Configuration](https://github.com/branflake2267/Project-Manager/tree/master/Directory/src/org/gonevertical/pm/directory/client)
 * [Client - GWTP Desktop Rest Communication or GWT JSO Overlays](https://github.com/branflake2267/Project-Manager/tree/master/Directory/src/org/gonevertical/pm/directory/client/rest)
 * [Server - GAE Rest Endpoints](https://github.com/branflake2267/Project-Manager/tree/master/Directory/src/org/gonevertical/pm/directory/server/rest)
 * [Testing - GAE Rest Endpoints](https://github.com/branflake2267/Project-Manager/tree/master/DirectoryTesting/src/test/java/org/gonevertical/pm/directory/testing)
