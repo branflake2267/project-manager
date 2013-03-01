@@ -2,7 +2,13 @@
 This is my experiment to speed up the creation of projects using Archetypes in Eclipse, IDEA and the terminal.
 
 ##Currently
-I'm working on the desktop editing of Archetype directory.
+I'm working on the desktop Archetype listing/edting for the Archetype directory.
+
+##Source Highlights
+* [Client - GWTP Desktop Archetype Directory](https://github.com/branflake2267/Project-Manager/tree/master/Directory/src/org/gonevertical/pm/directory/client) - GWTP application architecture used for the Desktop app.
+* [Client - GWTP Desktop Rest Communication](https://github.com/branflake2267/Project-Manager/tree/master/Directory/src/org/gonevertical/pm/directory/client/rest) - Rest comm. & JSO
+* [Server - GAE Rest Endpoints](https://github.com/branflake2267/Project-Manager/tree/master/Directory/src/org/gonevertical/pm/directory/server/rest) - Google App Engine endpoints used for rest communication.
+* [Testing - GAE Rest Endpoints](https://github.com/branflake2267/Project-Manager/tree/master/DirectoryTesting/src/test/java/org/gonevertical/pm/directory/testing) - Using Rest Assured for testing GAE endpoints.
 
 ##Goals
 * Provide a directory of Archetypes.
@@ -24,9 +30,3 @@ I'm working on the desktop editing of Archetype directory.
 
 ##Why
 I was working on the GWTP eclipse plugin and didn't want to rewrite the static source writers and thought it would be faster to create the project from an Archetype. But I created a few to choose from and wanted the choice to choose the Archetype. So I figured it be faster to write my own plugin than wait for someone else to make something like this. In other words, why should spend time on redundant setups.
-
-##Source Highlights
-* [Client - GWTP Desktop Archetype Directory](https://github.com/branflake2267/Project-Manager/tree/master/Directory/src/org/gonevertical/pm/directory/client) - GWTP application architecture used for the Desktop app.
-* [Client - GWTP Desktop Rest Communication](https://github.com/branflake2267/Project-Manager/tree/master/Directory/src/org/gonevertical/pm/directory/client/rest) - Rest comm. & JSO
-* [Server - GAE Rest Endpoints](https://github.com/branflake2267/Project-Manager/tree/master/Directory/src/org/gonevertical/pm/directory/server/rest) - Google App Engine endpoints used for rest communication.
-* [Testing - GAE Rest Endpoints](https://github.com/branflake2267/Project-Manager/tree/master/DirectoryTesting/src/test/java/org/gonevertical/pm/directory/testing) - Using Rest Assured for testing GAE endpoints.
