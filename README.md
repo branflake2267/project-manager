@@ -6,7 +6,7 @@ I'm working on the desktop Archetype listing/edting for the Archetype directory.
 
 ##Source Highlights
 * [Client - GWTP Desktop Archetype Directory](https://github.com/branflake2267/Project-Manager/tree/master/Directory/src/org/gonevertical/pm/directory/client) - GWTP application architecture used for the Desktop app.
-* [Client - GWTP Desktop Rest Communication](https://github.com/branflake2267/Project-Manager/tree/master/Directory/src/org/gonevertical/pm/directory/client/rest) - Rest comm. & JSO
+* [Client - GWTP Desktop Rest Communication](https://github.com/branflake2267/Project-Manager/tree/master/Directory/src/org/gonevertical/pm/directory/client/rest) - Rest communication & JSO.
 * [Server - GAE Rest Endpoints](https://github.com/branflake2267/Project-Manager/tree/master/Directory/src/org/gonevertical/pm/directory/server/rest) - Google App Engine endpoints used for rest communication.
 * [Testing - GAE Rest Endpoints](https://github.com/branflake2267/Project-Manager/tree/master/DirectoryTesting/src/test/java/org/gonevertical/pm/directory/testing) - Using Rest Assured for testing GAE endpoints.
 
