@@ -11,7 +11,7 @@ I'm working on the desktop Archetype listing/edting for the Archetype directory.
 * [Testing - GAE Rest Endpoints](https://github.com/branflake2267/Project-Manager/tree/master/DirectoryTesting/src/test/java/org/gonevertical/pm/directory/testing) - Using Rest Assured for testing GAE endpoints.
 
 ##Overall Goals
-* Provide a directory of Archetypes.
+* Provide a curated directory of Archetypes.
 * Provide an Eclipse plugin to create projects from the Archetype directory.
 * Provide an IDEA plugin to create projects from Archetype directory.
 
