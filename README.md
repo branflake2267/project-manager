@@ -1,5 +1,5 @@
 ##Project Manager
-This is my experiment to speed up the creation of projects using Archetypes Eclipse and IDEA.
+This is my experiment to speed up the creation of projects using Archetypes in Eclipse, IDEA and the terminal.
 
 ##Currently
 I'm working on the desktop editing of Archetype directory.
@@ -18,7 +18,7 @@ I'm working on the desktop editing of Archetype directory.
 
 ##Some Ideas of the Project
 * Setup project bare bones in minutes. 
-* Provide choice and allow others to contribute there archetype.
+* Provide choice and allow others to contribute their archetype.
 * Provide tutorial archetypes.
 * IDE agnostic
 

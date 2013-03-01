@@ -4,7 +4,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 public interface RestListHandler<T extends JavaScriptObject> {
 
-  void onSuccess(T object);
+  void onSuccess(RestList<T> list);
   
   void onFailure(Throwable e);
   
