@@ -26,7 +26,7 @@ I'm working on the desktop Archetype listing/edting for the Archetype directory.
 * Setup project bare bones in minutes. 
 * Provide choice and allow others to contribute their archetype.
 * Provide tutorial archetypes.
-* IDE agnostic
+* IDE agnostic.
 
 ##Why
 I was working on the GWTP eclipse plugin and didn't want to rewrite the static source writers and thought it would be faster to create the project from an Archetype. But I created a few to choose from and wanted the choice to choose the Archetype. So I figured it be faster to write my own plugin than wait for someone else to make something like this. In other words, why should spend time on redundant setups.
