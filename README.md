@@ -15,7 +15,7 @@ I'm working on the desktop Archetype listing/edting for the Archetype directory.
 * Provide an Eclipse plugin to create projects from the Archetype directory.
 * Provide an IDEA plugin to create projects from Archetype directory.
 
-#Archetype Directory Goals
+##Archetype Directory Goals
 * Filter by category, like GWT, GWTP, App Engine...
 * Filter by tags, like the technology used to build archetype, JPA, SQL, MySQL, Tomcat…
 * Provide users with choice.
