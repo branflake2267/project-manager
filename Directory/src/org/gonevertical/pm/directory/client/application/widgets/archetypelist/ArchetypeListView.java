@@ -67,7 +67,7 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
         }
         return s;
       }
-    }, "name");
+    }, "Name");
     
     dataProvider = new AsyncDataProvider<ArchetypeJso>() {
       @Override
