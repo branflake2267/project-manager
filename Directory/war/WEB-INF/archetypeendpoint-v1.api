@@ -53,6 +53,10 @@
             "type" : "string",
             "required" : false
           },
+          "offset" : {
+            "type" : "int32",
+            "required" : false
+          },
           "limit" : {
             "type" : "int32",
             "required" : false

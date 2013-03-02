@@ -1,6 +1,7 @@
 package org.gonevertical.pm.directory.testing;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -28,7 +29,20 @@ public class ArchetypeEndpointTest {
 
   @Test
   public void testList() {
-    RestAssured.given().param("limit", "2").expect().statusCode(200).when().get(url);
+    createArchetypeAndPersist(3);
+
+    RestAssured.given().param("limit", "2").expect().when().get(url).print();
+  }
+
+  @Test
+  public void testListWithOffset() {
+    createArchetypeAndPersist(4);
+
+    List<Archetype> list = RestAssured.given().param("offset", "1").and().param("limit", "2").expect().when().get(url)
+        .jsonPath().getList("items");
+
+    assertNotNull(list);
+    assertNotNull(list.size() > 1);
   }
 
   @Test
@@ -130,7 +144,7 @@ public class ArchetypeEndpointTest {
   @Test
   public void testAllProperties() {
     Archetype archetype = createBasicArchetype();
-    
+
     // TODO categories
     // TODO tags
 
@@ -143,7 +157,7 @@ public class ArchetypeEndpointTest {
     Archetype getArchetype = RestAssured.given().contentType(ContentType.JSON)
         .cookie("dev_appserver_login", devAppserverLoginCookie).expect().statusCode(200).when()
         .get(url + "/" + newArchetype.getKey()).as(Archetype.class);
-    
+
     assertEquals(archetype.getName(), getArchetype.getName());
     assertEquals(archetype.getRepository(), getArchetype.getRepository());
     assertEquals(archetype.getGroupId(), getArchetype.getGroupId());
@@ -161,5 +175,14 @@ public class ArchetypeEndpointTest {
     archetype.setVersion("testVersion");
     return archetype;
   }
-  
+
+  public void createArchetypeAndPersist(int count) {
+    for (int i = 0; i < count; i++) {
+      Archetype archetype = createBasicArchetype();
+
+      RestAssured.given().contentType(ContentType.JSON).cookie("dev_appserver_login", devAppserverLoginCookie).and()
+          .content(archetype).expect().statusCode(200).when().post(url).as(Archetype.class);
+    }
+  }
+
 }

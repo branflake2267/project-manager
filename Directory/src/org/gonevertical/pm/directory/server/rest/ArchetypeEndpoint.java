@@ -10,6 +10,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import org.gonevertical.pm.directory.server.domain.Archetype;
+import org.gonevertical.pm.directory.server.domain.dao.JdoUtils;
 import org.gonevertical.pm.directory.server.domain.dao.PMF;
 import org.gonevertical.pm.directory.server.rest.errors.CustomErrors;
 
@@ -60,6 +61,7 @@ public class ArchetypeEndpoint {
   }
 
   public CollectionResponse<Archetype> listArchetype(@Nullable @Named("cursor") String cursorString,
+      @Nullable @Named("offset") Integer offset,
       @Nullable @Named("limit") Integer limit) {
     PersistenceManager mgr = null;
     Cursor cursor = null;
@@ -74,9 +76,13 @@ public class ArchetypeEndpoint {
         extensionMap.put(JDOCursorHelper.CURSOR_EXTENSION, cursor);
         query.setExtensions(extensionMap);
       }
-
+      
       if (limit != null) {
-        query.setRange(0, limit);
+        if (offset != null) {
+          query.setRange(offset, limit);
+        } else {
+          query.setRange(0, limit); 
+        }
       }
 
       execute = (List<Archetype>) query.execute();
@@ -175,12 +181,7 @@ public class ArchetypeEndpoint {
   }
 
   private Archetype getArchetype(Key key) {
-    PersistenceManager mgr = getPersistenceManager();
-    try {
-      return mgr.getObjectById(Archetype.class, key);
-    } finally {
-      mgr.close();
-    }
+    return JdoUtils.findAndCatchErrors(Archetype.class, key);
   }
 
   private static PersistenceManager getPersistenceManager() {

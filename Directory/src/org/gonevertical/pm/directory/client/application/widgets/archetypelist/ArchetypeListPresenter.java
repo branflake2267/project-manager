@@ -1,5 +1,7 @@
 package org.gonevertical.pm.directory.client.application.widgets.archetypelist;
 
+import java.util.HashMap;
+
 import org.gonevertical.pm.directory.client.application.widgets.login.LoginPresenter;
 import org.gonevertical.pm.directory.client.rest.ArchetypeJsoDao;
 import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
@@ -18,32 +20,31 @@ public class ArchetypeListPresenter extends PresenterWidget<ArchetypeListPresent
   private ArchetypeJsoDao archetypeJsoDao;
 
   public interface MyView extends View, HasUiHandlers<ArchtypeListUiHandlers> {
+    void displayArchetypes(int start, RestList<ArchetypeJso> list);
   }
 
   @Inject
   public ArchetypeListPresenter(final EventBus eventBus, final MyView view, final LoginPresenter loginPresenter,
       final ArchetypeJsoDao archetypeJsoDao) {
     super(eventBus, view);
-    
+
     this.archetypeJsoDao = archetypeJsoDao;
 
     getView().setUiHandlers(this);
   }
 
   @Override
-  protected void onReveal() {
-    super.onReveal();
-
-    fetchArchetypes();
-  }
-
-  private void fetchArchetypes() {
-    archetypeJsoDao.getList(new RestListHandler<ArchetypeJso>() {
+  public void fetchArchetypes(final int start, int length) {
+    HashMap<String, String> parameters = new HashMap<String, String>();
+    parameters.put("offset", Integer.toString(start));
+    parameters.put("limit", Integer.toString(length));
+    
+    archetypeJsoDao.getList(parameters, new RestListHandler<ArchetypeJso>() {
       @Override
       public void onSuccess(RestList<ArchetypeJso> list) {
-        onFetchSuccessArchetypesList(list);
+        onFetchSuccessArchetypesList(start, list);
       }
-      
+
       @Override
       public void onFailure(Throwable e) {
         e.printStackTrace();
@@ -51,9 +52,8 @@ public class ArchetypeListPresenter extends PresenterWidget<ArchetypeListPresent
     });
   }
 
-  private void onFetchSuccessArchetypesList(RestList<ArchetypeJso> list) {
-    
-    System.out.println("test");
+  private void onFetchSuccessArchetypesList(int start, RestList<ArchetypeJso> list) {
+    getView().displayArchetypes(start, list);
   }
 
 }
