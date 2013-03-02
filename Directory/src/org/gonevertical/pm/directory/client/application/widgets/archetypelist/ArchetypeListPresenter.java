@@ -21,6 +21,8 @@ public class ArchetypeListPresenter extends PresenterWidget<ArchetypeListPresent
 
   public interface MyView extends View, HasUiHandlers<ArchtypeListUiHandlers> {
     void displayArchetypes(int start, RestList<ArchetypeJso> list);
+
+    void init();
   }
 
   @Inject
@@ -31,6 +33,18 @@ public class ArchetypeListPresenter extends PresenterWidget<ArchetypeListPresent
     this.archetypeJsoDao = archetypeJsoDao;
 
     getView().setUiHandlers(this);
+  }
+  
+  @Override
+  public void onReveal() {
+    super.onReveal();
+    
+    getView().init();
+  }
+  
+  @Override
+  public void gotoEdit(ArchetypeJso selectedArchetype) {
+    // TODO
   }
 
   @Override
@@ -55,5 +69,5 @@ public class ArchetypeListPresenter extends PresenterWidget<ArchetypeListPresent
   private void onFetchSuccessArchetypesList(int start, RestList<ArchetypeJso> list) {
     getView().displayArchetypes(start, list);
   }
-
+  
 }

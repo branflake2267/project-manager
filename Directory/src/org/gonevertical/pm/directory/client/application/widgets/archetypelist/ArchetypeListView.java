@@ -12,6 +12,9 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.Range;
+import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.gwt.view.client.SelectionChangeEvent.Handler;
+import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 
@@ -26,14 +29,22 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
   @UiField(provided = true)
   SimplePager pager = new SimplePager();
  
+  private boolean intialized = false;
   private AsyncDataProvider<ArchetypeJso> dataProvider;
+  private SingleSelectionModel<ArchetypeJso> selectionModel = new SingleSelectionModel<ArchetypeJso>();
   
   @Inject
   public ArchetypeListView(final Binder binder) {
     initWidget(binder.createAndBindUi(this));
   }
   
+  @Override
   public void init() {
+    if (intialized) {
+      return;
+    }
+    intialized = true;
+    
     initCellTable();
     initPager();
   }
@@ -45,6 +56,7 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
 
   private void initCellTable() {
     archetypeCellTable.setPageSize(PAGE_SIZE);
+    archetypeCellTable.setHeight("500px");
     
     // name
     archetypeCellTable.addColumn(new TextColumn<ArchetypeJso>() {
@@ -65,8 +77,15 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
       }
     };
     dataProvider.addDataDisplay(archetypeCellTable);
+    
+    archetypeCellTable.setSelectionModel(selectionModel);
+    selectionModel.addSelectionChangeHandler(new Handler() {
+      public void onSelectionChange(SelectionChangeEvent event) {
+        getUiHandlers().gotoEdit(selectionModel.getSelectedObject());
+      }
+    });
   }
-
+  
   @Override
   public void displayArchetypes(int start, RestList<ArchetypeJso> list) {
     dataProvider.updateRowData(start, list.getList());

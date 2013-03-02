@@ -109,10 +109,16 @@ public abstract class RestService<T extends JavaScriptObject> {
     if (parameters == null) {
       return "";
     }
-    
+
     String qs = "";
+
     Set<String> keys = parameters.keySet();
-    int i=0; 
+
+    if (keys.size() > 0) {
+      qs = "?";
+    }
+
+    int i = 0;
     for (String key : keys) {
       qs += key + "=" + parameters.get(key);
       if (i <= keys.size() - 1) {
@@ -120,7 +126,7 @@ public abstract class RestService<T extends JavaScriptObject> {
       }
       i++;
     }
-    
+
     return qs;
   }
 }
