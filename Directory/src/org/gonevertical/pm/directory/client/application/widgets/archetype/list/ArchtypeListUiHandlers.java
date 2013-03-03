@@ -1,4 +1,4 @@
-package org.gonevertical.pm.directory.client.application.widgets.archetypelist;
+package org.gonevertical.pm.directory.client.application.widgets.archetype.list;
 
 import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
 

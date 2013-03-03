@@ -2,8 +2,12 @@
     <ui:style>
         .widget {
         }
+        .inline {
+            display: inline-block;
+        }
     </ui:style>
     <g:HTMLPanel styleName="{style.widget}">
-        <g:SimplePanel ui:field="archetypeList" />
+        <g:SimplePanel ui:field="archetypeList" styleName="{style.inline}" />
+        <g:SimplePanel ui:field="archetypeDisplay" styleName="{style.inline}" />
     </g:HTMLPanel>
 </ui:UiBinder>

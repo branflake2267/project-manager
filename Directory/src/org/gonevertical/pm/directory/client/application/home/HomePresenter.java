@@ -1,7 +1,8 @@
 package org.gonevertical.pm.directory.client.application.home;
 
 import org.gonevertical.pm.directory.client.application.ApplicationPresenter;
-import org.gonevertical.pm.directory.client.application.widgets.archetypelist.ArchetypeListPresenter;
+import org.gonevertical.pm.directory.client.application.widgets.archetype.display.ArchetypeDisplayPresenter;
+import org.gonevertical.pm.directory.client.application.widgets.archetype.list.ArchetypeListPresenter;
 import org.gonevertical.pm.directory.client.place.NameTokens;
 
 import com.google.inject.Inject;
@@ -18,8 +19,10 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
   }
 
   public static final Object TYPE_ArchetypeListPresenter = new Object();
-  
-  private ArchetypeListPresenter archetypeListPresenter;
+  public static final Object TYPE_ArchetypeDisplayPresenter = new Object();
+
+  private final ArchetypeListPresenter archetypeListPresenter;
+  private final ArchetypeDisplayPresenter archetypeDisplayPresenter;
 
   @ProxyStandard
   @NameToken(NameTokens.home)
@@ -27,11 +30,12 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
   }
 
   @Inject
-  public HomePresenter(final EventBus eventBus, final MyView view, final MyProxy proxy,
-      final ArchetypeListPresenter archetypeListPresenter) {
+  public HomePresenter(EventBus eventBus, MyView view, MyProxy proxy, ArchetypeListPresenter archetypeListPresenter,
+      ArchetypeDisplayPresenter archetypeDisplayPresenter) {
     super(eventBus, view, proxy, ApplicationPresenter.TYPE_SetMainContent);
-    
+
     this.archetypeListPresenter = archetypeListPresenter;
+    this.archetypeDisplayPresenter = archetypeDisplayPresenter;
   }
 
   @Override
@@ -39,6 +43,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
     super.onBind();
 
     setInSlot(TYPE_ArchetypeListPresenter, archetypeListPresenter);
+    setInSlot(TYPE_ArchetypeDisplayPresenter, archetypeDisplayPresenter);
   }
 
 }

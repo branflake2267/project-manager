@@ -1,4 +1,4 @@
-package org.gonevertical.pm.directory.client.application.widgets.archetypeedit;
+package org.gonevertical.pm.directory.client.application.widgets.archetype.edit;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.HTMLPanel;

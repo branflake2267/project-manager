@@ -14,6 +14,8 @@ public class HomeView extends ViewImpl implements HomePresenter.MyView {
   
   @UiField
   SimplePanel archetypeList;
+  @UiField
+  SimplePanel archetypeDisplay;
 
   @Inject
   public HomeView(final Binder uiBinder) {
@@ -24,7 +26,9 @@ public class HomeView extends ViewImpl implements HomePresenter.MyView {
   public void setInSlot(Object slot, Widget content) {
     if (slot == HomePresenter.TYPE_ArchetypeListPresenter) {
       archetypeList.setWidget(content);
-    }
+    } else if (slot == HomePresenter.TYPE_ArchetypeDisplayPresenter) {
+      archetypeDisplay.setWidget(content);
+    } 
   }
   
 }

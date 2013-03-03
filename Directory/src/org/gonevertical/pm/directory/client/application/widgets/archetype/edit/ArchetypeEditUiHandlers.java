@@ -1,4 +1,4 @@
-package org.gonevertical.pm.directory.client.application.widgets.archetypeedit;
+package org.gonevertical.pm.directory.client.application.widgets.archetype.edit;
 
 import com.gwtplatform.mvp.client.UiHandlers;
 

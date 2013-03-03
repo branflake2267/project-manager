@@ -1,4 +1,4 @@
-package org.gonevertical.pm.directory.client.application.widgets.archetypeview;
+package org.gonevertical.pm.directory.client.application.widgets.archetype.display;
 
 import org.gonevertical.pm.directory.client.application.widgets.login.LoginPresenter;
 import org.gonevertical.pm.directory.client.rest.ArchetypeJsoDao;

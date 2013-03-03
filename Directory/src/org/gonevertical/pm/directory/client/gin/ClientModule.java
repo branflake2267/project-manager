@@ -1,6 +1,7 @@
 package org.gonevertical.pm.directory.client.gin;
 
 import org.gonevertical.pm.directory.client.application.ApplicationModule;
+import org.gonevertical.pm.directory.client.events.EventsModule;
 import org.gonevertical.pm.directory.client.place.NameTokens;
 import org.gonevertical.pm.directory.client.rest.RestModule;
 import org.gonevertical.pm.directory.client.security.SecurityModule;
@@ -21,6 +22,7 @@ public class ClientModule extends AbstractPresenterModule {
   @Override
   protected void configure() {
     install(new DefaultModule(DefaultPlaceManager.class));
+    install(new EventsModule());
     install(new SecurityModule());
     install(new RestModule());
     install(new ApplicationModule());
