@@ -2,8 +2,6 @@ package org.gonevertical.pm.directory.client.application.widgets.archetype.edit;
 
 import org.gonevertical.pm.directory.client.application.widgets.login.LoginPresenter;
 import org.gonevertical.pm.directory.client.rest.ArchetypeJsoDao;
-import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
-import org.gonevertical.pm.directory.client.rest.util.RestList;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;

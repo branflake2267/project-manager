@@ -39,4 +39,8 @@ public class ArchetypeObserver {
     eventBus.fireEvent(new ArchetypeDisplayEvent(archetypeJso));
   }
 
+  public void displayList() {
+    eventBus.fireEvent(new ArchetypeDisplayListEvent());
+  }
+
 }

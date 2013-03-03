@@ -2,6 +2,7 @@ package org.gonevertical.pm.directory.client.application.home;
 
 import org.gonevertical.pm.directory.client.application.ApplicationPresenter;
 import org.gonevertical.pm.directory.client.application.widgets.archetype.display.ArchetypeDisplayPresenter;
+import org.gonevertical.pm.directory.client.application.widgets.archetype.edit.ArchetypeEditPresenter;
 import org.gonevertical.pm.directory.client.application.widgets.archetype.list.ArchetypeListPresenter;
 import org.gonevertical.pm.directory.client.events.archetypes.ArchetypeDisplayListEvent;
 import org.gonevertical.pm.directory.client.events.archetypes.ArchetypeEditEvent;
@@ -27,11 +28,12 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
   public static final Object TYPE_ArchetypeListPresenter = new Object();
   public static final Object TYPE_ArchetypeDisplayPresenter = new Object();
+  public static final Object TYPE_ArchetypeEditPresenter = new Object();
 
-  private ArchetypeObserver archetypeObserver;
+  private final ArchetypeObserver archetypeObserver;
   private final ArchetypeListPresenter archetypeListPresenter;
   private final ArchetypeDisplayPresenter archetypeDisplayPresenter;
-  
+  private final ArchetypeEditPresenter archetypeEditPresenter;
 
   @ProxyStandard
   @NameToken(NameTokens.home)
@@ -40,12 +42,14 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
   @Inject
   public HomePresenter(EventBus eventBus, MyView view, MyProxy proxy, ArchetypeObserver archetypeObserver,
-      ArchetypeListPresenter archetypeListPresenter, ArchetypeDisplayPresenter archetypeDisplayPresenter) {
+      ArchetypeListPresenter archetypeListPresenter, ArchetypeDisplayPresenter archetypeDisplayPresenter,
+      ArchetypeEditPresenter archetypeEditPresenter) {
     super(eventBus, view, proxy, ApplicationPresenter.TYPE_SetMainContent);
 
     this.archetypeObserver = archetypeObserver;
     this.archetypeListPresenter = archetypeListPresenter;
     this.archetypeDisplayPresenter = archetypeDisplayPresenter;
+    this.archetypeEditPresenter = archetypeEditPresenter;
   }
 
   @Override
@@ -57,6 +61,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
 
     setInSlot(TYPE_ArchetypeListPresenter, archetypeListPresenter);
     setInSlot(TYPE_ArchetypeDisplayPresenter, archetypeDisplayPresenter);
+    setInSlot(TYPE_ArchetypeEditPresenter, archetypeEditPresenter);
   }
 
   @Override

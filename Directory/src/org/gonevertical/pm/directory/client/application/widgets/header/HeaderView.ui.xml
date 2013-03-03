@@ -11,7 +11,7 @@
     </ui:style>
     
     <g:HTMLPanel styleName="{style.widget}">
-        Archetype Directory
+        Curated Archetype Directory
         <a href="#home">Home</a>
         <a href="#admin">Admin</a>
         <g:SimplePanel ui:field="login" styleName="{style.inline}"/> 

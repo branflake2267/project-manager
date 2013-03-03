@@ -36,7 +36,9 @@ public class HomeView extends ViewImpl implements HomePresenter.MyView {
       archetypeList.setWidget(content);
     } else if (slot == HomePresenter.TYPE_ArchetypeDisplayPresenter) {
       archetypeDisplay.setWidget(content);
-    } 
+    } else if (slot == HomePresenter.TYPE_ArchetypeEditPresenter) {
+      editPanel.setWidget(content);
+    }
   }
   
   @Override
