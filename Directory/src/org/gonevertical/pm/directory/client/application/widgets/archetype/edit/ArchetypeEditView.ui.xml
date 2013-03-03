@@ -7,8 +7,40 @@
     </ui:style>
 
     <g:HTMLPanel styleName="{style.widget}">
+        
         <g:Button ui:field="goback">Back to the List</g:Button>
+
+        <g:Button ui:field="save">Save</g:Button>
         
-        
+        <div>
+            Name:
+            <g:TextBox ui:field="name" />
+        </div>
+
+        <div>
+            Description:
+            <g:TextBox ui:field="description" />
+        </div>
+
+        <div>
+            Repository:
+            <g:TextBox ui:field="repository" />
+        </div>
+
+        <div>
+            GroupId:
+            <g:TextBox ui:field="groupId" />
+        </div>
+
+        <div>
+            ArtifactId:
+            <g:TextBox ui:field="artifactId" />
+        </div>
+
+        <div>
+            Version
+            <g:TextBox ui:field="version" />
+        </div>
+
     </g:HTMLPanel>
 </ui:UiBinder>

@@ -1,5 +1,8 @@
 package org.gonevertical.pm.directory.client.application.widgets.archetype.list;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
 import org.gonevertical.pm.directory.client.rest.util.RestList;
 
@@ -89,6 +92,12 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
   @Override
   public void displayArchetypes(int start, RestList<ArchetypeJso> list) {
     dataProvider.updateRowData(start, list.getList());
+  }
+
+  @Override
+  public void updateSelected(ArchetypeJso archetypeJso) {     
+    // TODO reload table and select 
+    // TODO update row data 
   }
 
 }

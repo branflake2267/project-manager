@@ -101,8 +101,40 @@ public abstract class RestService<T extends JavaScriptObject> {
     }
   }
 
-  public void put() {
+  protected void put(String url, T object, final RestHandler<T> handler) {
+    url = getUrl(url);
+    
+    String json = new JSONObject(object).toString();
 
+    RequestBuilder builder = new RequestBuilder(RequestBuilder.PUT, url);
+    builder.setHeader(RestHeaders.CONTENT_TYPE__JSON.getKey(), RestHeaders.ACCEPT__JSON.getValue());
+    builder.setHeader(RestHeaders.ACCEPT__JSON.getKey(), RestHeaders.ACCEPT__JSON.getValue());
+    builder.setRequestData(json);
+    
+    builder.setCallback(new RequestCallback() {
+      @Override
+      public void onResponseReceived(Request request, Response response) {
+        String json = response.getText();
+        if (response.getStatusCode() == 200) {
+          T jso = (T) JSONParser.parseLenient(json).isObject().getJavaScriptObject().cast();
+          handler.onSuccess(jso);
+        } else {
+          handler.onFailure(new Exception("Exception: getStatusText=" + response.getStatusText()));
+        }
+      }
+
+      @Override
+      public void onError(Request request, Throwable e) {
+        handler.onFailure(e);
+      }
+    });
+
+    try {
+      builder.send();
+    } catch (RequestException e) {
+      handler.onFailure(e);
+      e.printStackTrace();
+    }
   }
 
   private String getQueryString(HashMap<String, String> parameters) {

@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.gonevertical.pm.directory.client.application.widgets.login.LoginPresenter;
 import org.gonevertical.pm.directory.client.events.archetypes.ArchetypeObserver;
+import org.gonevertical.pm.directory.client.events.archetypes.ArchetypeUpdateEvent;
 import org.gonevertical.pm.directory.client.rest.ArchetypeJsoDao;
 import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
 import org.gonevertical.pm.directory.client.rest.util.RestList;
@@ -16,12 +17,14 @@ import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 
 public class ArchetypeListPresenter extends PresenterWidget<ArchetypeListPresenter.MyView> implements
-    ArchtypeListUiHandlers {
+    ArchtypeListUiHandlers, ArchetypeUpdateEvent.UpdateArchetypeHandler {
 
   public interface MyView extends View, HasUiHandlers<ArchtypeListUiHandlers> {
     void displayArchetypes(int start, RestList<ArchetypeJso> list);
 
     void init();
+
+    void updateSelected(ArchetypeJso archetypeJso);
   }
 
   private final ArchetypeObserver archetypeObserver;
@@ -37,6 +40,13 @@ public class ArchetypeListPresenter extends PresenterWidget<ArchetypeListPresent
     this.archetypeJsoDao = archetypeJsoDao;
 
     getView().setUiHandlers(this);
+  }
+  
+  @Override
+  protected void onBind() {
+    super.onBind();
+    
+    registerHandler(archetypeObserver.addHandler(ArchetypeUpdateEvent.getType(), this));
   }
 
   @Override
@@ -72,6 +82,11 @@ public class ArchetypeListPresenter extends PresenterWidget<ArchetypeListPresent
 
   private void onFetchSuccessArchetypesList(int start, RestList<ArchetypeJso> list) {
     getView().displayArchetypes(start, list);
+  }
+
+  @Override
+  public void onArchetypeUpdate(ArchetypeUpdateEvent event) {
+    getView().updateSelected(event.get());
   }
 
 }

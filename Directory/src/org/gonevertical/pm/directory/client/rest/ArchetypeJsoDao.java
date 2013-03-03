@@ -3,6 +3,7 @@ package org.gonevertical.pm.directory.client.rest;
 import java.util.HashMap;
 
 import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
+import org.gonevertical.pm.directory.client.rest.util.RestHandler;
 import org.gonevertical.pm.directory.client.rest.util.RestListHandler;
 import org.gonevertical.pm.directory.client.rest.util.RestService;
 
@@ -11,6 +12,10 @@ public class ArchetypeJsoDao extends RestService<ArchetypeJso> {
 
   public void getList(HashMap<String, String> parameters, RestListHandler<ArchetypeJso> handler) {
     getList(url, parameters, handler);
+  }
+
+  public void put(ArchetypeJso object, RestHandler<ArchetypeJso> handler) {
+    put(url, object, handler);
   }
 
 }
