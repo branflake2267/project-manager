@@ -7,8 +7,6 @@
     </ui:style>
 
     <g:HTMLPanel styleName="{style.widget}">
-        <div>Archetypes</div>
-        <p1:CellTable ui:field="archetypeCellTable" />
-        <p1:SimplePager ui:field="pager" />
+        <g:FlowPanel ui:field="tableContanier"/>
     </g:HTMLPanel>
 </ui:UiBinder>

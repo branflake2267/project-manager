@@ -72,6 +72,12 @@ public abstract class RestService<T extends JavaScriptObject> {
             cursor = jsonObject.get("cursor").isString().stringValue();
           } catch (Exception e) {
           }
+          
+          int total = -1;
+          try {
+            total = (int) jsonObject.get("total").isNumber().doubleValue();
+          } catch (Exception e) {
+          }
 
           JsArray<T> list = null;
           try {
@@ -81,7 +87,7 @@ public abstract class RestService<T extends JavaScriptObject> {
             e.printStackTrace();
           }
 
-          handler.onSuccess(new RestList(list, cursor));
+          handler.onSuccess(new RestList(total, list, cursor));
         } else {
           handler.onFailure(new Exception("Exception: getStatusText=" + response.getStatusText()));
         }
