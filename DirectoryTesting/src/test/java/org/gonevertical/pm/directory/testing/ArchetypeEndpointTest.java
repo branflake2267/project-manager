@@ -168,7 +168,8 @@ public class ArchetypeEndpointTest {
 
   private Archetype createBasicArchetype() {
     Archetype archetype = new Archetype();
-    archetype.setName("test");
+    archetype.setName("testName");
+    archetype.setDescription("testDescription");
     archetype.setRepository("testRepository");
     archetype.setGroupId("testGroupid");
     archetype.setArtifactId("testArtifactid");

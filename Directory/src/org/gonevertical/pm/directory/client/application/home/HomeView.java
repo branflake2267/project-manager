@@ -2,6 +2,7 @@ package org.gonevertical.pm.directory.client.application.home;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -13,6 +14,10 @@ public class HomeView extends ViewImpl implements HomePresenter.MyView {
   }
   
   @UiField
+  FlowPanel displayPanel;
+  @UiField
+  SimplePanel editPanel;
+  @UiField
   SimplePanel archetypeList;
   @UiField
   SimplePanel archetypeDisplay;
@@ -20,6 +25,9 @@ public class HomeView extends ViewImpl implements HomePresenter.MyView {
   @Inject
   public HomeView(final Binder uiBinder) {
     initWidget(uiBinder.createAndBindUi(this));
+    
+    // defaults
+    displayList();
   }
 
   @Override
@@ -29,6 +37,18 @@ public class HomeView extends ViewImpl implements HomePresenter.MyView {
     } else if (slot == HomePresenter.TYPE_ArchetypeDisplayPresenter) {
       archetypeDisplay.setWidget(content);
     } 
+  }
+  
+  @Override
+  public void displayList() {
+    displayPanel.setVisible(true);
+    editPanel.setVisible(false);
+  }
+  
+  @Override
+  public void displayEdit() {
+    displayPanel.setVisible(false);
+    editPanel.setVisible(true);
   }
   
 }

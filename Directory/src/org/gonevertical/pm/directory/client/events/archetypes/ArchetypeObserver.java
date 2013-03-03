@@ -31,6 +31,10 @@ public class ArchetypeObserver {
     return eventBus;
   }
 
+  public void edit(ArchetypeJso archetypeJso) {
+    eventBus.fireEvent(new ArchetypeEditEvent(archetypeJso));
+  }
+  
   public void display(ArchetypeJso archetypeJso) {
     eventBus.fireEvent(new ArchetypeDisplayEvent(archetypeJso));
   }

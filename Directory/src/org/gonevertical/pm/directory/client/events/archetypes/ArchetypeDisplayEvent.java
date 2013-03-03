@@ -8,7 +8,7 @@ import com.google.gwt.event.shared.GwtEvent;
 public class ArchetypeDisplayEvent extends GwtEvent<ArchetypeDisplayEvent.DisplayArchetypeHandler> {
   
   public interface DisplayArchetypeHandler extends EventHandler {
-    void onDisplay(ArchetypeDisplayEvent event);
+    void onArchetypeDisplay(ArchetypeDisplayEvent event);
   }
 
   private static final Type<DisplayArchetypeHandler> TYPE = new Type<DisplayArchetypeHandler>();
@@ -34,7 +34,7 @@ public class ArchetypeDisplayEvent extends GwtEvent<ArchetypeDisplayEvent.Displa
 
   @Override
   protected void dispatch(DisplayArchetypeHandler handler) {
-    handler.onDisplay(this);
+    handler.onArchetypeDisplay(this);
   }
   
 }

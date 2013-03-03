@@ -24,6 +24,21 @@
     "maxAge" : 0
   },
   "methods" : {
+    "systemuserendpoint.updateSystemUser" : {
+      "path" : "systemuser",
+      "httpMethod" : "PUT",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "SystemUserEndpoint.updateSystemUser",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "systemuserendpoint.findByGoogleId" : {
       "path" : "findByGoogleId/{googleId}",
       "httpMethod" : "POST",
@@ -39,21 +54,6 @@
           }
         },
         "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "systemuserendpoint.updateSystemUser" : {
-      "path" : "systemuser",
-      "httpMethod" : "PUT",
-      "scopes" : [ ],
-      "audiences" : [ ],
-      "clientIds" : [ ],
-      "rosyMethod" : "SystemUserEndpoint.updateSystemUser",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -111,15 +111,15 @@
       }
     },
     "methods" : {
-      "SystemUserEndpoint.findByGoogleId" : {
-        "response" : {
-          "$ref" : "SystemUser"
-        }
-      },
       "SystemUserEndpoint.updateSystemUser" : {
         "request" : {
           "$ref" : "SystemUser"
         },
+        "response" : {
+          "$ref" : "SystemUser"
+        }
+      },
+      "SystemUserEndpoint.findByGoogleId" : {
         "response" : {
           "$ref" : "SystemUser"
         }

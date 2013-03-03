@@ -2,11 +2,37 @@
     xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
     <ui:style>
         .widget {
-            
+            border: 1px solid grey;
         }
     </ui:style>
 
     <g:HTMLPanel styleName="{style.widget}">
-        <g:HTML ui:field="name"/>
+        
+        <g:Button ui:field="edit">Edit</g:Button>
+        
+        <div>
+            Name: <g:InlineHTML ui:field="name"/>
+        </div>
+        
+        <div>
+            Description: <g:InlineHTML ui:field="description"/> 
+        </div>
+        
+        <div>
+            Repository: <g:InlineHTML ui:field="repository"/> 
+        </div>
+        
+        <div>
+            GroupId: <g:InlineHTML ui:field="groupId"/> 
+        </div>
+        
+        <div>
+            ArtifactId: <g:InlineHTML ui:field="artifactId"/> 
+        </div>
+        
+        <div>
+            Version <g:InlineHTML ui:field="version"/> 
+        </div>
+        
     </g:HTMLPanel>
 </ui:UiBinder>

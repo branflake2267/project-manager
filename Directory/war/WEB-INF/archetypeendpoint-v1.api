@@ -25,6 +25,21 @@
     "maxAge" : 0
   },
   "methods" : {
+    "archetypeendpoint.updateArchetype" : {
+      "path" : "archetype",
+      "httpMethod" : "PUT",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "ArchetypeEndpoint.updateArchetype",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "archetypeendpoint.listArchetype" : {
       "path" : "archetype",
       "httpMethod" : "GET",
@@ -48,21 +63,6 @@
           }
         },
         "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "archetypeendpoint.updateArchetype" : {
-      "path" : "archetype",
-      "httpMethod" : "PUT",
-      "scopes" : [ ],
-      "audiences" : [ ],
-      "clientIds" : [ ],
-      "rosyMethod" : "ArchetypeEndpoint.updateArchetype",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -150,21 +150,6 @@
   },
   "descriptor" : {
     "schemas" : {
-      "CollectionResponse_Archetype" : {
-        "id" : "CollectionResponse_Archetype",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Archetype"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
-      },
       "Archetype" : {
         "id" : "Archetype",
         "type" : "object",
@@ -239,20 +224,35 @@
             "type" : "string"
           }
         }
+      },
+      "CollectionResponse_Archetype" : {
+        "id" : "CollectionResponse_Archetype",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Archetype"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
       }
     },
     "methods" : {
-      "ArchetypeEndpoint.listArchetype" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Archetype"
-        }
-      },
       "ArchetypeEndpoint.updateArchetype" : {
         "request" : {
           "$ref" : "Archetype"
         },
         "response" : {
           "$ref" : "Archetype"
+        }
+      },
+      "ArchetypeEndpoint.listArchetype" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Archetype"
         }
       },
       "ArchetypeEndpoint.search" : {
