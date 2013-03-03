@@ -7,6 +7,6 @@
     </ui:style>
 
     <g:HTMLPanel styleName="{style.widget}">
-
+        <g:HTML ui:field="name"/>
     </g:HTMLPanel>
 </ui:UiBinder>
