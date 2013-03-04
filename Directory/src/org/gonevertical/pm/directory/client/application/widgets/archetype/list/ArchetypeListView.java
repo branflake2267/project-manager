@@ -65,7 +65,7 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
   }
 
   /**
-   * TODO selected event updates display
+   * TODO extract to methods
    */
   private void initTable() {
     // Data Provider
@@ -123,7 +123,9 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
     grid.getSelectionModel().addSelectionChangedHandler(new SelectionChangedHandler<ArchetypeJso>() {
       @Override
       public void onSelectionChanged(SelectionChangedEvent<ArchetypeJso> event) {
-        getUiHandlers().gotoEdit(event.getSelection().get(0));
+        if (event.getSelection().size() > 0) {
+          getUiHandlers().gotoEdit(event.getSelection().get(0));  
+        }
       }
     });
     
@@ -152,9 +154,7 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
 
   @Override
   public void updateSelected(ArchetypeJso archetypeJso) {
-    // TODO reload tableContanier and select
-    // TODO update row data
-
+    // TODO update the record after save
   }
 
 }
