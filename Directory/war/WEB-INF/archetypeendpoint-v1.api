@@ -225,8 +225,8 @@
           }
         }
       },
-      "CollectionResponse_Archetype" : {
-        "id" : "CollectionResponse_Archetype",
+      "JsonCollection_Archetype" : {
+        "id" : "JsonCollection_Archetype",
         "type" : "object",
         "properties" : {
           "items" : {
@@ -237,6 +237,9 @@
           },
           "nextPageToken" : {
             "type" : "string"
+          },
+          "total" : {
+            "type" : "integer"
           }
         }
       }
@@ -252,12 +255,12 @@
       },
       "ArchetypeEndpoint.listArchetype" : {
         "response" : {
-          "$ref" : "CollectionResponse_Archetype"
+          "$ref" : "JsonCollection_Archetype"
         }
       },
       "ArchetypeEndpoint.search" : {
         "response" : {
-          "$ref" : "CollectionResponse_Archetype"
+          "$ref" : "JsonCollection_Archetype"
         }
       },
       "ArchetypeEndpoint.insertArchetype" : {

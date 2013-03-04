@@ -12,11 +12,12 @@ import javax.jdo.Query;
 import org.gonevertical.pm.directory.server.domain.Archetype;
 import org.gonevertical.pm.directory.server.domain.dao.JdoUtils;
 import org.gonevertical.pm.directory.server.domain.dao.PMF;
+import org.gonevertical.pm.directory.server.domain.dao.SimpleFilter;
+import org.gonevertical.pm.directory.server.rest.dto.JsonCollection;
 import org.gonevertical.pm.directory.server.rest.errors.CustomErrors;
 
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
-import com.google.api.server.spi.response.CollectionResponse;
 import com.google.api.server.spi.response.UnauthorizedException;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.api.datastore.Key;
@@ -60,12 +61,11 @@ public class ArchetypeEndpoint {
     INDEX.putAsync(doc);
   }
 
-  public CollectionResponse<Archetype> listArchetype(@Nullable @Named("cursor") String cursorString,
-      @Nullable @Named("offset") Integer offset,
-      @Nullable @Named("limit") Integer limit) {
+  public JsonCollection<Archetype> listArchetype(@Nullable @Named("cursor") String cursorString,
+      @Nullable @Named("offset") Integer offset, @Nullable @Named("limit") Integer limit) {
     PersistenceManager mgr = null;
     Cursor cursor = null;
-    List<Archetype> execute = null;
+    List<Archetype> items = null;
 
     try {
       mgr = getPersistenceManager();
@@ -76,28 +76,31 @@ public class ArchetypeEndpoint {
         extensionMap.put(JDOCursorHelper.CURSOR_EXTENSION, cursor);
         query.setExtensions(extensionMap);
       }
-      
+
       if (limit != null) {
         if (offset != null) {
           query.setRange(offset, limit);
         } else {
-          query.setRange(0, limit); 
+          query.setRange(0, limit);
         }
       }
 
-      execute = (List<Archetype>) query.execute();
-      cursor = JDOCursorHelper.getCursor(execute);
+      items = (List<Archetype>) query.execute();
+      cursor = JDOCursorHelper.getCursor(items);
       if (cursor != null) {
         cursorString = cursor.toWebSafeString();
       }
 
-      for (Archetype obj : execute)
+      for (Archetype obj : items)
         ;
     } finally {
       mgr.close();
     }
 
-    return CollectionResponse.<Archetype> builder().setItems(execute).setNextPageToken(cursorString).build();
+    ArrayList<SimpleFilter> simpleFilter = new ArrayList<SimpleFilter>();
+    int total = JdoUtils.findCount(Archetype.class, simpleFilter).intValue();
+    
+    return new JsonCollection<Archetype>(items, cursor.toWebSafeString(), total);
   }
 
   public Archetype getArchetype(@Named("key") String key) {
@@ -153,11 +156,12 @@ public class ArchetypeEndpoint {
   }
 
   @ApiMethod(httpMethod = "GET", name = "archetype.search", path = "archetype/search/{queryString}")
-  public CollectionResponse<Archetype> search(@Named("queryString") String queryString,
+  public JsonCollection<Archetype> search(@Named("queryString") String queryString,
       @Nullable @Named("limit") Integer limit) {
-    List<Archetype> returnList = new ArrayList<Archetype>();
+    List<Archetype> items = new ArrayList<Archetype>();
     Results<ScoredDocument> searchResults = INDEX.search(queryString);
 
+    int total = searchResults.getNumberReturned();
     int count = 0;
     for (ScoredDocument scoredDoc : searchResults) {
       Field fieldKey = scoredDoc.getOnlyField("key");
@@ -169,7 +173,7 @@ public class ArchetypeEndpoint {
       if (skey != null) {
         Key key = KeyFactory.stringToKey(skey);
         Archetype o = getArchetype(key);
-        returnList.add(o);
+        items.add(o);
       }
 
       count++;
@@ -177,7 +181,8 @@ public class ArchetypeEndpoint {
         break;
       }
     }
-    return CollectionResponse.<Archetype> builder().setItems(returnList).build();
+    
+    return new JsonCollection<Archetype>(items, null, total);
   }
 
   private Archetype getArchetype(Key key) {

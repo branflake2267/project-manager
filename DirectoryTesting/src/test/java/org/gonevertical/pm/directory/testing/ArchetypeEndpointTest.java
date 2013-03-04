@@ -182,7 +182,7 @@ public class ArchetypeEndpointTest {
       Archetype archetype = createBasicArchetype();
 
       RestAssured.given().contentType(ContentType.JSON).cookie("dev_appserver_login", devAppserverLoginCookie).and()
-          .content(archetype).expect().statusCode(200).when().post(url).as(Archetype.class);
+          .content(archetype).when().post(url).as(Archetype.class);
     }
   }
 
