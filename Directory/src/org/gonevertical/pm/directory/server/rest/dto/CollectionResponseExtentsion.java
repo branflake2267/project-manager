@@ -4,9 +4,9 @@ import java.util.Collection;
 
 import com.google.api.server.spi.response.CollectionResponse;
 
-public class JsonCollection<T> extends CollectionResponse<T> {
+public class CollectionResponseExtentsion<T> extends CollectionResponse<T> {
   
-  public JsonCollection(Collection<T> items, String nextPageToken, int total) {
+  public CollectionResponseExtentsion(Collection<T> items, String nextPageToken, int total) {
     super(items, nextPageToken);
     
     this.total = total;

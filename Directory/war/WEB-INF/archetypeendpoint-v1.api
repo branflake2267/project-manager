@@ -225,8 +225,8 @@
           }
         }
       },
-      "JsonCollection_Archetype" : {
-        "id" : "JsonCollection_Archetype",
+      "CollectionResponseExtentsion_Archetype" : {
+        "id" : "CollectionResponseExtentsion_Archetype",
         "type" : "object",
         "properties" : {
           "items" : {
@@ -255,12 +255,12 @@
       },
       "ArchetypeEndpoint.listArchetype" : {
         "response" : {
-          "$ref" : "JsonCollection_Archetype"
+          "$ref" : "CollectionResponseExtentsion_Archetype"
         }
       },
       "ArchetypeEndpoint.search" : {
         "response" : {
-          "$ref" : "JsonCollection_Archetype"
+          "$ref" : "CollectionResponseExtentsion_Archetype"
         }
       },
       "ArchetypeEndpoint.insertArchetype" : {

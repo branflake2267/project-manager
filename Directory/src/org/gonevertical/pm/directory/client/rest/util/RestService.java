@@ -67,9 +67,11 @@ public abstract class RestService<T extends JavaScriptObject> {
         if (response.getStatusCode() == 200) {
           JSONObject jsonObject = JSONParser.parseLenient(json).isObject();
 
+          String s = jsonObject.toString();
+          
           String cursor = null;
           try {
-            cursor = jsonObject.get("cursor").isString().stringValue();
+            cursor = jsonObject.get("nextPageToken").isString().stringValue();
           } catch (Exception e) {
           }
           

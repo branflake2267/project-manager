@@ -13,7 +13,7 @@ import org.gonevertical.pm.directory.server.domain.Archetype;
 import org.gonevertical.pm.directory.server.domain.dao.JdoUtils;
 import org.gonevertical.pm.directory.server.domain.dao.PMF;
 import org.gonevertical.pm.directory.server.domain.dao.SimpleFilter;
-import org.gonevertical.pm.directory.server.rest.dto.JsonCollection;
+import org.gonevertical.pm.directory.server.rest.dto.CollectionResponseExtentsion;
 import org.gonevertical.pm.directory.server.rest.errors.CustomErrors;
 
 import com.google.api.server.spi.config.Api;
@@ -61,7 +61,7 @@ public class ArchetypeEndpoint {
     INDEX.putAsync(doc);
   }
 
-  public JsonCollection<Archetype> listArchetype(@Nullable @Named("cursor") String cursorString,
+  public CollectionResponseExtentsion<Archetype> listArchetype(@Nullable @Named("cursor") String cursorString,
       @Nullable @Named("offset") Integer offset, @Nullable @Named("limit") Integer limit) {
     PersistenceManager mgr = null;
     Cursor cursor = null;
@@ -100,7 +100,12 @@ public class ArchetypeEndpoint {
     ArrayList<SimpleFilter> simpleFilter = new ArrayList<SimpleFilter>();
     int total = JdoUtils.findCount(Archetype.class, simpleFilter).intValue();
     
-    return new JsonCollection<Archetype>(items, cursor.toWebSafeString(), total);
+    String cursorWebSafe = null;
+    if (cursor != null && cursor.toWebSafeString() != null) {
+      cursorWebSafe = cursor.toWebSafeString();
+    }
+    
+    return new CollectionResponseExtentsion<Archetype>(items, cursorWebSafe, total);
   }
 
   public Archetype getArchetype(@Named("key") String key) {
@@ -156,7 +161,7 @@ public class ArchetypeEndpoint {
   }
 
   @ApiMethod(httpMethod = "GET", name = "archetype.search", path = "archetype/search/{queryString}")
-  public JsonCollection<Archetype> search(@Named("queryString") String queryString,
+  public CollectionResponseExtentsion<Archetype> search(@Named("queryString") String queryString,
       @Nullable @Named("limit") Integer limit) {
     List<Archetype> items = new ArrayList<Archetype>();
     Results<ScoredDocument> searchResults = INDEX.search(queryString);
@@ -182,7 +187,7 @@ public class ArchetypeEndpoint {
       }
     }
     
-    return new JsonCollection<Archetype>(items, null, total);
+    return new CollectionResponseExtentsion<Archetype>(items, null, total);
   }
 
   private Archetype getArchetype(Key key) {
