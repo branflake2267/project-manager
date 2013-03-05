@@ -5,6 +5,7 @@ import javax.inject.Named;
 
 import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.web.bindery.event.shared.EventBus;
@@ -45,6 +46,11 @@ public class ArchetypeObserver {
 
   public void update(ArchetypeJso archetypeJso) {
     eventBus.fireEvent(new ArchetypeUpdateEvent(archetypeJso));
+  }
+
+  public void addNewArchetype() {
+    ArchetypeJso archetypeJso = JavaScriptObject.createObject().cast();
+    eventBus.fireEvent(new ArchetypeEditEvent(archetypeJso));
   }
   
 }

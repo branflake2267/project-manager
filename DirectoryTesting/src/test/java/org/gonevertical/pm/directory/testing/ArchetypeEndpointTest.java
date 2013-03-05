@@ -54,9 +54,7 @@ public class ArchetypeEndpointTest {
         .content(archetype).expect().statusCode(200).when().post(url).as(Archetype.class);
     
     assertNotNull(newArchetype.getSystemUserKey());
-    
-    // TODO
-    //assertNotNull(newArchetype.getDateCreated());
+    assertTrue(newArchetype.getDateCreated() > 0);
   }
 
   @Test

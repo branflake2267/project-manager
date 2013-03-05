@@ -17,6 +17,7 @@ public class Archetype {
   private String version;
   
   private String systemUserKey;
+  private Long dateCreated;
 
   public String getKey() {
     return key;
@@ -100,6 +101,10 @@ public class Archetype {
   
   public String getSystemUserKey() {
     return systemUserKey;
+  }
+  
+  public Long getDateCreated() {
+    return dateCreated;
   }
   
 }

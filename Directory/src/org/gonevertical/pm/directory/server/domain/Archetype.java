@@ -47,9 +47,10 @@ public class Archetype {
 
   public void setKey(String key) {
     if (key == null) {
-      return;
+      this.key = null;
+    } else {
+      this.key = KeyFactory.stringToKey(key);
     }
-    this.key = KeyFactory.stringToKey(key);
   }
 
   // TODO
@@ -74,21 +75,20 @@ public class Archetype {
 
   public void setDescription(String description) {
     if (description == null) {
-      return;
+      this.description = null;
+    } else {
+      this.description = new Text(description);
     }
-    this.description = new Text(description);
   }
 
   public List<String> getCategories() {
     if (categories == null) {
       return new ArrayList<String>();
     }
-
     ArrayList<String> list = new ArrayList<String>();
     for (Key key : categories) {
       list.add(KeyFactory.keyToString(key));
     }
-
     return list;
   }
 
@@ -96,7 +96,6 @@ public class Archetype {
     if (categories == null) {
       return;
     }
-
     categories.clear();
     for (String skey : categories) {
       this.categories.add(KeyFactory.stringToKey(skey));
@@ -112,9 +111,10 @@ public class Archetype {
 
   public void setTags(List<Category> tags) {
     if (tags == null) {
-      return;
+      this.tags = new HashSet<Category>();
+    } else {
+      this.tags = new HashSet<Category>(tags);
     }
-    this.tags = new HashSet<Category>(tags);
   }
 
   public String getRepository() {
@@ -150,11 +150,25 @@ public class Archetype {
   }
 
   public void setSystemUserKey(String key) {
-    systemUserKey = KeyFactory.stringToKey(key);
+    if (key == null) {
+      systemUserKey = null;
+    } else {
+      systemUserKey = KeyFactory.stringToKey(key);
+    }
   }
   
   public String getSystemUserKey() {
+    if (systemUserKey == null) {
+      return null;
+    }
     return KeyFactory.keyToString(systemUserKey);
+  }
+  
+  public Long getDateCreated() {
+    if (dateCreated == null) {
+      return null;
+    }
+    return dateCreated.getTime();
   }
   
 }
