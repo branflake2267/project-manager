@@ -1,6 +1,7 @@
 package org.gonevertical.pm.directory.server.domain;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -32,6 +33,13 @@ public class Archetype {
   private String groupId;
   private String artifactId;
   private String version;
+  
+  private Date dateCreated;
+  private Key systemUserKey;
+  
+  public Archetype() {
+    dateCreated = new Date();
+  }
 
   public String getKey() {
     return KeyFactory.keyToString(key);
@@ -141,4 +149,12 @@ public class Archetype {
     this.version = version;
   }
 
+  public void setSystemUserKey(String key) {
+    systemUserKey = KeyFactory.stringToKey(key);
+  }
+  
+  public String getSystemUserKey() {
+    return KeyFactory.keyToString(systemUserKey);
+  }
+  
 }

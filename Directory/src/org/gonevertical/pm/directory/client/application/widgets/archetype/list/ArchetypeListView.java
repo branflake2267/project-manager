@@ -43,9 +43,10 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
   @UiField
   FlowPanel tableContanier;
 
+  private final ArchetypeColumnProperties columnProperties;
+  
   private boolean intialized = false;
-
-  private ArchetypeColumnProperties columnProperties;
+  private Grid<ArchetypeJso> grid;
 
   @Inject
   public ArchetypeListView(final Binder binder, ArchetypeColumnProperties columnProperties) {
@@ -106,7 +107,7 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
     ColumnModel<ArchetypeJso> columnModel = new ColumnModel<ArchetypeJso>(columnConfigList);
     
     // Grid
-    Grid<ArchetypeJso> grid = new Grid<ArchetypeJso>(store, columnModel) {
+    grid = new Grid<ArchetypeJso>(store, columnModel) {
       @Override
       protected void onAfterFirstAttach() {
         super.onAfterFirstAttach();
@@ -154,7 +155,8 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
 
   @Override
   public void updateSelected(ArchetypeJso archetypeJso) {
-    // TODO update the record after save
+    // TODO instead of reloading, maybe just update the record
+    grid.getView().refresh(false);
   }
 
 }

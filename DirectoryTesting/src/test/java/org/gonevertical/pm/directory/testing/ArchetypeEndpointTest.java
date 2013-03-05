@@ -50,8 +50,13 @@ public class ArchetypeEndpointTest {
     Archetype archetype = createBasicArchetype();
 
     // insert
-    RestAssured.given().contentType(ContentType.JSON).cookie("dev_appserver_login", devAppserverLoginCookie).and()
-        .content(archetype).expect().statusCode(200).when().post(url);
+    Archetype newArchetype = RestAssured.given().contentType(ContentType.JSON).cookie("dev_appserver_login", devAppserverLoginCookie).and()
+        .content(archetype).expect().statusCode(200).when().post(url).as(Archetype.class);
+    
+    assertNotNull(newArchetype.getSystemUserKey());
+    
+    // TODO
+    //assertNotNull(newArchetype.getDateCreated());
   }
 
   @Test

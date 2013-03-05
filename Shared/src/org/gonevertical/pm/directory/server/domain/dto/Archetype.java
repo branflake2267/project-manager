@@ -15,6 +15,8 @@ public class Archetype {
   private String groupId;
   private String artifactId;
   private String version;
+  
+  private String systemUserKey;
 
   public String getKey() {
     return key;
@@ -92,4 +94,12 @@ public class Archetype {
     this.version = version;
   }
 
+  public void setSystemUserKey(String systemUserKey) {
+    this.systemUserKey = systemUserKey;
+  }
+  
+  public String getSystemUserKey() {
+    return systemUserKey;
+  }
+  
 }

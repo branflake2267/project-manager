@@ -10,6 +10,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import org.gonevertical.pm.directory.server.domain.Archetype;
+import org.gonevertical.pm.directory.server.domain.CurrentUser;
 import org.gonevertical.pm.directory.server.domain.dao.JdoUtils;
 import org.gonevertical.pm.directory.server.domain.dao.PMF;
 import org.gonevertical.pm.directory.server.domain.dao.SimpleFilter;
@@ -99,12 +100,12 @@ public class ArchetypeEndpoint {
 
     ArrayList<SimpleFilter> simpleFilter = new ArrayList<SimpleFilter>();
     int total = JdoUtils.findCount(Archetype.class, simpleFilter).intValue();
-    
+
     String cursorWebSafe = null;
     if (cursor != null && cursor.toWebSafeString() != null) {
       cursorWebSafe = cursor.toWebSafeString();
     }
-    
+
     return new CollectionResponseExtentsion<Archetype>(items, cursorWebSafe, total);
   }
 
@@ -117,13 +118,12 @@ public class ArchetypeEndpoint {
       throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
     }
 
-    PersistenceManager mgr = getPersistenceManager();
-    try {
-      mgr.makePersistent(archetype);
-      addToSearchIndex(archetype);
-    } finally {
-      mgr.close();
-    }
+    CurrentUser currentUser = JdoUtils.getCurrentUser();
+    archetype.setSystemUserKey(currentUser.getSystemUser().getKey());
+
+    JdoUtils.persistOrThrow(archetype);
+    addToSearchIndex(archetype);
+
     return archetype;
   }
 
@@ -132,13 +132,9 @@ public class ArchetypeEndpoint {
       throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
     }
 
-    PersistenceManager mgr = getPersistenceManager();
-    try {
-      mgr.makePersistent(archetype);
-      addToSearchIndex(archetype);
-    } finally {
-      mgr.close();
-    }
+    JdoUtils.persistOrThrow(archetype);
+    addToSearchIndex(archetype);
+
     return archetype;
   }
 
@@ -186,7 +182,7 @@ public class ArchetypeEndpoint {
         break;
       }
     }
-    
+
     return new CollectionResponseExtentsion<Archetype>(items, null, total);
   }
 
