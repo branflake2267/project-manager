@@ -16,12 +16,8 @@ import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 public class AdminPresenter extends Presenter<AdminPresenter.MyView, AdminPresenter.MyProxy> {
   
     public interface MyView extends View {
-        void displayTaskCount(Integer totalTasks);
     }
 
-    /**
-     * The logged in Gatekeeper prevents folks that are not logged in from seeing this presenter.
-     */
     @ProxyStandard
     @NameToken(NameTokens.admin)
     @UseGatekeeper(LoggedInGatekeeper.class)

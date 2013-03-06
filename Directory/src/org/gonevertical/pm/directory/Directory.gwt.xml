@@ -9,7 +9,10 @@
 
     <!-- Other module inherits -->
     <inherits name="com.google.gwt.json.JSON" /> 
+    
+    <!-- GXT -->
     <inherits name='com.sencha.gxt.ui.GXT'/>
+    <stylesheet src="reset.css" /> 
     
     <inherits name='com.gwtplatform.mvp.MvpWithEntryPoint' />
 

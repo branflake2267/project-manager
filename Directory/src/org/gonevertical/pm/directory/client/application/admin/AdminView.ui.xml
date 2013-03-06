@@ -2,7 +2,5 @@
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
     <g:HTMLPanel>
         Application Admins Only:<br/>
-        Total Task Count:
-        <g:HTML ui:field="totalTaskCount"/>
     </g:HTMLPanel>
 </ui:UiBinder>
