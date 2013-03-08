@@ -1,5 +1,6 @@
 package org.gonevertical.pm.directory.client.application.widgets.login;
 
+import org.gonevertical.pm.directory.client.events.login.LoggedInEvent;
 import org.gonevertical.pm.directory.client.rest.CurrentUserJsoDao;
 import org.gonevertical.pm.directory.client.rest.jso.CurrentUserJso;
 import org.gonevertical.pm.directory.client.rest.util.RestHandler;
@@ -63,6 +64,8 @@ public class LoginPresenter extends PresenterWidget<LoginPresenter.MyView> imple
     loggedInUser.copyFrom(currentUserJso);
     
     displayLogin();
+    
+    LoggedInEvent.fire(this);
   }
 
   private void displayLogin() {

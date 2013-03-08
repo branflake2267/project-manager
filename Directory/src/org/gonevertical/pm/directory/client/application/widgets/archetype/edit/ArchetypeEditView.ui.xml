@@ -4,42 +4,58 @@
         .widget {
             
         }
+        
+        .inputDiv {
+            margin: 10px;
+        }
+        
+        .textField {
+            width: 100px;
+            text-align: right;
+            display: inline-block;
+        }
+        
+        .textInput {
+            width: 300px;
+        }
     </ui:style>
 
     <g:HTMLPanel styleName="{style.widget}">
-        
+
         <g:Button ui:field="goback">Back to the List</g:Button>
 
         <g:Button ui:field="save">Save</g:Button>
-        
-        <div>
-            Name:
-            <g:TextBox ui:field="name" />
+
+        <div class="{style.inputDiv}">
+            <div class="{style.textField}">Name:</div>
+            <g:TextBox ui:field="name" styleName="{style.textInput}" />
         </div>
 
-        <div>
-            Description:
-            <g:TextBox ui:field="description" />
+        <div class="{style.inputDiv}">
+            <div class="{style.textField}">Description:</div>
+            <g:TextBox ui:field="description" styleName="{style.textInput}" />
         </div>
 
-        <div>
-            Repository:
-            <g:TextBox ui:field="repository" />
+        <br />
+
+        <div class="{style.inputDiv}">
+            <div class="{style.textField}">Repository:</div>
+            <g:TextBox ui:field="repository" styleName="{style.textInput}" />
         </div>
 
-        <div>
-            GroupId:
-            <g:TextBox ui:field="groupId" />
+        <div class="{style.inputDiv}">
+            <div class="{style.textField}">GroupId:</div>
+            <g:TextBox ui:field="groupId" styleName="{style.textInput}" />
         </div>
 
-        <div>
-            ArtifactId:
-            <g:TextBox ui:field="artifactId" />
+        <div class="{style.inputDiv}">
+            <div class="{style.textField}">ArtifactId:</div>
+            <g:TextBox ui:field="artifactId" styleName="{style.textInput}" />
         </div>
 
-        <div>
-            Version
-            <g:TextBox ui:field="version" />
+        <div class="{style.inputDiv}">
+            <div class="{style.textField}">Version:</div>
+            <g:TextBox ui:field="version" styleName="{style.textInput}" />
         </div>
 
     </g:HTMLPanel>

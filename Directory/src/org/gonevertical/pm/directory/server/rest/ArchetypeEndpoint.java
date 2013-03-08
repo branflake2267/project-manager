@@ -3,6 +3,7 @@ package org.gonevertical.pm.directory.server.rest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.annotation.Nullable;
 import javax.inject.Named;
@@ -34,6 +35,7 @@ import com.google.appengine.datanucleus.query.JDOCursorHelper;
 
 @Api(name = "archetypeendpoint", description = "This entity represents a Archetype.", version = "v1")
 public class ArchetypeEndpoint {
+  private static Logger logger = Logger.getLogger(ArchetypeEndpoint.class.getName());
 
   private static final Index INDEX = getIndex();
 
@@ -64,6 +66,8 @@ public class ArchetypeEndpoint {
 
   public CollectionResponseExtentsion<Archetype> listArchetype(@Nullable @Named("cursor") String cursorString,
       @Nullable @Named("offset") Integer offset, @Nullable @Named("limit") Integer limit) {
+    logger.info("listArchetype(): cursorString=" + cursorString + " offset=" + offset + " limit=" + limit);
+    
     PersistenceManager mgr = null;
     Cursor cursor = null;
     List<Archetype> items = null;
@@ -71,6 +75,7 @@ public class ArchetypeEndpoint {
     try {
       mgr = getPersistenceManager();
       Query query = mgr.newQuery(Archetype.class);
+      
       if (cursorString != null && cursorString != "") {
         cursor = Cursor.fromWebSafeString(cursorString);
         HashMap<String, Object> extensionMap = new HashMap<String, Object>();
@@ -78,15 +83,16 @@ public class ArchetypeEndpoint {
         query.setExtensions(extensionMap);
       }
 
-      if (limit != null) {
-        if (offset != null) {
-          query.setRange(offset, limit);
-        } else {
-          query.setRange(0, limit);
-        }
+      if (offset != null && limit != null) {
+        query.setRange(offset, offset + limit);
+      } else if (limit != null) {
+        query.setRange(0, limit);
+      } else {
+        query.setRange(0, 15);
       }
-
+      
       items = (List<Archetype>) query.execute();
+      
       cursor = JDOCursorHelper.getCursor(items);
       if (cursor != null) {
         cursorString = cursor.toWebSafeString();

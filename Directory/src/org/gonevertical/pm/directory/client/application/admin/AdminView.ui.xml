@@ -2,5 +2,7 @@
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
     <g:HTMLPanel>
         Application Admins Only:<br/>
+        
+        <g:FlowPanel ui:field="urls"/>
     </g:HTMLPanel>
 </ui:UiBinder>

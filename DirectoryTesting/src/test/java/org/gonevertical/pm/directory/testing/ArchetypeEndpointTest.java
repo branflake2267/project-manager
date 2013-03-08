@@ -31,7 +31,20 @@ public class ArchetypeEndpointTest {
   public void testList() {
     createArchetypeAndPersist(3);
 
-    RestAssured.given().param("limit", "2").expect().when().get(url).print();
+    List<Archetype> items = RestAssured.given().param("limit", "2").expect().when().get(url).jsonPath()
+        .getList("items");
+
+    assertEquals(2, items.size());
+  }
+
+  @Test
+  public void testListPage2() {
+    createArchetypeAndPersist(20);
+
+    List<Archetype> items = RestAssured.given().param("offset", "10").and().param("limit", "10").expect().when()
+        .get(url).jsonPath().getList("items");
+
+    assertEquals(10, items.size());
   }
 
   @Test
@@ -50,9 +63,10 @@ public class ArchetypeEndpointTest {
     Archetype archetype = createBasicArchetype();
 
     // insert
-    Archetype newArchetype = RestAssured.given().contentType(ContentType.JSON).cookie("dev_appserver_login", devAppserverLoginCookie).and()
-        .content(archetype).expect().statusCode(200).when().post(url).as(Archetype.class);
-    
+    Archetype newArchetype = RestAssured.given().contentType(ContentType.JSON)
+        .cookie("dev_appserver_login", devAppserverLoginCookie).and().content(archetype).expect().statusCode(200)
+        .when().post(url).as(Archetype.class);
+
     assertNotNull(newArchetype.getSystemUserKey());
     assertTrue(newArchetype.getDateCreated() > 0);
   }

@@ -15,13 +15,18 @@ import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 
 public abstract class RestService<T extends JavaScriptObject> {
-
-  private String getUrl(String url) {
-    return GWT.getHostPageBaseURL() + url;
+  private String endpointPath = "";
+  
+  protected RestService(String endpointPath) {
+    this.endpointPath = endpointPath;
+  }
+  
+  public String getBaseAndEndpointPath() {
+    return GWT.getHostPageBaseURL() + endpointPath;
   }
 
-  protected void get(String url, final RestHandler<T> handler) {
-    url = getUrl(url);
+  public void get(final RestHandler<T> handler) {
+    String url = getBaseAndEndpointPath();
 
     RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
     builder.setHeader(RestHeaders.CONTENT_TYPE__JSON.getKey(), RestHeaders.ACCEPT__JSON.getValue());
@@ -53,8 +58,8 @@ public abstract class RestService<T extends JavaScriptObject> {
     }
   }
 
-  protected void getList(String url, HashMap<String, String> parameters, final RestListHandler<T> handler) {
-    url = getUrl(url) + getQueryString(parameters);
+  public void getList(HashMap<String, String> parameters, final RestListHandler<T> handler) {
+    String url = getBaseAndEndpointPath() + getQueryString(parameters);
 
     RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
     builder.setHeader(RestHeaders.CONTENT_TYPE__JSON.getKey(), RestHeaders.ACCEPT__JSON.getValue());
@@ -109,8 +114,8 @@ public abstract class RestService<T extends JavaScriptObject> {
     }
   }
 
-  protected void put(String url, T object, final RestHandler<T> handler) {
-    url = getUrl(url);
+  public void put(T object, final RestHandler<T> handler) {
+    String url = getBaseAndEndpointPath();
     
     String json = new JSONObject(object).toString();
 

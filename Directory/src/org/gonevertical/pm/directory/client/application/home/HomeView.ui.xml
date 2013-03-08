@@ -2,16 +2,36 @@
     <ui:style>
         .widget {
         }
-        .inline {
+        
+        .menu {
+            margin-bottom: 10px;
+        }
+        
+        .list {
             display: inline-table;
         }
+        
+        .display {
+            display: inline-table;
+            margin-left: 10px;
+        }
     </ui:style>
+    
     <g:HTMLPanel styleName="{style.widget}">
+        
         <g:FlowPanel ui:field="displayPanel">
-            <g:Button ui:field="add">Add</g:Button>
-            <g:SimplePanel ui:field="archetypeList" styleName="{style.inline}" />
-            <g:SimplePanel ui:field="archetypeDisplay" styleName="{style.inline}" />
+        
+            <g:HTMLPanel styleName="{style.menu}">
+                <g:Button ui:field="add">Add</g:Button>
+            </g:HTMLPanel>
+        
+            <g:SimplePanel ui:field="archetypeList" styleName="{style.list}" />
+            <g:SimplePanel ui:field="archetypeDisplay" styleName="{style.display}" />
+            
         </g:FlowPanel>
+        
         <g:SimplePanel ui:field="editPanel"/>
+        
     </g:HTMLPanel>
+    
 </ui:UiBinder>
