@@ -74,26 +74,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "categoryendpoint.removeCategory" : {
-      "path" : "category/{id}",
-      "httpMethod" : "DELETE",
-      "scopes" : [ ],
-      "audiences" : [ ],
-      "clientIds" : [ ],
-      "rosyMethod" : "CategoryEndpoint.removeCategory",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "categoryendpoint.listCategory" : {
       "path" : "category",
       "httpMethod" : "GET",
@@ -110,6 +90,26 @@
           "limit" : {
             "type" : "int32",
             "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "categoryendpoint.removeCategory" : {
+      "path" : "category/{id}",
+      "httpMethod" : "DELETE",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "CategoryEndpoint.removeCategory",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
           }
         },
         "body" : "empty"
@@ -171,14 +171,14 @@
           "$ref" : "Category"
         }
       },
-      "CategoryEndpoint.removeCategory" : {
-        "response" : {
-          "$ref" : "Category"
-        }
-      },
       "CategoryEndpoint.listCategory" : {
         "response" : {
           "$ref" : "CollectionResponse_Category"
+        }
+      },
+      "CategoryEndpoint.removeCategory" : {
+        "response" : {
+          "$ref" : "Category"
         }
       }
     }

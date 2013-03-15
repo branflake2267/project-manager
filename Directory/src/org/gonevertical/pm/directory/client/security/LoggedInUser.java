@@ -39,10 +39,13 @@ public class LoggedInUser {
   public void copyFrom(CurrentUserJso currentUserJso) {
     isAdmin = currentUserJso.getIsAdmin();
     isLoggedIn = currentUserJso.getIsLoggedIn();
-    systemUser = currentUserJso.getSystemUser();
     logoutUrl = currentUserJso.getLogoutUrl();
     loginUrl = currentUserJso.getLoginUrl();
-    nickname = currentUserJso.getNickname();
+    
+    if (isLoggedIn) {
+      systemUser = currentUserJso.getSystemUser();
+      nickname = currentUserJso.getNickname();
+    }
   }
 
 }

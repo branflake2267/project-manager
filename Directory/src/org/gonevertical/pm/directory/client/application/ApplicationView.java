@@ -10,7 +10,7 @@ import com.gwtplatform.mvp.client.ViewImpl;
 
 public class ApplicationView extends ViewImpl implements ApplicationPresenter.MyView {
   public interface Binder extends UiBinder<Widget, ApplicationView> {
-  }
+  } 
 
   @UiField
   SimplePanel header;

@@ -71,7 +71,6 @@ public class ArchetypeEndpoint {
     PersistenceManager mgr = null;
     Cursor cursor = null;
     List<Archetype> items = null;
-
     try {
       mgr = getPersistenceManager();
       Query query = mgr.newQuery(Archetype.class);
@@ -111,7 +110,7 @@ public class ArchetypeEndpoint {
     if (cursor != null && cursor.toWebSafeString() != null) {
       cursorWebSafe = cursor.toWebSafeString();
     }
-
+    
     return new CollectionResponseExtentsion<Archetype>(items, cursorWebSafe, total);
   }
 
@@ -119,10 +118,10 @@ public class ArchetypeEndpoint {
     return getArchetype(KeyFactory.stringToKey(key));
   }
 
-  public Archetype insertArchetype(Archetype archetype, com.google.appengine.api.users.User guser) throws Exception {
-    if (guser == null) {
-      throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
-    }
+  public Archetype insertArchetype(Archetype archetype) throws Exception {
+//    if (guser == null) {
+//      throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
+//    }
 
     CurrentUser currentUser = JdoUtils.getCurrentUser();
     archetype.setSystemUserKey(currentUser.getSystemUser().getKey());

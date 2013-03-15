@@ -25,7 +25,7 @@ public class AdminView extends ViewImpl implements AdminPresenter.MyView {
   }
 
   private void displayUrls() {
-    String url = GWT.getHostPageBaseURL() + "_ah/api/discovery/v1/apis";
+    String url = GWT.getHostPageBaseURL() + "/_ah/api/explorer";//_ah/api/discovery/v1/apis
     String html = "<a href=\"" + url + "\">Discovery</a>";
     urls.add(new HTML(html));
   }

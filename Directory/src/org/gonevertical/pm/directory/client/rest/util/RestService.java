@@ -72,8 +72,6 @@ public abstract class RestService<T extends JavaScriptObject> {
         if (response.getStatusCode() == 200) {
           JSONObject jsonObject = JSONParser.parseLenient(json).isObject();
 
-          String s = jsonObject.toString();
-          
           String cursor = null;
           try {
             cursor = jsonObject.get("nextPageToken").isString().stringValue();
@@ -91,7 +89,6 @@ public abstract class RestService<T extends JavaScriptObject> {
             list = (JsArray<T>) JSONParser.parseLenient(json).isObject().get("items").isArray().getJavaScriptObject()
                 .cast();
           } catch (Exception e) {
-            e.printStackTrace();
           }
 
           handler.onSuccess(new RestList(total, list, cursor));
