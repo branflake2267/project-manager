@@ -2,7 +2,9 @@
 This is my experiment to speed up the creation of projects using Archetypes in Eclipse, IDEA and the terminal.
 
 ##Currently
-I'm working on the desktop Archetype listing/edting for the Archetype directory. (02/28/2013)
+Got the Archetype editor online working. (03/15/2013)
+
+### [Directory Editor](https://project-manager-directory.appspot.com)
 
 ##Source Highlights
 * [Client - GWTP Desktop Archetype Directory](https://github.com/branflake2267/Project-Manager/tree/master/Directory/src/org/gonevertical/pm/directory/client) - GWTP application architecture used for the Desktop app.
