@@ -10,11 +10,12 @@
         }
         
         .links {
-            display: inline;
+            display: inline-block;
         }
         
         .link {
             margin-right: 10px;
+            display: inline;
         }
     </ui:style>
     
@@ -25,11 +26,16 @@
             <g:SimplePanel ui:field="login" styleName="{style.login}"/>
         </div>
         
-        <div class="{style.links">
+        <div class="{style.links}">
             <a href="#home" class="{style.link}">Home</a>
-            <g:HTMLPanel ui:field="admin">
+                        
+            <g:FlowPanel ui:field="explorer" styleName="{style.link}"/>
+            
+            <g:HTMLPanel ui:field="admin" styleName="{style.links}">
                 <a href="#admin" class="{style.link}">Admin</a>
             </g:HTMLPanel>
+            
+            <a href="https://github.com/branflake2267/Project-Manager" target="_blank" class="{style.link}">Project Source</a>
         </div>
          
     </g:HTMLPanel>

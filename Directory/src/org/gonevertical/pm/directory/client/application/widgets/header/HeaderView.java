@@ -1,7 +1,10 @@
 package org.gonevertical.pm.directory.client.application.widgets.header;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -16,6 +19,8 @@ public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements 
   @UiField
   SimplePanel login;
   @UiField
+  FlowPanel explorer;
+  @UiField
   HTMLPanel admin;
 
   @Inject
@@ -23,6 +28,8 @@ public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements 
     initWidget(binder.createAndBindUi(this));
     
     admin.setVisible(false);
+    
+    displayExplorer();
   }
 
   @Override
@@ -37,4 +44,9 @@ public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements 
     this.admin.setVisible(visible);
   }
 
+  private void displayExplorer() {
+    String url = GWT.getHostPageBaseURL() + "/_ah/api/explorer";
+    String html = "<a href=\"" + url + "\" target=\"_blank\">Rest Explorer</a>";
+    explorer.add(new HTML(html));
+  }
 }
