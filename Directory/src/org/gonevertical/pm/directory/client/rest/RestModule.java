@@ -7,6 +7,7 @@ public class RestModule extends AbstractPresenterModule {
   
   @Override
   protected void configure() {
+    bind(ArchetypeJsoDao.class).in(Singleton.class);
     bind(CurrentUserJsoDao.class).in(Singleton.class);
   }
   

@@ -5,15 +5,18 @@ import org.gonevertical.pm.directory.client.rest.jso.SystemUserJso;
 
 public class LoggedInUser {
   
-  private boolean isAdmin;
   private boolean isLoggedIn;
-  private SystemUserJso systemUser;
   private String logoutUrl;
   private String loginUrl;
   private String nickname;
-
+  private SystemUserJso systemUser;
+  
   public boolean getIsAdmin() {
-    return isAdmin;
+    boolean admin = false;
+    if (systemUser != null) {
+      admin = systemUser.getIsAdmin();
+    }
+    return admin;
   }
   
   public boolean getIsLoggedIn() {
@@ -37,7 +40,6 @@ public class LoggedInUser {
   }
 
   public void copyFrom(CurrentUserJso currentUserJso) {
-    isAdmin = currentUserJso.getIsAdmin();
     isLoggedIn = currentUserJso.getIsLoggedIn();
     logoutUrl = currentUserJso.getLogoutUrl();
     loginUrl = currentUserJso.getLoginUrl();

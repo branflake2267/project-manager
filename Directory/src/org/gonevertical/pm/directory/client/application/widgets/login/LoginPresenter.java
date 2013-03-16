@@ -1,11 +1,17 @@
 package org.gonevertical.pm.directory.client.application.widgets.login;
 
+import java.util.HashMap;
+
 import org.gonevertical.pm.directory.client.events.login.LoggedInEvent;
 import org.gonevertical.pm.directory.client.rest.CurrentUserJsoDao;
 import org.gonevertical.pm.directory.client.rest.jso.CurrentUserJso;
 import org.gonevertical.pm.directory.client.rest.util.RestHandler;
 import org.gonevertical.pm.directory.client.security.LoggedInUser;
+import org.gonevertical.pm.directory.client.security.OAuthToken;
+import org.gonevertical.pm.directory.client.utils.QueryStringData;
+import org.gonevertical.pm.directory.client.utils.QueryStringUtils;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
@@ -27,14 +33,16 @@ public class LoginPresenter extends PresenterWidget<LoginPresenter.MyView> imple
 
   private final CurrentUserJsoDao currentUserJsoDao;
   private final LoggedInUser loggedInUser;
+  private final OAuthToken oauth;
 
   @Inject
-  public LoginPresenter(final EventBus eventBus, final MyView view, final CurrentUserJsoDao currentUserJsoDao,
-      final LoggedInUser loggedInUser) {
+  public LoginPresenter(EventBus eventBus, MyView view, CurrentUserJsoDao currentUserJsoDao, LoggedInUser loggedInUser,
+      OAuthToken oauth) {
     super(eventBus, view);
 
     this.currentUserJsoDao = currentUserJsoDao;
     this.loggedInUser = loggedInUser;
+    this.oauth = oauth;
 
     getView().setUiHandlers(this);
   }
@@ -43,11 +51,16 @@ public class LoginPresenter extends PresenterWidget<LoginPresenter.MyView> imple
   protected void onBind() {
     super.onBind();
 
+    initAccess_Token();
+
     fetchCurrentUser();
   }
 
   private void fetchCurrentUser() {
-    currentUserJsoDao.get(new RestHandler<CurrentUserJso>() {
+    HashMap<String, String> parameters = new HashMap<String, String>();
+    parameters.put("siteUrl", getSiteUrl());
+
+    currentUserJsoDao.get(parameters, new RestHandler<CurrentUserJso>() {
       @Override
       public void onSuccess(CurrentUserJso object) {
         onFetchCurrentUserSuccess(object);
@@ -62,9 +75,9 @@ public class LoginPresenter extends PresenterWidget<LoginPresenter.MyView> imple
 
   private void onFetchCurrentUserSuccess(CurrentUserJso currentUserJso) {
     loggedInUser.copyFrom(currentUserJso);
-    
+
     displayLogin();
-    
+
     LoggedInEvent.fire(this);
   }
 
@@ -74,7 +87,7 @@ public class LoginPresenter extends PresenterWidget<LoginPresenter.MyView> imple
       getView().displayNickname(loggedInUser.getNickname());
       getView().displayLoggedIn(url);
     } else {
-      String url = replaceReturnPath(loggedInUser.getLoginUrl());
+      String url = loggedInUser.getLoginUrl();
       getView().displayNickname("");
       getView().displayLoggedOut(url);
     }
@@ -82,10 +95,6 @@ public class LoginPresenter extends PresenterWidget<LoginPresenter.MyView> imple
 
   private String replaceReturnPath(String url) {
     String path = Window.Location.getPath();
-    if (path != null && path.length() > 0) {
-      path = path.replace("/", "%2F");
-      url = url.replace("%2F", path);
-    }
 
     String queryString = Window.Location.getQueryString();
     String token = History.getToken();
@@ -98,6 +107,19 @@ public class LoginPresenter extends PresenterWidget<LoginPresenter.MyView> imple
     }
 
     return url;
+  }
+
+  private String getSiteUrl() {
+    String s = GWT.getHostPageBaseURL() + Window.Location.getQueryString();
+    s = URL.encodeQueryString(s);
+    return s;
+  }
+
+  private void initAccess_Token() {
+    QueryStringData qsd = QueryStringUtils.getQueryStringData();
+    String access_token = qsd.getParameter_String("access_token");
+    System.out.println("access_token=" + access_token);
+    oauth.setAccessToken(access_token);
   }
 
 }

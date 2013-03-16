@@ -15,10 +15,14 @@ public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements 
 
   @UiField
   SimplePanel login;
+  @UiField
+  HTMLPanel admin;
 
   @Inject
   public HeaderView(final Binder binder) {
     initWidget(binder.createAndBindUi(this));
+    
+    admin.setVisible(false);
   }
 
   @Override
@@ -26,6 +30,11 @@ public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements 
     if (slot == HeaderPresenter.TYPE_LoginPresenter) {
       login.setWidget(content);
     }
+  }
+  
+  @Override
+  public void setAdmin(boolean visible) {
+    this.admin.setVisible(visible);
   }
 
 }

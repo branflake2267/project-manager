@@ -27,11 +27,17 @@
     "currentuserendpoint.getCurrentUser" : {
       "path" : "currentuser",
       "httpMethod" : "GET",
-      "scopes" : [ ],
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
-      "clientIds" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
       "rosyMethod" : "CurrentUserEndpoint.getCurrentUser",
       "request" : {
+        "parameters" : {
+          "siteUrl" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
         "body" : "empty"
       },
       "response" : {
@@ -41,18 +47,33 @@
   },
   "descriptor" : {
     "schemas" : {
+      "User" : {
+        "id" : "User",
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "authDomain" : {
+            "type" : "string"
+          },
+          "userId" : {
+            "type" : "string"
+          },
+          "federatedIdentity" : {
+            "type" : "string"
+          },
+          "nickname" : {
+            "type" : "string"
+          }
+        }
+      },
       "CurrentUser" : {
         "id" : "CurrentUser",
         "type" : "object",
         "properties" : {
-          "isAdmin" : {
-            "type" : "boolean"
-          },
           "isLoggedIn" : {
             "type" : "boolean"
-          },
-          "systemUser" : {
-            "$ref" : "SystemUser"
           },
           "logoutUrl" : {
             "type" : "string"
@@ -62,6 +83,12 @@
           },
           "nickname" : {
             "type" : "string"
+          },
+          "systemUser" : {
+            "$ref" : "SystemUser"
+          },
+          "isAdmin" : {
+            "type" : "boolean"
           }
         }
       },
@@ -72,7 +99,16 @@
           "key" : {
             "type" : "string"
           },
-          "googleId" : {
+          "userId" : {
+            "type" : "string"
+          },
+          "isAdmin" : {
+            "type" : "boolean"
+          },
+          "nameFirst" : {
+            "type" : "string"
+          },
+          "nameLast" : {
             "type" : "string"
           }
         }

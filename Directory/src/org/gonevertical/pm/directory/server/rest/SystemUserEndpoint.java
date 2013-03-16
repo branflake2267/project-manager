@@ -23,13 +23,13 @@ public class SystemUserEndpoint {
   }
 
   public SystemUser updateSystemUser(SystemUser systemUser) {
-    return JdoUtils.persist(systemUser); 
+    return JdoUtils.persist(systemUser);
   }
 
-  public SystemUser findByGoogleId(@Named("googleId") String googleId) {
+  public SystemUser findByUserId(@Named("userId") String googleId) {
     ArrayList<SimpleFilter> simpleFilter = new ArrayList<SimpleFilter>();
-    simpleFilter.add(new SimpleFilter("googleId", FilterOperator.EQUAL, googleId));
-    
+    simpleFilter.add(new SimpleFilter("userId", FilterOperator.EQUAL, googleId));
+
     return JdoUtils.findFirst(SystemUser.class, simpleFilter);
   }
 

@@ -14,5 +14,17 @@ public class SystemUserJso extends JavaScriptObject {
   public final native String getGoogleId() /*-{
     return this.googleId;
   }-*/;
-
+  
+  public final native boolean getIsAdmin() /*-{
+    return this.isAdmin;
+  }-*/;
+  
+  public final native String getNameFirst() /*-{
+    return this.nameFirst;
+  }-*/;
+  
+  public final native String getNameLast() /*-{
+    return this.nameLast;
+  }-*/;
+  
 }

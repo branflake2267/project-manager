@@ -24,16 +24,16 @@
     "maxAge" : 0
   },
   "methods" : {
-    "systemuserendpoint.findByGoogleId" : {
-      "path" : "findByGoogleId/{googleId}",
+    "systemuserendpoint.findByUserId" : {
+      "path" : "findByUserId/{userId}",
       "httpMethod" : "POST",
       "scopes" : [ ],
       "audiences" : [ ],
       "clientIds" : [ ],
-      "rosyMethod" : "SystemUserEndpoint.findByGoogleId",
+      "rosyMethod" : "SystemUserEndpoint.findByUserId",
       "request" : {
         "parameters" : {
-          "googleId" : {
+          "userId" : {
             "type" : "string",
             "required" : true
           }
@@ -104,14 +104,23 @@
           "key" : {
             "type" : "string"
           },
-          "googleId" : {
+          "userId" : {
+            "type" : "string"
+          },
+          "isAdmin" : {
+            "type" : "boolean"
+          },
+          "nameFirst" : {
+            "type" : "string"
+          },
+          "nameLast" : {
             "type" : "string"
           }
         }
       }
     },
     "methods" : {
-      "SystemUserEndpoint.findByGoogleId" : {
+      "SystemUserEndpoint.findByUserId" : {
         "response" : {
           "$ref" : "SystemUser"
         }

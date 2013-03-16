@@ -3,6 +3,8 @@ package org.gonevertical.pm.directory.client.rest.util;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.gonevertical.pm.directory.client.security.OAuthToken;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
@@ -15,22 +17,29 @@ import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 
 public abstract class RestService<T extends JavaScriptObject> {
-  private String endpointPath = "";
   
-  protected RestService(String endpointPath) {
+  private String endpointPath = "";
+  private OAuthToken oauth;
+  
+  protected RestService(String endpointPath, OAuthToken oauth) {
     this.endpointPath = endpointPath;
+    this.oauth = oauth;
   }
   
   public String getBaseAndEndpointPath() {
     return GWT.getHostPageBaseURL() + endpointPath;
   }
 
-  public void get(final RestHandler<T> handler) {
-    String url = getBaseAndEndpointPath();
+  public void get(HashMap<String, String> parameters,  final RestHandler<T> handler) {
+    String url = getBaseAndEndpointPath() + getQueryString(parameters);
 
     RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
     builder.setHeader(RestHeaders.CONTENT_TYPE__JSON.getKey(), RestHeaders.ACCEPT__JSON.getValue());
     builder.setHeader(RestHeaders.ACCEPT__JSON.getKey(), RestHeaders.ACCEPT__JSON.getValue());
+    
+    if (oauth.getAccessToken() != null && oauth.getAccessToken().trim().length() > 0) {
+      builder.setHeader("Authorization", "Bearer " + oauth.getAccessToken());
+    }
 
     builder.setCallback(new RequestCallback() {
       @Override
@@ -64,6 +73,10 @@ public abstract class RestService<T extends JavaScriptObject> {
     RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
     builder.setHeader(RestHeaders.CONTENT_TYPE__JSON.getKey(), RestHeaders.ACCEPT__JSON.getValue());
     builder.setHeader(RestHeaders.ACCEPT__JSON.getKey(), RestHeaders.ACCEPT__JSON.getValue());
+    
+    if (oauth.getAccessToken() != null && oauth.getAccessToken().trim().length() > 0) {
+      builder.setHeader("Authorization", "Bearer " + oauth.getAccessToken());
+    }
 
     builder.setCallback(new RequestCallback() {
       @Override
@@ -119,6 +132,11 @@ public abstract class RestService<T extends JavaScriptObject> {
     RequestBuilder builder = new RequestBuilder(RequestBuilder.PUT, url);
     builder.setHeader(RestHeaders.CONTENT_TYPE__JSON.getKey(), RestHeaders.ACCEPT__JSON.getValue());
     builder.setHeader(RestHeaders.ACCEPT__JSON.getKey(), RestHeaders.ACCEPT__JSON.getValue());
+    
+    if (oauth.getAccessToken() != null && oauth.getAccessToken().trim().length() > 0) {
+      builder.setHeader("Authorization", "Bearer " + oauth.getAccessToken());
+    }
+    
     builder.setRequestData(json);
     
     builder.setCallback(new RequestCallback() {

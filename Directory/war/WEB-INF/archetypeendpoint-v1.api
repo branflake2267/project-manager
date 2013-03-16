@@ -28,9 +28,9 @@
     "archetypeendpoint.listArchetype" : {
       "path" : "archetype",
       "httpMethod" : "GET",
-      "scopes" : [ ],
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
-      "clientIds" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
       "rosyMethod" : "ArchetypeEndpoint.listArchetype",
       "request" : {
         "parameters" : {
@@ -56,9 +56,9 @@
     "archetypeendpoint.updateArchetype" : {
       "path" : "archetype",
       "httpMethod" : "PUT",
-      "scopes" : [ ],
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
-      "clientIds" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
       "rosyMethod" : "ArchetypeEndpoint.updateArchetype",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
@@ -71,9 +71,9 @@
     "archetypeendpoint.archetype.search" : {
       "path" : "archetype/search/{queryString}",
       "httpMethod" : "GET",
-      "scopes" : [ ],
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
-      "clientIds" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
       "rosyMethod" : "ArchetypeEndpoint.search",
       "request" : {
         "parameters" : {
@@ -95,9 +95,9 @@
     "archetypeendpoint.insertArchetype" : {
       "path" : "archetype",
       "httpMethod" : "POST",
-      "scopes" : [ ],
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
-      "clientIds" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
       "rosyMethod" : "ArchetypeEndpoint.insertArchetype",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
@@ -110,9 +110,9 @@
     "archetypeendpoint.getArchetype" : {
       "path" : "archetype/{key}",
       "httpMethod" : "GET",
-      "scopes" : [ ],
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
-      "clientIds" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
       "rosyMethod" : "ArchetypeEndpoint.getArchetype",
       "request" : {
         "parameters" : {
@@ -130,9 +130,9 @@
     "archetypeendpoint.removeArchetype" : {
       "path" : "archetype/{key}",
       "httpMethod" : "DELETE",
-      "scopes" : [ ],
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
-      "clientIds" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
       "rosyMethod" : "ArchetypeEndpoint.removeArchetype",
       "request" : {
         "parameters" : {

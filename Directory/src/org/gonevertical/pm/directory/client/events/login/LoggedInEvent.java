@@ -6,40 +6,42 @@ import com.google.gwt.event.shared.HasHandlers;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
 public class LoggedInEvent extends GwtEvent<LoggedInEvent.LoggedInHandler> {
-    public LoggedInEvent() {
-        // Possibly for serialization.
-    }
 
-    public static void fire(HasHandlers source) {
-        LoggedInEvent eventInstance = new LoggedInEvent();
-        source.fireEvent(eventInstance);
-    }
+  public LoggedInEvent() {
+    // Possibly for serialization.
+  }
 
-    public static void fire(HasHandlers source, LoggedInEvent eventInstance) {
-        source.fireEvent(eventInstance);
-    }
+  public static void fire(HasHandlers source) {
+    LoggedInEvent eventInstance = new LoggedInEvent();
+    source.fireEvent(eventInstance);
+  }
 
-    public interface HasGlobalDataHandlers extends HasHandlers {
-        HandlerRegistration addGlobalHandler(LoggedInHandler handler);
-    }
+  public static void fire(HasHandlers source, LoggedInEvent eventInstance) {
+    source.fireEvent(eventInstance);
+  }
 
-    public interface LoggedInHandler extends EventHandler {
-        public void onGlobalEvent(LoggedInEvent event);
-    }
+  public interface HasGlobalDataHandlers extends HasHandlers {
+    HandlerRegistration addGlobalHandler(LoggedInHandler handler);
+  }
 
-    private static final Type<LoggedInHandler> TYPE = new Type<LoggedInHandler>();
+  public interface LoggedInHandler extends EventHandler {
+    public void onLoggedIn(LoggedInEvent event);
+  }
 
-    public static Type<LoggedInHandler> getType() {
-        return TYPE;
-    }
+  private static final Type<LoggedInHandler> TYPE = new Type<LoggedInHandler>();
 
-    @Override
-    public Type<LoggedInHandler> getAssociatedType() {
-        return TYPE;
-    }
+  public static Type<LoggedInHandler> getType() {
+    return TYPE;
+  }
 
-    @Override
-    protected void dispatch(LoggedInHandler handler) {
-        handler.onGlobalEvent(this);
-    }
+  @Override
+  public Type<LoggedInHandler> getAssociatedType() {
+    return TYPE;
+  }
+
+  @Override
+  protected void dispatch(LoggedInHandler handler) {
+    handler.onLoggedIn(this);
+  }
+
 }

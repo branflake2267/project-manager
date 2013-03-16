@@ -33,7 +33,12 @@ import com.google.appengine.api.search.ScoredDocument;
 import com.google.appengine.api.search.SearchServiceFactory;
 import com.google.appengine.datanucleus.query.JDOCursorHelper;
 
-@Api(name = "archetypeendpoint", description = "This entity represents a Archetype.", version = "v1")
+@Api(
+    name = "archetypeendpoint",
+    description = "This entity represents a Archetype.",
+    version = "v1",
+    clientIds = { "433818979508.apps.googleusercontent.com" },
+    scopes = { "https://www.googleapis.com/auth/userinfo.email" })
 public class ArchetypeEndpoint {
   private static Logger logger = Logger.getLogger(ArchetypeEndpoint.class.getName());
 
@@ -67,14 +72,14 @@ public class ArchetypeEndpoint {
   public CollectionResponseExtentsion<Archetype> listArchetype(@Nullable @Named("cursor") String cursorString,
       @Nullable @Named("offset") Integer offset, @Nullable @Named("limit") Integer limit) {
     logger.info("listArchetype(): cursorString=" + cursorString + " offset=" + offset + " limit=" + limit);
-    
+
     PersistenceManager mgr = null;
     Cursor cursor = null;
     List<Archetype> items = null;
     try {
       mgr = getPersistenceManager();
       Query query = mgr.newQuery(Archetype.class);
-      
+
       if (cursorString != null && cursorString != "") {
         cursor = Cursor.fromWebSafeString(cursorString);
         HashMap<String, Object> extensionMap = new HashMap<String, Object>();
@@ -89,9 +94,9 @@ public class ArchetypeEndpoint {
       } else {
         query.setRange(0, 15);
       }
-      
+
       items = (List<Archetype>) query.execute();
-      
+
       cursor = JDOCursorHelper.getCursor(items);
       if (cursor != null) {
         cursorString = cursor.toWebSafeString();
@@ -110,7 +115,14 @@ public class ArchetypeEndpoint {
     if (cursor != null && cursor.toWebSafeString() != null) {
       cursorWebSafe = cursor.toWebSafeString();
     }
-    
+
+    if (items == null || items.size() == 0) {
+      items = new ArrayList<Archetype>();
+      Archetype archetype = new Archetype();
+      archetype.setName("Nothing Exists Yet");
+      items.add(archetype);
+    }
+
     return new CollectionResponseExtentsion<Archetype>(items, cursorWebSafe, total);
   }
 
@@ -118,12 +130,12 @@ public class ArchetypeEndpoint {
     return getArchetype(KeyFactory.stringToKey(key));
   }
 
-  public Archetype insertArchetype(Archetype archetype) throws Exception {
-//    if (guser == null) {
-//      throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
-//    }
+  public Archetype insertArchetype(Archetype archetype, com.google.appengine.api.users.User guser) throws Exception {
+    if (guser == null) {
+      throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
+    }
 
-    CurrentUser currentUser = JdoUtils.getCurrentUser();
+    CurrentUser currentUser = JdoUtils.getCurrentUser(guser);
     archetype.setSystemUserKey(currentUser.getSystemUser().getKey());
 
     JdoUtils.persistOrThrow(archetype);

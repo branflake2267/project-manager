@@ -27,7 +27,9 @@
         
         <div class="{style.links">
             <a href="#home" class="{style.link}">Home</a>
-            <a href="#admin" class="{style.link}">Admin</a>
+            <g:HTMLPanel ui:field="admin">
+                <a href="#admin" class="{style.link}">Admin</a>
+            </g:HTMLPanel>
         </div>
          
     </g:HTMLPanel>

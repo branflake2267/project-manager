@@ -7,6 +7,7 @@ public class SecurityModule extends AbstractPresenterModule {
   @Override
   protected void configure() {
     bind(LoggedInUser.class).asEagerSingleton();
+    bind(OAuthToken.class).asEagerSingleton();
   }
   
 }

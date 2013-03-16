@@ -13,6 +13,7 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView, ApplicationPresenter.MyProxy> {
+  
   public interface MyView extends View {
   }
 
@@ -41,5 +42,6 @@ public class ApplicationPresenter extends Presenter<ApplicationPresenter.MyView,
       
       setInSlot(TYPE_HeaderPresenter, headerPresenter);
   }
+  
 }
 

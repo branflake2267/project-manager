@@ -14,10 +14,14 @@ public class SystemUser {
   @PrimaryKey
   @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
   private Key key;
-  private String googleId;
+  private String userId;
+  private Boolean isAdmin;
+  private String nameFirst;
+  private String nameLast;
 
   public SystemUser() {
-    googleId = "";
+    userId = "";
+    isAdmin = false;
   }
 
   public String getKey() {
@@ -33,12 +37,44 @@ public class SystemUser {
     }
   }
 
-  public String getGoogleId() {
-    return googleId;
+  public String getUserId() {
+    return userId;
   }
 
-  public void setGoogleId(String googleId) {
-    this.googleId = googleId;
+  public void setUserId(String userId) {
+    this.userId = userId;
   }
 
+  public Boolean getIsAdmin() {
+    return isAdmin;
+  }
+
+  public void setIsAdmin(Boolean isAdmin) {
+    this.isAdmin = isAdmin;
+  }
+
+  public String getNameFirst() {
+    return nameFirst;
+  }
+
+  public void setNameFirst(String nameFirst) {
+    this.nameFirst = nameFirst;
+  }
+
+  public String getNameLast() {
+    return nameLast;
+  }
+
+  public void setNameLast(String nameLast) {
+    this.nameLast = nameLast;
+  }
+
+  @Override
+  public String toString() {
+    String s = "SystemUser(";
+    s += "key=" + key + ", ";
+    s += "userId=" + userId;
+    s += ")";
+    return s;
+  }
 }

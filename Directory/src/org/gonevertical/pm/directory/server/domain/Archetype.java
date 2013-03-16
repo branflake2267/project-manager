@@ -42,11 +42,14 @@ public class Archetype {
   }
 
   public String getKey() {
+    if (key == null) {
+      return "";
+    }
     return KeyFactory.keyToString(key);
   }
 
   public void setKey(String key) {
-    if (key == null) {
+    if (key == null || key.trim().length() == 0) {
       this.key = null;
     } else {
       this.key = KeyFactory.stringToKey(key);

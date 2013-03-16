@@ -102,7 +102,7 @@ public class HomePresenter extends Presenter<HomePresenter.MyView, HomePresenter
   }
 
   @Override
-  public void onGlobalEvent(LoggedInEvent event) {
+  public void onLoggedIn(LoggedInEvent event) {
     updateView();
   }
 
