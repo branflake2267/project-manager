@@ -1,12 +1,12 @@
 {
   "extends" : "thirdParty.api",
   "abstract" : false,
-  "root" : "https://project-manager-directory.appspot.com/_ah/api",
+  "root" : "https://1.project-manager-directory.appspot.com/_ah/api",
   "name" : "categoryendpoint",
   "version" : "v1",
   "defaultVersion" : false,
   "adapter" : {
-    "bns" : "http://project-manager-directory.appspot.com/_ah/spi",
+    "bns" : "https://1.project-manager-directory.appspot.com/_ah/spi",
     "deadline" : 10.0,
     "type" : "lily"
   },
@@ -30,7 +30,7 @@
       "scopes" : [ ],
       "audiences" : [ ],
       "clientIds" : [ ],
-      "rosyMethod" : "CategoryEndpoint.updateCategory",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.updateCategory",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -45,7 +45,7 @@
       "scopes" : [ ],
       "audiences" : [ ],
       "clientIds" : [ ],
-      "rosyMethod" : "CategoryEndpoint.getCategory",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.getCategory",
       "request" : {
         "parameters" : {
           "id" : {
@@ -65,7 +65,7 @@
       "scopes" : [ ],
       "audiences" : [ ],
       "clientIds" : [ ],
-      "rosyMethod" : "CategoryEndpoint.insertCategory",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.insertCategory",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -80,7 +80,7 @@
       "scopes" : [ ],
       "audiences" : [ ],
       "clientIds" : [ ],
-      "rosyMethod" : "CategoryEndpoint.removeCategory",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.removeCategory",
       "request" : {
         "parameters" : {
           "id" : {
@@ -100,7 +100,7 @@
       "scopes" : [ ],
       "audiences" : [ ],
       "clientIds" : [ ],
-      "rosyMethod" : "CategoryEndpoint.listCategory",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.listCategory",
       "request" : {
         "parameters" : {
           "cursor" : {
@@ -150,7 +150,7 @@
       }
     },
     "methods" : {
-      "CategoryEndpoint.updateCategory" : {
+      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.updateCategory" : {
         "request" : {
           "$ref" : "Category"
         },
@@ -158,12 +158,12 @@
           "$ref" : "Category"
         }
       },
-      "CategoryEndpoint.getCategory" : {
+      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.getCategory" : {
         "response" : {
           "$ref" : "Category"
         }
       },
-      "CategoryEndpoint.insertCategory" : {
+      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.insertCategory" : {
         "request" : {
           "$ref" : "Category"
         },
@@ -171,12 +171,12 @@
           "$ref" : "Category"
         }
       },
-      "CategoryEndpoint.removeCategory" : {
+      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.removeCategory" : {
         "response" : {
           "$ref" : "Category"
         }
       },
-      "CategoryEndpoint.listCategory" : {
+      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.listCategory" : {
         "response" : {
           "$ref" : "CollectionResponse_Category"
         }

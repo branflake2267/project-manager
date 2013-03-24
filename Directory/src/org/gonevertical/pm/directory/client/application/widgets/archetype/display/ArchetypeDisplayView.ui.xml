@@ -1,39 +1,57 @@
-<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:g='urn:import:com.google.gwt.user.client.ui'
-    xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
-    <ui:style>
-        .widget {
-            border: 1px solid grey;
-            padding: 5px;
-        }
-    </ui:style>
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
+	<ui:style>
+		.widget {
+			border: 1px solid grey;
+			padding: 5px;
+		}
+		
+		.field {
+			font-weight: bold;
+		}
+		
+		.mvn {
+			margin-top: 15px;
+			padding: 15px;
+			font-family: "courier new", courier, monospace;
+		}
+	</ui:style>
 
-    <g:HTMLPanel styleName="{style.widget}">
-        
-        <g:Button ui:field="edit">Edit</g:Button>
-        
-        <div>
-            Name: <g:InlineHTML ui:field="name"/>
-        </div>
-        
-        <div>
-            Description: <g:InlineHTML ui:field="description"/> 
-        </div>
-        
-        <div>
-            Repository: <g:InlineHTML ui:field="repository"/> 
-        </div>
-        
-        <div>
-            GroupId: <g:InlineHTML ui:field="groupId"/> 
-        </div>
-        
-        <div>
-            ArtifactId: <g:InlineHTML ui:field="artifactId"/> 
-        </div>
-        
-        <div>
-            Version <g:InlineHTML ui:field="version"/> 
-        </div>
-        
-    </g:HTMLPanel>
+	<g:HTMLPanel styleName="{style.widget}">
+
+		<g:Button ui:field="edit">Edit</g:Button>
+
+		<div>
+			<div class="{style.field}">Name</div>
+			<g:InlineHTML ui:field="name" />
+		</div>
+
+		<div>
+			<div class="{style.field}">Description</div>
+			<g:InlineHTML ui:field="description" />
+		</div>
+
+		<div>
+			<div class="{style.field}">Repository</div>
+			<g:InlineHTML ui:field="repository" />
+		</div>
+
+		<div>
+			<div class="{style.field}">GroupId</div>
+			<g:InlineHTML ui:field="groupId" />
+		</div>
+
+		<div>
+			<div class="{style.field}">ArtifactId</div>
+			<g:InlineHTML ui:field="artifactId" />
+		</div>
+
+		<div>
+			<div class="{style.field}">Version</div>
+			<g:InlineHTML ui:field="version" />
+		</div>
+
+		<g:HTML ui:field="mvn" styleName="{style.mvn}" />
+
+	</g:HTMLPanel>
 </ui:UiBinder>

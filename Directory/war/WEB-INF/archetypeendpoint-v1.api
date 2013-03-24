@@ -1,13 +1,13 @@
 {
   "extends" : "thirdParty.api",
   "abstract" : false,
-  "root" : "https://project-manager-directory.appspot.com/_ah/api",
+  "root" : "https://1.project-manager-directory.appspot.com/_ah/api",
   "name" : "archetypeendpoint",
   "version" : "v1",
   "description" : "This entity represents a Archetype.",
   "defaultVersion" : false,
   "adapter" : {
-    "bns" : "http://project-manager-directory.appspot.com/_ah/spi",
+    "bns" : "https://1.project-manager-directory.appspot.com/_ah/spi",
     "deadline" : 10.0,
     "type" : "lily"
   },
@@ -25,13 +25,28 @@
     "maxAge" : 0
   },
   "methods" : {
+    "archetypeendpoint.updateArchetype" : {
+      "path" : "archetype",
+      "httpMethod" : "PUT",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.updateArchetype",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "archetypeendpoint.listArchetype" : {
       "path" : "archetype",
       "httpMethod" : "GET",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "ArchetypeEndpoint.listArchetype",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.listArchetype",
       "request" : {
         "parameters" : {
           "cursor" : {
@@ -53,28 +68,13 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "archetypeendpoint.updateArchetype" : {
-      "path" : "archetype",
-      "httpMethod" : "PUT",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "ArchetypeEndpoint.updateArchetype",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "archetypeendpoint.archetype.search" : {
       "path" : "archetype/search/{queryString}",
       "httpMethod" : "GET",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "ArchetypeEndpoint.search",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.search",
       "request" : {
         "parameters" : {
           "queryString" : {
@@ -98,7 +98,7 @@
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "ArchetypeEndpoint.insertArchetype",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.insertArchetype",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -113,7 +113,7 @@
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "ArchetypeEndpoint.getArchetype",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.getArchetype",
       "request" : {
         "parameters" : {
           "key" : {
@@ -133,7 +133,7 @@
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "ArchetypeEndpoint.removeArchetype",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.removeArchetype",
       "request" : {
         "parameters" : {
           "key" : {
@@ -150,24 +150,6 @@
   },
   "descriptor" : {
     "schemas" : {
-      "CollectionResponseExtentsion_Archetype" : {
-        "id" : "CollectionResponseExtentsion_Archetype",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Archetype"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          },
-          "total" : {
-            "type" : "integer"
-          }
-        }
-      },
       "Archetype" : {
         "id" : "Archetype",
         "type" : "object",
@@ -249,15 +231,28 @@
             "type" : "string"
           }
         }
+      },
+      "CollectionResponseExtentsion_Archetype" : {
+        "id" : "CollectionResponseExtentsion_Archetype",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Archetype"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          },
+          "total" : {
+            "type" : "integer"
+          }
+        }
       }
     },
     "methods" : {
-      "ArchetypeEndpoint.listArchetype" : {
-        "response" : {
-          "$ref" : "CollectionResponseExtentsion_Archetype"
-        }
-      },
-      "ArchetypeEndpoint.updateArchetype" : {
+      "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.updateArchetype" : {
         "request" : {
           "$ref" : "Archetype"
         },
@@ -265,12 +260,17 @@
           "$ref" : "Archetype"
         }
       },
-      "ArchetypeEndpoint.search" : {
+      "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.listArchetype" : {
         "response" : {
           "$ref" : "CollectionResponseExtentsion_Archetype"
         }
       },
-      "ArchetypeEndpoint.insertArchetype" : {
+      "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.search" : {
+        "response" : {
+          "$ref" : "CollectionResponseExtentsion_Archetype"
+        }
+      },
+      "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.insertArchetype" : {
         "request" : {
           "$ref" : "Archetype"
         },
@@ -278,12 +278,12 @@
           "$ref" : "Archetype"
         }
       },
-      "ArchetypeEndpoint.getArchetype" : {
+      "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.getArchetype" : {
         "response" : {
           "$ref" : "Archetype"
         }
       },
-      "ArchetypeEndpoint.removeArchetype" : {
+      "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.removeArchetype" : {
         "response" : {
           "$ref" : "Archetype"
         }

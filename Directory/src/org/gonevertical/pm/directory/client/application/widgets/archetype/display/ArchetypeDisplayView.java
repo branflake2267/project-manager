@@ -4,10 +4,12 @@ import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
 import org.gonevertical.pm.directory.client.security.LoggedInUser;
 
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.inject.Inject;
@@ -18,7 +20,7 @@ public class ArchetypeDisplayView extends ViewWithUiHandlers<ArchetypeDisplayUiH
 
   public interface Binder extends UiBinder<HTMLPanel, ArchetypeDisplayView> {
   }
-  
+
   @UiField
   Button edit;
   @UiField
@@ -33,34 +35,39 @@ public class ArchetypeDisplayView extends ViewWithUiHandlers<ArchetypeDisplayUiH
   InlineHTML artifactId;
   @UiField
   InlineHTML version;
-  
+  @UiField
+  HTML mvn;
+
   private final LoggedInUser loggedInUser;
-  
+  private final ArchetypeDisplay archetypeDisplay;
+
   private ArchetypeJso archetypeJso;
 
   @Inject
-  public ArchetypeDisplayView(final Binder binder, LoggedInUser loggedInUser) {
+  public ArchetypeDisplayView(Binder binder, LoggedInUser loggedInUser, ArchetypeDisplay archetypeDisplay) {
     this.loggedInUser = loggedInUser;
-    
+    this.archetypeDisplay = archetypeDisplay;
+
     initWidget(binder.createAndBindUi(this));
-    
+
     edit.setVisible(false);
   }
 
   @Override
   public void displayArchetype(ArchetypeJso archetypeJso) {
     this.archetypeJso = archetypeJso;
-    
+
     displayEditButton();
-    
+
     displayName(archetypeJso.getName());
     displayDescription(archetypeJso.getDescription());
     displayRepository(archetypeJso.getRepository());
     displayGroupId(archetypeJso.getGroupId());
-    displayArtifactId(archetypeJso.getArtifactid());
+    displayArtifactId(archetypeJso.getArtifactId());
     displayVersion(archetypeJso.getVersion());
+    displayMvnCommand(archetypeJso);
   }
-  
+
   @UiHandler("edit")
   void onEditClick(ClickEvent event) {
     getUiHandlers().gotoEdit(archetypeJso);
@@ -80,14 +87,14 @@ public class ArchetypeDisplayView extends ViewWithUiHandlers<ArchetypeDisplayUiH
     }
     this.name.setText(s);
   }
-  
+
   private void displayDescription(String s) {
     if (s == null) {
       s = "Description";
     }
     this.description.setText(s);
   }
-  
+
   private void displayRepository(String s) {
     if (s == null) {
       s = "Repository";
@@ -101,19 +108,24 @@ public class ArchetypeDisplayView extends ViewWithUiHandlers<ArchetypeDisplayUiH
     }
     this.groupId.setText(s);
   }
-  
+
   private void displayArtifactId(String s) {
     if (s == null) {
       s = "ArtifactId";
     }
     this.artifactId.setText(s);
   }
-  
+
   private void displayVersion(String s) {
     if (s == null) {
       s = "Version";
     }
     this.version.setText(s);
   }
-  
+
+  private void displayMvnCommand(ArchetypeJso archetype) {
+    SafeHtml safehtml = archetypeDisplay.displayCommand(archetype);
+    mvn.setHTML(safehtml);
+  }
+
 }

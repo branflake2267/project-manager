@@ -1,12 +1,12 @@
 {
   "extends" : "thirdParty.api",
   "abstract" : false,
-  "root" : "https://project-manager-directory.appspot.com/_ah/api",
+  "root" : "https://1.project-manager-directory.appspot.com/_ah/api",
   "name" : "sessionendpoint",
   "version" : "v1",
   "defaultVersion" : false,
   "adapter" : {
-    "bns" : "http://project-manager-directory.appspot.com/_ah/spi",
+    "bns" : "https://1.project-manager-directory.appspot.com/_ah/spi",
     "deadline" : 10.0,
     "type" : "lily"
   },
@@ -30,7 +30,7 @@
       "scopes" : [ ],
       "audiences" : [ ],
       "clientIds" : [ ],
-      "rosyMethod" : "SessionEndpoint.getSession",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.SessionEndpoint.getSession",
       "request" : {
         "parameters" : {
           "url" : {
@@ -58,7 +58,7 @@
       }
     },
     "methods" : {
-      "SessionEndpoint.getSession" : {
+      "org.gonevertical.pm.directory.server.rest.SessionEndpoint.getSession" : {
         "response" : {
           "$ref" : "Session"
         }

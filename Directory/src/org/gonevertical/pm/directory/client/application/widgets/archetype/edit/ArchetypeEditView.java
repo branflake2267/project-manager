@@ -70,7 +70,7 @@ public class ArchetypeEditView extends ViewWithUiHandlers<ArchetypeEditUiHandler
     displayDescription(archetypeJso.getDescription());
     displayRepository(archetypeJso.getRepository());
     displayGroupId(archetypeJso.getGroupId());
-    displayArtifactId(archetypeJso.getArtifactid());
+    displayArtifactId(archetypeJso.getArtifactId());
     displayVersion(archetypeJso.getVersion());
   }
   

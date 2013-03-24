@@ -51,7 +51,7 @@ public class ArchetypeJso extends JavaScriptObject {
     this.artifactId = artifactId;
   }-*/;
   
-  public final native String getArtifactid() /*-{
+  public final native String getArtifactId() /*-{
     return this.artifactId;
   }-*/;
   

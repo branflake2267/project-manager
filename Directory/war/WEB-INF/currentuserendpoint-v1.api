@@ -1,12 +1,12 @@
 {
   "extends" : "thirdParty.api",
   "abstract" : false,
-  "root" : "https://project-manager-directory.appspot.com/_ah/api",
+  "root" : "https://1.project-manager-directory.appspot.com/_ah/api",
   "name" : "currentuserendpoint",
   "version" : "v1",
   "defaultVersion" : false,
   "adapter" : {
-    "bns" : "http://project-manager-directory.appspot.com/_ah/spi",
+    "bns" : "https://1.project-manager-directory.appspot.com/_ah/spi",
     "deadline" : 10.0,
     "type" : "lily"
   },
@@ -30,7 +30,7 @@
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "CurrentUserEndpoint.getCurrentUser",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CurrentUserEndpoint.getCurrentUser",
       "request" : {
         "parameters" : {
           "siteUrl" : {
@@ -115,7 +115,7 @@
       }
     },
     "methods" : {
-      "CurrentUserEndpoint.getCurrentUser" : {
+      "org.gonevertical.pm.directory.server.rest.CurrentUserEndpoint.getCurrentUser" : {
         "response" : {
           "$ref" : "CurrentUser"
         }

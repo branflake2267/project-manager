@@ -1,12 +1,12 @@
 {
   "extends" : "thirdParty.api",
   "abstract" : false,
-  "root" : "https://project-manager-directory.appspot.com/_ah/api",
+  "root" : "https://1.project-manager-directory.appspot.com/_ah/api",
   "name" : "systemuserendpoint",
   "version" : "v1",
   "defaultVersion" : false,
   "adapter" : {
-    "bns" : "http://project-manager-directory.appspot.com/_ah/spi",
+    "bns" : "https://1.project-manager-directory.appspot.com/_ah/spi",
     "deadline" : 10.0,
     "type" : "lily"
   },
@@ -30,7 +30,7 @@
       "scopes" : [ ],
       "audiences" : [ ],
       "clientIds" : [ ],
-      "rosyMethod" : "SystemUserEndpoint.findByUserId",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.SystemUserEndpoint.findByUserId",
       "request" : {
         "parameters" : {
           "userId" : {
@@ -50,7 +50,7 @@
       "scopes" : [ ],
       "audiences" : [ ],
       "clientIds" : [ ],
-      "rosyMethod" : "SystemUserEndpoint.updateSystemUser",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.SystemUserEndpoint.updateSystemUser",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -65,7 +65,7 @@
       "scopes" : [ ],
       "audiences" : [ ],
       "clientIds" : [ ],
-      "rosyMethod" : "SystemUserEndpoint.insertSystemUser",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.SystemUserEndpoint.insertSystemUser",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -80,7 +80,7 @@
       "scopes" : [ ],
       "audiences" : [ ],
       "clientIds" : [ ],
-      "rosyMethod" : "SystemUserEndpoint.getSystemUser",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.SystemUserEndpoint.getSystemUser",
       "request" : {
         "parameters" : {
           "key" : {
@@ -120,12 +120,12 @@
       }
     },
     "methods" : {
-      "SystemUserEndpoint.findByUserId" : {
+      "org.gonevertical.pm.directory.server.rest.SystemUserEndpoint.findByUserId" : {
         "response" : {
           "$ref" : "SystemUser"
         }
       },
-      "SystemUserEndpoint.updateSystemUser" : {
+      "org.gonevertical.pm.directory.server.rest.SystemUserEndpoint.updateSystemUser" : {
         "request" : {
           "$ref" : "SystemUser"
         },
@@ -133,7 +133,7 @@
           "$ref" : "SystemUser"
         }
       },
-      "SystemUserEndpoint.insertSystemUser" : {
+      "org.gonevertical.pm.directory.server.rest.SystemUserEndpoint.insertSystemUser" : {
         "request" : {
           "$ref" : "SystemUser"
         },
@@ -141,7 +141,7 @@
           "$ref" : "SystemUser"
         }
       },
-      "SystemUserEndpoint.getSystemUser" : {
+      "org.gonevertical.pm.directory.server.rest.SystemUserEndpoint.getSystemUser" : {
         "response" : {
           "$ref" : "SystemUser"
         }
