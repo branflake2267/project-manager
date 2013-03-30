@@ -1,8 +1,10 @@
 package org.gonevertical.pm.directory.client.application.admin;
 
 import org.gonevertical.pm.directory.client.application.ApplicationPresenter;
+import org.gonevertical.pm.directory.client.application.admin.category.CategoryPresenter;
 import org.gonevertical.pm.directory.client.place.NameTokens;
 import org.gonevertical.pm.directory.client.security.LoggedInGatekeeper;
+import org.gonevertical.pm.directory.client.security.LoggedInUser;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -14,19 +16,35 @@ import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
 public class AdminPresenter extends Presenter<AdminPresenter.MyView, AdminPresenter.MyProxy> {
-  
-    public interface MyView extends View {
-    }
 
-    @ProxyStandard
-    @NameToken(NameTokens.admin)
-    @UseGatekeeper(LoggedInGatekeeper.class)
-    public interface MyProxy extends ProxyPlace<AdminPresenter> {
-    }
+  public interface MyView extends View {
+  }
 
-    @Inject
-    public AdminPresenter(final EventBus eventBus, final MyView view, final MyProxy proxy) {
-        super(eventBus, view, proxy, ApplicationPresenter.TYPE_SetMainContent);
-    }    
+  public static final Object TYPE_CategoryPresenter = new Object();
+
+  private final LoggedInUser loggedInuser;
+  private final CategoryPresenter categoryPresenter;
+
+  @ProxyStandard
+  @NameToken(NameTokens.admin)
+  @UseGatekeeper(LoggedInGatekeeper.class)
+  public interface MyProxy extends ProxyPlace<AdminPresenter> {
+  }
+
+  @Inject
+  public AdminPresenter(EventBus eventBus, MyView view, MyProxy proxy, LoggedInUser loggedInuser,
+      CategoryPresenter categoryPresenter) {
+    super(eventBus, view, proxy, ApplicationPresenter.TYPE_SetMainContent);
     
+    this.loggedInuser = loggedInuser;
+    this.categoryPresenter = categoryPresenter;
+  }
+
+  @Override
+  protected void onBind() {
+    super.onBind();
+    
+    setInSlot(TYPE_CategoryPresenter, categoryPresenter);
+  }
+  
 }

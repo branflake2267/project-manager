@@ -1,12 +1,12 @@
 {
   "extends" : "thirdParty.api",
   "abstract" : false,
-  "root" : "https://1.project-manager-directory.appspot.com/_ah/api",
+  "root" : "https://project-manager-directory.appspot.com/_ah/api",
   "name" : "categoryendpoint",
   "version" : "v1",
   "defaultVersion" : false,
   "adapter" : {
-    "bns" : "https://1.project-manager-directory.appspot.com/_ah/spi",
+    "bns" : "https://project-manager-directory.appspot.com/_ah/spi",
     "deadline" : 10.0,
     "type" : "lily"
   },
@@ -74,26 +74,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "categoryendpoint.removeCategory" : {
-      "path" : "category/{id}",
-      "httpMethod" : "DELETE",
-      "scopes" : [ ],
-      "audiences" : [ ],
-      "clientIds" : [ ],
-      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.removeCategory",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "categoryendpoint.listCategory" : {
       "path" : "category",
       "httpMethod" : "GET",
@@ -110,6 +90,26 @@
           "limit" : {
             "type" : "int32",
             "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "categoryendpoint.removeCategory" : {
+      "path" : "category/{id}",
+      "httpMethod" : "DELETE",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.removeCategory",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
           }
         },
         "body" : "empty"
@@ -171,14 +171,14 @@
           "$ref" : "Category"
         }
       },
-      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.removeCategory" : {
-        "response" : {
-          "$ref" : "Category"
-        }
-      },
       "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.listCategory" : {
         "response" : {
           "$ref" : "CollectionResponse_Category"
+        }
+      },
+      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.removeCategory" : {
+        "response" : {
+          "$ref" : "Category"
         }
       }
     }

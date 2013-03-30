@@ -1,13 +1,13 @@
 {
   "extends" : "thirdParty.api",
   "abstract" : false,
-  "root" : "https://1.project-manager-directory.appspot.com/_ah/api",
+  "root" : "https://project-manager-directory.appspot.com/_ah/api",
   "name" : "archetypeendpoint",
   "version" : "v1",
   "description" : "This entity represents a Archetype.",
   "defaultVersion" : false,
   "adapter" : {
-    "bns" : "https://1.project-manager-directory.appspot.com/_ah/spi",
+    "bns" : "https://project-manager-directory.appspot.com/_ah/spi",
     "deadline" : 10.0,
     "type" : "lily"
   },

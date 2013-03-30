@@ -11,13 +11,21 @@ import com.google.appengine.api.datastore.KeyFactory;
 @PersistenceCapable(detachable = "true")
 public class Category {
 
+  private Key parent;
+
   @PrimaryKey
   @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
   private Key key;
 
   private String name;
 
+  public Category() {
+  }
+  
   public String getKey() {
+    if (key == null) {
+      return null;
+    }
     return KeyFactory.keyToString(key);
   }
 
@@ -26,6 +34,20 @@ public class Category {
       return;
     }
     this.key = KeyFactory.stringToKey(key);
+  }
+
+  public void setParent(String parent) {
+    if (parent == null) {
+      return;
+    }
+    this.parent = KeyFactory.stringToKey(parent);
+  }
+
+  public String getParent() {
+    if (parent == null) {
+      return null;
+    }
+    return KeyFactory.keyToString(parent);
   }
 
   public String getName() {

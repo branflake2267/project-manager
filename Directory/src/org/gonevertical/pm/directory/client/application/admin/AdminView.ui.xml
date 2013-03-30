@@ -1,8 +1,11 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
-    <g:HTMLPanel>
-        Application Admins Only:<br/>
-        
-        <g:FlowPanel ui:field="urls"/>
-    </g:HTMLPanel>
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<g:HTMLPanel>
+		Application Admins Only:
+		<br />
+
+		<g:FlowPanel ui:field="urls" />
+
+		<g:SimplePanel ui:field="categories" />
+	</g:HTMLPanel>
 </ui:UiBinder>

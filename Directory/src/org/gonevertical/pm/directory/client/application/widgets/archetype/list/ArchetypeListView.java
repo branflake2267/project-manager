@@ -3,23 +3,17 @@ package org.gonevertical.pm.directory.client.application.widgets.archetype.list;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.gonevertical.pm.directory.client.events.archetypes.ArchetypeObserver;
 import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.sencha.gxt.data.client.loader.RpcProxy;
 import com.sencha.gxt.data.shared.ListStore;
-import com.sencha.gxt.data.shared.ModelKeyProvider;
-import com.sencha.gxt.data.shared.loader.LoadResultListStoreBinding;
 import com.sencha.gxt.data.shared.loader.PagingLoadConfig;
 import com.sencha.gxt.data.shared.loader.PagingLoadResult;
 import com.sencha.gxt.data.shared.loader.PagingLoader;
@@ -43,59 +37,29 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
   @UiField
   FlowPanel tableContanier;
 
-  private final ArchetypeColumnProperties columnProperties;
+  private final ArchetypeProperties columnProperties;
   
-  private boolean intialized = false;
   private Grid<ArchetypeJso> grid;
 
   @Inject
-  public ArchetypeListView(final Binder binder, ArchetypeColumnProperties columnProperties) {
+  public ArchetypeListView(final Binder binder, ArchetypeProperties columnProperties) {
     this.columnProperties = columnProperties;
 
     initWidget(binder.createAndBindUi(this));
   }
 
   @Override
-  public void init() {
-    if (intialized) {
-      return;
-    }
-    intialized = true;
-
-    initTable();
+  public void init(ListStore<ArchetypeJso> listStore, PagingLoader<PagingLoadConfig, 
+      PagingLoadResult<ArchetypeJso>> pagingLoader) {
+    initGrid(listStore, pagingLoader);
   }
 
-  /**
-   * TODO extract to methods
-   */
-  private void initTable() {
-    // Data Provider
-    RpcProxy<PagingLoadConfig, PagingLoadResult<ArchetypeJso>> proxy = new RpcProxy<PagingLoadConfig, PagingLoadResult<ArchetypeJso>>() {
-      @Override
-      public void load(PagingLoadConfig loadConfig, AsyncCallback<PagingLoadResult<ArchetypeJso>> callback) {
-        getUiHandlers().fetchArchetypes(loadConfig.getOffset(), loadConfig.getLimit(), callback);
-      }
-    };
-
-    // List Store
-    ListStore<ArchetypeJso> store = new ListStore<ArchetypeJso>(new ModelKeyProvider<ArchetypeJso>() {
-      @Override
-      public String getKey(ArchetypeJso item) {
-        return item.getKey();
-      }
-    });
-
-    // Paging Loader
-    final PagingLoader<PagingLoadConfig, PagingLoadResult<ArchetypeJso>> loader = new PagingLoader<PagingLoadConfig, PagingLoadResult<ArchetypeJso>>(
-        proxy);
-    loader.setRemoteSort(true);
-    loader.addLoadHandler(new LoadResultListStoreBinding<PagingLoadConfig, ArchetypeJso, PagingLoadResult<ArchetypeJso>>(
-            store));
-
+  private void initGrid(ListStore<ArchetypeJso> listStore, 
+      PagingLoader<PagingLoadConfig, PagingLoadResult<ArchetypeJso>> pagingLoader) {
     // Toolbar
     final PagingToolBar toolBar = new PagingToolBar(PAGE_SIZE);
     toolBar.getElement().getStyle().setProperty("borderBottom", "none");
-    toolBar.bind(loader);
+    toolBar.bind(pagingLoader);
 
     // Name Column
     ColumnConfig<ArchetypeJso, String> nameColumn = new ColumnConfig<ArchetypeJso, String>(columnProperties.name(),
@@ -107,14 +71,14 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
     ColumnModel<ArchetypeJso> columnModel = new ColumnModel<ArchetypeJso>(columnConfigList);
     
     // Grid
-    grid = new Grid<ArchetypeJso>(store, columnModel) {
+    grid = new Grid<ArchetypeJso>(listStore, columnModel) {
       @Override
       protected void onAfterFirstAttach() {
         super.onAfterFirstAttach();
         Scheduler.get().scheduleDeferred(new ScheduledCommand() {
           @Override
           public void execute() {
-            loader.load();
+            getUiHandlers().load();
           }
         });
       }
@@ -131,7 +95,7 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
     });
     
     // Grid properties
-    grid.setLoader(loader);
+    grid.setLoader(pagingLoader);
     grid.getView().setForceFit(true);
     grid.setLoadMask(true);
     grid.setBorders(true);
