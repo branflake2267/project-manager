@@ -1,4 +1,4 @@
-package org.gonevertical.pm.directory.client.application.admin.category;
+package org.gonevertical.pm.directory.client.application.widgets.category.list;
 
 import org.gonevertical.pm.directory.client.rest.jso.CategoryJso;
 

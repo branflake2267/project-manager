@@ -58,4 +58,11 @@ public class Category {
     this.name = name;
   }
 
+  /**
+   * TODO
+   */
+  public boolean hasChildren() {
+    return true;
+  }
+  
 }

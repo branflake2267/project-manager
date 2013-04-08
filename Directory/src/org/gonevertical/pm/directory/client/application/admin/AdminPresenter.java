@@ -1,7 +1,7 @@
 package org.gonevertical.pm.directory.client.application.admin;
 
 import org.gonevertical.pm.directory.client.application.ApplicationPresenter;
-import org.gonevertical.pm.directory.client.application.admin.category.CategoryPresenter;
+import org.gonevertical.pm.directory.client.application.widgets.category.list.CategoryListPresenter;
 import org.gonevertical.pm.directory.client.place.NameTokens;
 import org.gonevertical.pm.directory.client.security.LoggedInGatekeeper;
 import org.gonevertical.pm.directory.client.security.LoggedInUser;
@@ -23,7 +23,7 @@ public class AdminPresenter extends Presenter<AdminPresenter.MyView, AdminPresen
   public static final Object TYPE_CategoryPresenter = new Object();
 
   private final LoggedInUser loggedInuser;
-  private final CategoryPresenter categoryPresenter;
+  private final CategoryListPresenter categoryListPresenter;
 
   @ProxyStandard
   @NameToken(NameTokens.admin)
@@ -33,18 +33,18 @@ public class AdminPresenter extends Presenter<AdminPresenter.MyView, AdminPresen
 
   @Inject
   public AdminPresenter(EventBus eventBus, MyView view, MyProxy proxy, LoggedInUser loggedInuser,
-      CategoryPresenter categoryPresenter) {
+      CategoryListPresenter categoryListPresenter) {
     super(eventBus, view, proxy, ApplicationPresenter.TYPE_SetMainContent);
     
     this.loggedInuser = loggedInuser;
-    this.categoryPresenter = categoryPresenter;
+    this.categoryListPresenter = categoryListPresenter;
   }
 
   @Override
   protected void onBind() {
     super.onBind();
     
-    setInSlot(TYPE_CategoryPresenter, categoryPresenter);
+    setInSlot(TYPE_CategoryPresenter, categoryListPresenter);
   }
   
 }

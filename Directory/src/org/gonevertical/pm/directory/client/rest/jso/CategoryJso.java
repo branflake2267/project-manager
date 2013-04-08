@@ -27,4 +27,8 @@ public class CategoryJso extends JavaScriptObject {
     this.name = name;
   }-*/;
 
+  public native Boolean hasChildren() /*-{
+    return this.hasChildren;
+  }-*/;
+
 }
