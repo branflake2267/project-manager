@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry including="**/*.java" kind="src" output="war/WEB-INF/classes" path="src"/>
+	<classpathentry kind="src" output="war/WEB-INF/classes" path="src"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gxt-3.0.1.jar"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gin-2.0.0.jar"/>

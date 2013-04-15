@@ -47,6 +47,7 @@ public class ArchetypeListPresenter extends PresenterWidget<ArchetypeListPresent
 
     this.archetypeObserver = archetypeObserver;
     this.archetypeJsoDao = archetypeJsoDao;
+    initialized = false;
 
     getView().setUiHandlers(this);
   }
@@ -62,13 +63,13 @@ public class ArchetypeListPresenter extends PresenterWidget<ArchetypeListPresent
   protected void onReveal() {
     super.onReveal();
 
-    if (initialized) {
+    if (!initialized) {
       initialized = true;
 
       ListStore<ArchetypeJso> listStore = createListStore();
       pagingLoader = createPagingLoader(listStore);
-
       getView().init(listStore, pagingLoader);
+      
     } else if (pagingLoader != null) {
       pagingLoader.load();
     }
