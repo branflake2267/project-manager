@@ -13,6 +13,7 @@
     <!-- GXT -->
     <inherits name='com.sencha.gxt.ui.GXT'/>
     <stylesheet src="reset.css" /> 
+    <inherits name='com.sencha.gxt.theme.gray.Gray'/>
     
     <inherits name='com.gwtplatform.mvp.MvpWithEntryPoint' />
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" output="war/WEB-INF/classes" path="src"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/gxt-3.0.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gxt-3.0.1.jar" sourcepath="/Users/branflake2267/.m2/repository/com/sencha/gxt/gxt/3.0.1/gxt-3.0.1-sources.jar"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gin-2.0.0.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/guice-3.0.jar"/>
