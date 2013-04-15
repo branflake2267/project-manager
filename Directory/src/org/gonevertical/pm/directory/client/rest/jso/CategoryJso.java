@@ -7,27 +7,27 @@ public class CategoryJso extends JavaScriptObject {
   protected CategoryJso() {
   }
   
-  public native void setParent(String parent) /*-{
+  public final native void setParent(String parent) /*-{
     this.parent = parent;
   }-*/;
   
-  public native String getParent() /*-{
+  public final native String getParent() /*-{
     return this.parent;
   }-*/;
   
-  public native void setKey(String key) /*-{
+  public final native void setKey(String key) /*-{
     this.key = key;
   }-*/;
 
-  public native String getKey() /*-{
+  public final native String getKey() /*-{
     return this.key;
   }-*/;
   
-  public native void setName(String name) /*-{
+  public final native void setName(String name) /*-{
     this.name = name;
   }-*/;
 
-  public native Boolean hasChildren() /*-{
+  public final native Boolean hasChildren() /*-{
     return this.hasChildren;
   }-*/;
 
