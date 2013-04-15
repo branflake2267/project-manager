@@ -1,0 +1,296 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://project-manager-directory.appspot.com/_ah/api",
+  "name" : "archetypeendpoint",
+  "version" : "v1",
+  "description" : "This entity represents a Archetype.",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://project-manager-directory.appspot.com/_ah/spi",
+    "deadline" : 10.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "archetypeendpoint.archetypeEndpoint.updateArchetype" : {
+      "path" : "archetype",
+      "httpMethod" : "PUT",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.updateArchetype",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "archetypeendpoint.archetypeEndpoint.listArchetype" : {
+      "path" : "archetype",
+      "httpMethod" : "GET",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.listArchetype",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "offset" : {
+            "type" : "int32",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "archetypeendpoint.archetype.search" : {
+      "path" : "archetype/search/{queryString}",
+      "httpMethod" : "GET",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.search",
+      "request" : {
+        "parameters" : {
+          "queryString" : {
+            "type" : "string",
+            "required" : true
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "archetypeendpoint.archetypeEndpoint.insertArchetype" : {
+      "path" : "archetype",
+      "httpMethod" : "POST",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.insertArchetype",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "archetypeendpoint.archetypeEndpoint.getArchetype" : {
+      "path" : "archetype/{key}",
+      "httpMethod" : "GET",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.getArchetype",
+      "request" : {
+        "parameters" : {
+          "key" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "archetypeendpoint.archetypeEndpoint.removeArchetype" : {
+      "path" : "archetype/{key}",
+      "httpMethod" : "DELETE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.removeArchetype",
+      "request" : {
+        "parameters" : {
+          "key" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Archetype" : {
+        "id" : "Archetype",
+        "type" : "object",
+        "properties" : {
+          "key" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "categories" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Category"
+            }
+          },
+          "repository" : {
+            "type" : "string"
+          },
+          "groupId" : {
+            "type" : "string"
+          },
+          "artifactId" : {
+            "type" : "string"
+          },
+          "version" : {
+            "type" : "string"
+          },
+          "dateCreated" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "systemUserKey" : {
+            "type" : "string"
+          },
+          "blobUrl" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Category" : {
+        "id" : "Category",
+        "type" : "object",
+        "properties" : {
+          "parent" : {
+            "type" : "string"
+          },
+          "key" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "User" : {
+        "id" : "User",
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "authDomain" : {
+            "type" : "string"
+          },
+          "userId" : {
+            "type" : "string"
+          },
+          "federatedIdentity" : {
+            "type" : "string"
+          },
+          "nickname" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CollectionResponseExtentsion_Archetype" : {
+        "id" : "CollectionResponseExtentsion_Archetype",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Archetype"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          },
+          "total" : {
+            "type" : "integer"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.updateArchetype" : {
+        "request" : {
+          "$ref" : "Archetype"
+        },
+        "response" : {
+          "$ref" : "Archetype"
+        }
+      },
+      "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.listArchetype" : {
+        "response" : {
+          "$ref" : "CollectionResponseExtentsion_Archetype"
+        }
+      },
+      "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.search" : {
+        "response" : {
+          "$ref" : "CollectionResponseExtentsion_Archetype"
+        }
+      },
+      "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.insertArchetype" : {
+        "request" : {
+          "$ref" : "Archetype"
+        },
+        "response" : {
+          "$ref" : "Archetype"
+        }
+      },
+      "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.getArchetype" : {
+        "response" : {
+          "$ref" : "Archetype"
+        }
+      },
+      "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.removeArchetype" : {
+        "response" : {
+          "$ref" : "Archetype"
+        }
+      }
+    }
+  }
+}

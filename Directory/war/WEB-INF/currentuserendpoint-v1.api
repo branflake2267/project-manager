@@ -1,0 +1,125 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://project-manager-directory.appspot.com/_ah/api",
+  "name" : "currentuserendpoint",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://project-manager-directory.appspot.com/_ah/spi",
+    "deadline" : 10.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "currentuserendpoint.currentUserEndpoint.getCurrentUser" : {
+      "path" : "currentuser",
+      "httpMethod" : "GET",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CurrentUserEndpoint.getCurrentUser",
+      "request" : {
+        "parameters" : {
+          "siteUrl" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "User" : {
+        "id" : "User",
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "authDomain" : {
+            "type" : "string"
+          },
+          "userId" : {
+            "type" : "string"
+          },
+          "federatedIdentity" : {
+            "type" : "string"
+          },
+          "nickname" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CurrentUser" : {
+        "id" : "CurrentUser",
+        "type" : "object",
+        "properties" : {
+          "isLoggedIn" : {
+            "type" : "boolean"
+          },
+          "logoutUrl" : {
+            "type" : "string"
+          },
+          "loginUrl" : {
+            "type" : "string"
+          },
+          "nickname" : {
+            "type" : "string"
+          },
+          "systemUser" : {
+            "$ref" : "SystemUser"
+          },
+          "isAdmin" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "SystemUser" : {
+        "id" : "SystemUser",
+        "type" : "object",
+        "properties" : {
+          "key" : {
+            "type" : "string"
+          },
+          "userId" : {
+            "type" : "string"
+          },
+          "isAdmin" : {
+            "type" : "boolean"
+          },
+          "nameFirst" : {
+            "type" : "string"
+          },
+          "nameLast" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "org.gonevertical.pm.directory.server.rest.CurrentUserEndpoint.getCurrentUser" : {
+        "response" : {
+          "$ref" : "CurrentUser"
+        }
+      }
+    }
+  }
+}

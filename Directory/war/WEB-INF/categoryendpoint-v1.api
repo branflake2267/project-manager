@@ -1,0 +1,243 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://project-manager-directory.appspot.com/_ah/api",
+  "name" : "categoryendpoint",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://project-manager-directory.appspot.com/_ah/spi",
+    "deadline" : 10.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "categoryendpoint.categoryEndpoint.updateCategory" : {
+      "path" : "category",
+      "httpMethod" : "PUT",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.updateCategory",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "categoryendpoint.categoryEndpoint.getCategory" : {
+      "path" : "category/{id}",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.getCategory",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "categoryendpoint.categoryEndpoint.insertCategory" : {
+      "path" : "category",
+      "httpMethod" : "POST",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.insertCategory",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "categoryendpoint.categoryEndpoint.removeCategory" : {
+      "path" : "category/{id}",
+      "httpMethod" : "DELETE",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.removeCategory",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "categoryendpoint.categoryEndpoint.listCategory" : {
+      "path" : "category",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.listCategory",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "categoryendpoint.category.children" : {
+      "path" : "category/children",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.findChildren",
+      "request" : {
+        "parameters" : {
+          "parentKey" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Category" : {
+        "id" : "Category",
+        "type" : "object",
+        "properties" : {
+          "parent" : {
+            "type" : "string"
+          },
+          "key" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "User" : {
+        "id" : "User",
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "authDomain" : {
+            "type" : "string"
+          },
+          "userId" : {
+            "type" : "string"
+          },
+          "federatedIdentity" : {
+            "type" : "string"
+          },
+          "nickname" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CollectionResponse_Category" : {
+        "id" : "CollectionResponse_Category",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Category"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CollectionResponseExtentsion_Category" : {
+        "id" : "CollectionResponseExtentsion_Category",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Category"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          },
+          "total" : {
+            "type" : "integer"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.updateCategory" : {
+        "request" : {
+          "$ref" : "Category"
+        },
+        "response" : {
+          "$ref" : "Category"
+        }
+      },
+      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.getCategory" : {
+        "response" : {
+          "$ref" : "Category"
+        }
+      },
+      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.insertCategory" : {
+        "request" : {
+          "$ref" : "Category"
+        },
+        "response" : {
+          "$ref" : "Category"
+        }
+      },
+      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.removeCategory" : {
+        "response" : {
+          "$ref" : "Category"
+        }
+      },
+      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.listCategory" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Category"
+        }
+      },
+      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.findChildren" : {
+        "response" : {
+          "$ref" : "CollectionResponseExtentsion_Category"
+        }
+      }
+    }
+  }
+}
