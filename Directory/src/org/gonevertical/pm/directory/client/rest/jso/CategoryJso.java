@@ -34,5 +34,9 @@ public class CategoryJso extends JavaScriptObject {
   public final native Boolean hasChildren() /*-{
     return this.hasChildren;
   }-*/;
+  
+  public final native void setChildren(Boolean hasChildren) /*-{
+    this.hasChildren = hasChildren;
+  }-*/;
 
 }

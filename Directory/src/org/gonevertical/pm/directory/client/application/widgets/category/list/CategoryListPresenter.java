@@ -1,5 +1,6 @@
 package org.gonevertical.pm.directory.client.application.widgets.category.list;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -75,10 +76,7 @@ public class CategoryListPresenter extends PresenterWidget<CategoryListPresenter
     final TreeLoader<CategoryJso> loader = new TreeLoader<CategoryJso>(rpcProxy) {
       @Override
       public boolean hasChildren(CategoryJso parent) {
-        if (parent.hasChildren() != null && parent.hasChildren()) {
-          return true;
-        }
-        return false;
+        return parent.hasChildren();
       }
     };
     loader.addLoadHandler(new ChildTreeStoreBinding<CategoryJso>(treeStore));
@@ -95,7 +93,11 @@ public class CategoryListPresenter extends PresenterWidget<CategoryListPresenter
     categoryJsoDao.getList(parameters, new RestListHandler<CategoryJso>() {
       @Override
       public void onSuccess(RestList<CategoryJso> result) {
-        callback.onSuccess(result.getList());
+        List<CategoryJso> list = new ArrayList<CategoryJso>();
+        if (result.getList() != null) {
+          list = result.getList();
+        }
+        callback.onSuccess(list);
       }
 
       @Override

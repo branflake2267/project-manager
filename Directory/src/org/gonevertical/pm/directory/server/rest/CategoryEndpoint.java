@@ -37,26 +37,30 @@ public class CategoryEndpoint {
   public CollectionResponse<Category> listCategory() {
     PersistenceManager mgr = null;
     Cursor cursor = null;
-    List<Category> execute = null;
+    List<Category> items = null;
 
     String cursorString = null;
     try {
       mgr = getPersistenceManager();
       Query query = mgr.newQuery(Category.class);
 
-      execute = (List<Category>) query.execute();
-      cursor = JDOCursorHelper.getCursor(execute);
+      items = (List<Category>) query.execute();
+      cursor = JDOCursorHelper.getCursor(items);
 
       if (cursor != null) {
         cursorString = cursor.toWebSafeString();
       }
 
-      for (Category obj : execute);
+      for (Category obj : items);
     } finally {
       mgr.close();
     }
+    
+    if (items == null) {
+      items = new ArrayList<Category>();
+    }
 
-    return CollectionResponse.<Category> builder().setItems(execute).setNextPageToken(cursorString).build();
+    return CollectionResponse.<Category> builder().setItems(items).setNextPageToken(cursorString).build();
   }
 
   public Category getCategory(@Named("id") Long id) {
@@ -96,6 +100,10 @@ public class CategoryEndpoint {
 
     List<Category> items = JdoUtils.findList(Category.class, simpleFilter, 0, 1000);
 
+    if (items == null) {
+      items = new ArrayList<Category>();
+    }
+    
     return new CollectionResponseExtentsion<Category>(items, null, 0);
   }
 

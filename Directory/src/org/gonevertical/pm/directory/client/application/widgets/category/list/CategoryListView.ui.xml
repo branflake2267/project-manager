@@ -7,6 +7,7 @@
     </ui:style>
 
     <g:HTMLPanel styleName="{style.widget}">
-        <g:FlowPanel ui:field="tableContanier"/>
+        <g:Button ui:field="add">Add</g:Button>
+        <g:FlowPanel ui:field="categories"/>
     </g:HTMLPanel>
 </ui:UiBinder>
