@@ -1,6 +1,7 @@
 package org.gonevertical.pm.directory.client.application.widgets.category.list;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,6 +21,9 @@ import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.sencha.gxt.data.client.loader.RpcProxy;
+import com.sencha.gxt.data.shared.Store.Change;
+import com.sencha.gxt.data.shared.Store.Record;
+import com.sencha.gxt.data.shared.Store;
 import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.data.shared.loader.ChildTreeStoreBinding;
 import com.sencha.gxt.data.shared.loader.TreeLoader;
@@ -38,6 +42,7 @@ public class CategoryListPresenter extends PresenterWidget<CategoryListPresenter
   private final CategoryProperties categoryProperties;
   
   private boolean initialized;
+  private TreeStore<CategoryJso> treeStore;
 
   @Inject
   public CategoryListPresenter(EventBus eventBus, MyView view, LoginPresenter loginPresenter,
@@ -65,7 +70,7 @@ public class CategoryListPresenter extends PresenterWidget<CategoryListPresenter
   }
 
   private TreeStore<CategoryJso> createTreeStore() {
-    TreeStore<CategoryJso> treeStore = new TreeStore<CategoryJso>(categoryProperties.key());
+    treeStore = new TreeStore<CategoryJso>(categoryProperties.key());
     return treeStore;
   }
 
@@ -128,7 +133,35 @@ public class CategoryListPresenter extends PresenterWidget<CategoryListPresenter
       @Override
       public void onFailure(Throwable e) {
         e.printStackTrace();
-        // TODO
+      }
+    });
+  }
+
+  @Override
+  public void save() {
+    Collection<Store<CategoryJso>.Record> records = treeStore.getModifiedRecords();
+    
+    for (Store<CategoryJso>.Record record : records) {
+      Collection<Change<CategoryJso, ?>> changes = record.getChanges();
+      String value = (String) changes.iterator().next().getValue();
+      CategoryJso category = record.getModel();
+      category.setName(value);
+      save(category);
+      record.commit(true);
+    }
+    
+  }
+
+  private void save(CategoryJso category) {
+    categoryJsoDao.put(category, new RestHandler<CategoryJso>() {
+      @Override
+      public void onSuccess(CategoryJso object) {
+        treeStore.update(object);
+      }
+      
+      @Override
+      public void onFailure(Throwable e) {
+        e.printStackTrace();
       }
     });
   }

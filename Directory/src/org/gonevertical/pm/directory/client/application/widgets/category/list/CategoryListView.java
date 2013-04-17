@@ -37,6 +37,8 @@ public class CategoryListView extends ViewWithUiHandlers<CategoryListUiHandlers>
   @UiField
   TextButton add;
   @UiField
+  TextButton save;
+  @UiField
   FlowPanel categories;
   
   private TreeStore<CategoryJso> treeStore;
@@ -50,6 +52,13 @@ public class CategoryListView extends ViewWithUiHandlers<CategoryListUiHandlers>
       @Override
       public void onSelect(SelectEvent event) {
         getUiHandlers().createNew();
+      }
+    });
+    
+    save.addSelectHandler(new SelectHandler() {
+      @Override
+      public void onSelect(SelectEvent event) {
+        getUiHandlers().save();
       }
     });
   }
@@ -92,16 +101,11 @@ public class CategoryListView extends ViewWithUiHandlers<CategoryListUiHandlers>
     editing.addCompleteEditHandler(new CompleteEditHandler<CategoryJso>() {
       @Override
       public void onCompleteEdit(CompleteEditEvent<CategoryJso> event) {
-        updateModifiedRecords();
+        getUiHandlers().save();
       }
     });
     
     categories.add(framedPanel);
-  }
-
-  private void updateModifiedRecords() {
-    Collection<Store<CategoryJso>.Record> records = treeStore.getModifiedRecords();
-    System.out.println("test");
   }
 
   @Override

@@ -5,5 +5,7 @@ import com.gwtplatform.mvp.client.UiHandlers;
 public interface CategoryListUiHandlers extends UiHandlers {
 
   void createNew();
+
+  void save();
   
 }

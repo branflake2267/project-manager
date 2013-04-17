@@ -13,6 +13,7 @@
 
     <g:HTMLPanel styleName="{style.widget}">
         <button:TextButton ui:field="add" text="Add" />
+        <button:TextButton ui:field="save" text="Save" />
         <g:FlowPanel ui:field="categories"/>
     </g:HTMLPanel>
 </ui:UiBinder>
