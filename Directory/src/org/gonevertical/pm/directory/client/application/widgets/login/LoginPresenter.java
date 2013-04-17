@@ -51,6 +51,12 @@ public class LoginPresenter extends PresenterWidget<LoginPresenter.MyView> imple
   protected void onBind() {
     super.onBind();
 
+  }
+  
+  @Override
+  protected void onReveal() {
+    super.onReveal();
+    
     initAccess_Token();
 
     fetchCurrentUser();
@@ -118,8 +124,10 @@ public class LoginPresenter extends PresenterWidget<LoginPresenter.MyView> imple
   private void initAccess_Token() {
     QueryStringData qsd = QueryStringUtils.getQueryStringData();
     String access_token = qsd.getParameter_String("access_token");
-    System.out.println("access_token=" + access_token);
-    oauth.setAccessToken(access_token);
+    if (access_token != null && access_token.length() > 0) {
+      System.out.println("access_token=" + access_token);
+      oauth.setAccessToken(access_token);
+    }
   }
 
 }

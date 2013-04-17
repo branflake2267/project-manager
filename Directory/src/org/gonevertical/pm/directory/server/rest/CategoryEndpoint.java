@@ -1,6 +1,7 @@
 package org.gonevertical.pm.directory.server.rest;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -59,6 +60,11 @@ public class CategoryEndpoint {
     if (items == null) {
       items = new ArrayList<Category>();
     }
+    
+    Iterator<Category> iterator = items.iterator();
+    while(iterator.hasNext()) {
+      iterator.next().setHasChildren(true);
+    }
 
     return CollectionResponse.<Category> builder().setItems(items).setNextPageToken(cursorString).build();
   }
@@ -73,11 +79,15 @@ public class CategoryEndpoint {
   }
 
   public Category updateCategory(Category category, com.google.appengine.api.users.User guser) throws Exception {
-    if (guser == null) {
-      throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
-    }
+//    if (guser == null) {
+//      throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
+//    }
 
     category = JdoUtils.persist(category);
+    
+    // TODO add children
+    category.setHasChildren(true);
+    
     return category;
   }
 
@@ -88,6 +98,7 @@ public class CategoryEndpoint {
 
     Category category = getCategory(id);
     JdoUtils.remove(category);
+    
     return category;
   }
 
@@ -102,6 +113,11 @@ public class CategoryEndpoint {
 
     if (items == null) {
       items = new ArrayList<Category>();
+    }
+    
+    Iterator<Category> iterator = items.iterator();
+    while(iterator.hasNext()) {
+      iterator.next().setHasChildren(true);
     }
     
     return new CollectionResponseExtentsion<Category>(items, null, 0);

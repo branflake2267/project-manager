@@ -4,6 +4,7 @@ import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import javax.persistence.Transient;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
@@ -18,6 +19,9 @@ public class Category {
   private Key key;
 
   private String name;
+  
+  @Transient
+  private boolean hasChildren;
 
   public Category() {
   }
@@ -58,11 +62,12 @@ public class Category {
     this.name = name;
   }
 
-  /**
-   * TODO
-   */
   public boolean hasChildren() {
-    return true;
+    return hasChildren;
+  }
+
+  public void setHasChildren(boolean hasChildren) {
+    this.hasChildren = hasChildren;
   }
   
 }

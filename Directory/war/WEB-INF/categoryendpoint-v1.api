@@ -74,20 +74,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "categoryendpoint.categoryEndpoint.listCategory" : {
-      "path" : "category",
-      "httpMethod" : "GET",
-      "scopes" : [ ],
-      "audiences" : [ ],
-      "clientIds" : [ ],
-      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.listCategory",
-      "request" : {
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "categoryendpoint.categoryEndpoint.removeCategory" : {
       "path" : "category/{id}",
       "httpMethod" : "DELETE",
@@ -102,6 +88,20 @@
             "required" : true
           }
         },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "categoryendpoint.categoryEndpoint.listCategory" : {
+      "path" : "category",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.listCategory",
+      "request" : {
         "body" : "empty"
       },
       "response" : {
@@ -143,6 +143,9 @@
           },
           "name" : {
             "type" : "string"
+          },
+          "hasChildren" : {
+            "type" : "boolean"
           }
         }
       },
@@ -223,14 +226,14 @@
           "$ref" : "Category"
         }
       },
-      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.listCategory" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Category"
-        }
-      },
       "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.removeCategory" : {
         "response" : {
           "$ref" : "Category"
+        }
+      },
+      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.listCategory" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Category"
         }
       },
       "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.findChildren" : {

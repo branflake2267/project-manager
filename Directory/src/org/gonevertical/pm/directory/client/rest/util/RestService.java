@@ -53,7 +53,7 @@ public abstract class RestService<T extends JavaScriptObject> {
           T jso = (T) JSONParser.parseLenient(json).isObject().getJavaScriptObject().cast();
           handler.onSuccess(jso);
         } else {
-          handler.onFailure(new Exception("Exception: url=" + url + " getStatusText=" + response.getStatusText()));
+          handler.onFailure(new Exception("Exception: url=" + url + " getStatusText=" + response.getStatusText() + " text=" + response.getText()));
         }
       }
 
@@ -103,8 +103,7 @@ public abstract class RestService<T extends JavaScriptObject> {
 
           JsArray<T> list = null;
           try {
-            list = (JsArray<T>) JSONParser.parseLenient(json).isObject().get("items").isArray().getJavaScriptObject()
-                .cast();
+            list = (JsArray<T>) JSONParser.parseLenient(json).isObject().get("items").isArray().getJavaScriptObject().cast();
           } catch (Exception e) {
           }
 

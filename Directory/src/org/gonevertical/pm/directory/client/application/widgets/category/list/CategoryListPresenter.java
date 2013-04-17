@@ -8,9 +8,11 @@ import org.gonevertical.pm.directory.client.application.widgets.login.LoginPrese
 import org.gonevertical.pm.directory.client.rest.ArchetypeJsoDao;
 import org.gonevertical.pm.directory.client.rest.CategoryJsoDao;
 import org.gonevertical.pm.directory.client.rest.jso.CategoryJso;
+import org.gonevertical.pm.directory.client.rest.util.RestHandler;
 import org.gonevertical.pm.directory.client.rest.util.RestList;
 import org.gonevertical.pm.directory.client.rest.util.RestListHandler;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -28,11 +30,13 @@ public class CategoryListPresenter extends PresenterWidget<CategoryListPresenter
   public interface MyView extends View, HasUiHandlers<CategoryListUiHandlers> {
     void initTreeGrid(TreeStore<CategoryJso> treeStore, TreeLoader<CategoryJso> loader,
         CategoryProperties categoryProperties);
+
+    void add(CategoryJso categoryJso);
   }
 
   private final CategoryJsoDao categoryJsoDao;
   private final CategoryProperties categoryProperties;
-
+  
   private boolean initialized;
 
   @Inject
@@ -76,7 +80,11 @@ public class CategoryListPresenter extends PresenterWidget<CategoryListPresenter
     final TreeLoader<CategoryJso> loader = new TreeLoader<CategoryJso>(rpcProxy) {
       @Override
       public boolean hasChildren(CategoryJso parent) {
-        return parent.hasChildren();
+        boolean hasChildren = false;
+        if (parent.hasChildren() != null) {
+          hasChildren = true;
+        }
+        return hasChildren;
       }
     };
     loader.addLoadHandler(new ChildTreeStoreBinding<CategoryJso>(treeStore));
@@ -103,6 +111,24 @@ public class CategoryListPresenter extends PresenterWidget<CategoryListPresenter
       @Override
       public void onFailure(Throwable e) {
         e.printStackTrace();
+      }
+    });
+  }
+
+  @Override
+  public void createNew() {
+    CategoryJso jso = JavaScriptObject.createObject().cast();
+    jso.setName("New Category");
+    categoryJsoDao.put(jso, new RestHandler<CategoryJso>() {
+      @Override
+      public void onSuccess(CategoryJso categoryJso) {
+        getView().add(categoryJso);
+      }
+      
+      @Override
+      public void onFailure(Throwable e) {
+        e.printStackTrace();
+        // TODO
       }
     });
   }
