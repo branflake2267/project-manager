@@ -6,11 +6,8 @@ import java.util.List;
 
 import org.gonevertical.pm.directory.client.rest.jso.CategoryJso;
 
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.inject.Inject;
@@ -19,9 +16,12 @@ import com.sencha.gxt.data.shared.Store;
 import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.data.shared.loader.TreeLoader;
 import com.sencha.gxt.widget.core.client.FramedPanel;
+import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.container.BoxLayoutContainer.BoxLayoutPack;
 import com.sencha.gxt.widget.core.client.event.CompleteEditEvent;
 import com.sencha.gxt.widget.core.client.event.CompleteEditEvent.CompleteEditHandler;
+import com.sencha.gxt.widget.core.client.event.SelectEvent;
+import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.form.TextField;
 import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
 import com.sencha.gxt.widget.core.client.grid.ColumnModel;
@@ -35,7 +35,7 @@ public class CategoryListView extends ViewWithUiHandlers<CategoryListUiHandlers>
   }
 
   @UiField
-  Button add;
+  TextButton add;
   @UiField
   FlowPanel categories;
   
@@ -45,6 +45,13 @@ public class CategoryListView extends ViewWithUiHandlers<CategoryListUiHandlers>
   @Inject
   public CategoryListView(Binder binder) {
     initWidget(binder.createAndBindUi(this));
+    
+    add.addSelectHandler(new SelectHandler() {
+      @Override
+      public void onSelect(SelectEvent event) {
+        getUiHandlers().createNew();
+      }
+    });
   }
 
   @Override
@@ -90,11 +97,6 @@ public class CategoryListView extends ViewWithUiHandlers<CategoryListUiHandlers>
     });
     
     categories.add(framedPanel);
-  }
-
-  @UiHandler("add")
-  public void onAddClick(ClickEvent event) {
-    getUiHandlers().createNew();
   }
 
   private void updateModifiedRecords() {
