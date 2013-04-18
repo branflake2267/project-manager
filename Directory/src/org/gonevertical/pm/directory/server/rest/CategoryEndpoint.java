@@ -79,9 +79,9 @@ public class CategoryEndpoint {
   }
 
   public Category updateCategory(Category category, com.google.appengine.api.users.User guser) throws Exception {
-//    if (guser == null) {
-//      throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
-//    }
+    if (guser == null) {
+      throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
+    }
 
     category = JdoUtils.persist(category);
     

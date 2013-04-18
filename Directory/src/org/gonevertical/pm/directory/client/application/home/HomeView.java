@@ -2,6 +2,7 @@ package org.gonevertical.pm.directory.client.application.home;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -34,13 +35,6 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     add.setVisible(false);
     
     displayList();
-    
-    add.addSelectHandler(new SelectHandler() {
-      @Override
-      public void onSelect(SelectEvent event) {
-        getUiHandlers().addArchetype();
-      }
-    });
   }
 
   @Override
@@ -71,4 +65,9 @@ public class HomeView extends ViewWithUiHandlers<HomeUiHandlers> implements Home
     this.add.setVisible(visible);
   }
 
+  @UiHandler("add")
+  public void onSelectionEvent(SelectEvent event) {
+    getUiHandlers().addArchetype();
+  }
+  
 }

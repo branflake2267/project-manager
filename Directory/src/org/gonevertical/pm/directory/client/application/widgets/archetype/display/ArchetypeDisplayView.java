@@ -3,17 +3,17 @@ package org.gonevertical.pm.directory.client.application.widgets.archetype.displ
 import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
 import org.gonevertical.pm.directory.client.security.LoggedInUser;
 
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.sencha.gxt.widget.core.client.button.TextButton;
+import com.sencha.gxt.widget.core.client.event.SelectEvent;
 
 public class ArchetypeDisplayView extends ViewWithUiHandlers<ArchetypeDisplayUiHandlers> implements
     ArchetypeDisplayPresenter.MyView {
@@ -22,7 +22,7 @@ public class ArchetypeDisplayView extends ViewWithUiHandlers<ArchetypeDisplayUiH
   }
 
   @UiField
-  Button edit;
+  TextButton edit;
   @UiField
   InlineHTML name;
   @UiField
@@ -69,7 +69,7 @@ public class ArchetypeDisplayView extends ViewWithUiHandlers<ArchetypeDisplayUiH
   }
 
   @UiHandler("edit")
-  void onEditClick(ClickEvent event) {
+  void onEdit(SelectEvent event) {
     getUiHandlers().gotoEdit(archetypeJso);
   }
 

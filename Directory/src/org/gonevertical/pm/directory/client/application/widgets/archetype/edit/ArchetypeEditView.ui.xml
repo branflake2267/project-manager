@@ -1,5 +1,11 @@
-<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:g='urn:import:com.google.gwt.user.client.ui'
-    xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
+<ui:UiBinder 
+    xmlns:ui='urn:ui:com.google.gwt.uibinder' 
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'
+    xmlns:p1="urn:import:com.google.gwt.user.cellview.client"
+    xmlns:gxt='urn:import:com.sencha.gxt.widget.core.client' 
+    xmlns:util='urn:import:com.sencha.gxt.core.client.util'
+    xmlns:form='urn:import:com.sencha.gxt.widget.core.client.form' 
+    xmlns:button='urn:import:com.sencha.gxt.widget.core.client.button'>
     <ui:style>
         .widget {
             
@@ -13,6 +19,7 @@
             width: 100px;
             text-align: right;
             display: inline-block;
+            vertical-align: middle;
         }
         
         .textInput {
@@ -22,40 +29,40 @@
 
     <g:HTMLPanel styleName="{style.widget}">
 
-        <g:Button ui:field="goback">Back to the List</g:Button>
+        <button:TextButton ui:field="goback" text="Back to the List" />
 
-        <g:Button ui:field="save">Save</g:Button>
+        <button:TextButton ui:field="save" text="Save" />
 
         <div class="{style.inputDiv}">
             <div class="{style.textField}">Name:</div>
-            <g:TextBox ui:field="name" styleName="{style.textInput}" />
+            <form:TextField ui:field="name" addStyleNames="{style.textInput}" />
         </div>
 
         <div class="{style.inputDiv}">
             <div class="{style.textField}">Description:</div>
-            <g:TextBox ui:field="description" styleName="{style.textInput}" />
+            <form:TextField ui:field="description" addStyleNames="{style.textInput}" />
         </div>
 
         <br />
 
         <div class="{style.inputDiv}">
             <div class="{style.textField}">Repository:</div>
-            <g:TextBox ui:field="repository" styleName="{style.textInput}" />
+            <form:TextField ui:field="repository" addStyleNames="{style.textInput}" />
         </div>
 
         <div class="{style.inputDiv}">
             <div class="{style.textField}">GroupId:</div>
-            <g:TextBox ui:field="groupId" styleName="{style.textInput}" />
+            <form:TextField ui:field="groupId" addStyleNames="{style.textInput}" />
         </div>
 
         <div class="{style.inputDiv}">
             <div class="{style.textField}">ArtifactId:</div>
-            <g:TextBox ui:field="artifactId" styleName="{style.textInput}" />
+            <form:TextField ui:field="artifactId" addStyleNames="{style.textInput}" />
         </div>
 
         <div class="{style.inputDiv}">
             <div class="{style.textField}">Version:</div>
-            <g:TextBox ui:field="version" styleName="{style.textInput}" />
+            <form:TextField ui:field="version" addStyleNames="{style.textInput}" />
         </div>
 
     </g:HTMLPanel>
