@@ -6,7 +6,18 @@ public class ArchetypeJso extends JavaScriptObject {
 
   protected ArchetypeJso() {
   }
-
+  
+  public static ArchetypeJso newInstance() {
+    ArchetypeJso jso = JavaScriptObject.createObject().cast();
+    jso.setArtifactId("");
+    jso.setDescription("");
+    jso.setGroupId("");
+    jso.setName("");
+    jso.setRepository("");
+    jso.setVersion("");
+    return jso;
+  }
+  
   public final native void setKey(String key) /*-{
     this.key = key;
   }-*/;

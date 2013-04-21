@@ -1,35 +1,39 @@
 package org.gonevertical.pm.directory.client.application.widgets.header;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.safehtml.shared.SimpleHtmlSanitizer;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.sencha.gxt.widget.core.client.container.HtmlLayoutContainer;
+import com.sencha.gxt.widget.core.client.container.SimpleContainer;
 
 public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements HeaderPresenter.MyView {
   
-  public interface Binder extends UiBinder<HTMLPanel, HeaderView> {
+  public interface Binder extends UiBinder<SimpleContainer, HeaderView> {
   }
 
   @UiField
-  SimplePanel login;
-  @UiField
-  FlowPanel explorer;
+  SimpleContainer login;
+  @UiField(provided = true)
+  HtmlLayoutContainer explorer;
   @UiField
   HTMLPanel admin;
+  @UiField(provided = true)
+  HtmlLayoutContainer title;
 
   @Inject
   public HeaderView(final Binder binder) {
+    explorer = new HtmlLayoutContainer(SimpleHtmlSanitizer.sanitizeHtml(getExplorerLink()));
+    title = new HtmlLayoutContainer(SimpleHtmlSanitizer.sanitizeHtml("Curated Archetype Directory"));
+    
     initWidget(binder.createAndBindUi(this));
     
     admin.setVisible(false);
-    
-    displayExplorer();
   }
 
   @Override
@@ -44,9 +48,9 @@ public class HeaderView extends ViewWithUiHandlers<HeaderUiHandlers> implements 
     this.admin.setVisible(visible);
   }
 
-  private void displayExplorer() {
+  private String getExplorerLink() {
     String url = GWT.getHostPageBaseURL() + "/_ah/api/explorer";
     String html = "<a href=\"" + url + "\" target=\"_blank\">Rest Explorer</a>";
-    explorer.add(new HTML(html));
+    return html;
   }
 }

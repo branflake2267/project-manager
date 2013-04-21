@@ -1,23 +1,20 @@
 package org.gonevertical.pm.directory.client.application.widgets.category.list;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.gonevertical.pm.directory.client.rest.jso.CategoryJso;
 
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
-import com.sencha.gxt.data.shared.Store;
 import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.data.shared.loader.TreeLoader;
 import com.sencha.gxt.widget.core.client.FramedPanel;
 import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.container.BoxLayoutContainer.BoxLayoutPack;
+import com.sencha.gxt.widget.core.client.container.SimpleContainer;
 import com.sencha.gxt.widget.core.client.event.CompleteEditEvent;
 import com.sencha.gxt.widget.core.client.event.CompleteEditEvent.CompleteEditHandler;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
@@ -31,7 +28,7 @@ import com.sencha.gxt.widget.core.client.treegrid.TreeGrid;
 public class CategoryListView extends ViewWithUiHandlers<CategoryListUiHandlers> implements
     CategoryListPresenter.MyView {
 
-  public interface Binder extends UiBinder<HTMLPanel, CategoryListView> {
+  public interface Binder extends UiBinder<SimpleContainer, CategoryListView> {
   }
 
   @UiField
@@ -39,7 +36,7 @@ public class CategoryListView extends ViewWithUiHandlers<CategoryListUiHandlers>
   @UiField
   TextButton save;
   @UiField
-  FlowPanel categories;
+  SimpleContainer container;
   
   private TreeStore<CategoryJso> treeStore;
   private TreeGrid<CategoryJso> grid;
@@ -105,7 +102,7 @@ public class CategoryListView extends ViewWithUiHandlers<CategoryListUiHandlers>
       }
     });
     
-    categories.add(framedPanel);
+    container.add(framedPanel);
   }
 
   @Override

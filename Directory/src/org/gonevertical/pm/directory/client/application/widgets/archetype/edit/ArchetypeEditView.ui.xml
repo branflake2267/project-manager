@@ -1,69 +1,45 @@
-<ui:UiBinder 
-    xmlns:ui='urn:ui:com.google.gwt.uibinder' 
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' 
     xmlns:g='urn:import:com.google.gwt.user.client.ui'
-    xmlns:p1="urn:import:com.google.gwt.user.cellview.client"
-    xmlns:gxt='urn:import:com.sencha.gxt.widget.core.client' 
-    xmlns:util='urn:import:com.sencha.gxt.core.client.util'
-    xmlns:form='urn:import:com.sencha.gxt.widget.core.client.form' 
-    xmlns:button='urn:import:com.sencha.gxt.widget.core.client.button'>
+    xmlns:p1="urn:import:com.google.gwt.user.cellview.client" 
+    xmlns:gxt='urn:import:com.sencha.gxt.widget.core.client'
+    xmlns:util='urn:import:com.sencha.gxt.core.client.util' 
+    xmlns:form='urn:import:com.sencha.gxt.widget.core.client.form'
+    xmlns:button='urn:import:com.sencha.gxt.widget.core.client.button' 
+    xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container">
     <ui:style>
-        .widget {
-            
-        }
-        
-        .inputDiv {
-            margin: 10px;
-        }
-        
-        .textField {
-            width: 100px;
-            text-align: right;
-            display: inline-block;
-            vertical-align: middle;
-        }
-        
-        .textInput {
-            width: 300px;
-        }
+    	.space {
+			margin-left: 10px;
+		}
     </ui:style>
 
-    <g:HTMLPanel styleName="{style.widget}">
+    <!--VerticalLayoutData margins -->
+    <ui:with type="com.sencha.gxt.core.client.util.Margins" field="margins">
+        <ui:attributes top="0" right="0" bottom="0" left="0" />
+    </ui:with>
 
-        <button:TextButton ui:field="goback" text="Back to the List" />
+    <!-- VerticalLayoutData layoutData -->
+    <ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData"
+        field="layoutData">
+        <ui:attributes width="-1" height="-1" margins="{margins}" />
+    </ui:with>
+    
+    <container:SimpleContainer>
+    
+        <container:VerticalLayoutContainer>
+            <container:child layoutData="{layoutData}">
+                <g:HorizontalPanel>
+                    <g:cell>
+                        <button:TextButton ui:field="goback" text="Back to the List" />    
+                    </g:cell>
+                    <g:cell>
+                        <button:TextButton ui:field="save" text="Save" addStyleNames="{style.space}" />
+                    </g:cell>
+                </g:HorizontalPanel>
+            </container:child>
+            <container:child>
+                <container:VerticalLayoutContainer ui:field="vlc" />
+            </container:child>
+        </container:VerticalLayoutContainer>
 
-        <button:TextButton ui:field="save" text="Save" />
-
-        <div class="{style.inputDiv}">
-            <div class="{style.textField}">Name:</div>
-            <form:TextField ui:field="name" addStyleNames="{style.textInput}" />
-        </div>
-
-        <div class="{style.inputDiv}">
-            <div class="{style.textField}">Description:</div>
-            <form:TextField ui:field="description" addStyleNames="{style.textInput}" />
-        </div>
-
-        <br />
-
-        <div class="{style.inputDiv}">
-            <div class="{style.textField}">Repository:</div>
-            <form:TextField ui:field="repository" addStyleNames="{style.textInput}" />
-        </div>
-
-        <div class="{style.inputDiv}">
-            <div class="{style.textField}">GroupId:</div>
-            <form:TextField ui:field="groupId" addStyleNames="{style.textInput}" />
-        </div>
-
-        <div class="{style.inputDiv}">
-            <div class="{style.textField}">ArtifactId:</div>
-            <form:TextField ui:field="artifactId" addStyleNames="{style.textInput}" />
-        </div>
-
-        <div class="{style.inputDiv}">
-            <div class="{style.textField}">Version:</div>
-            <form:TextField ui:field="version" addStyleNames="{style.textInput}" />
-        </div>
-
-    </g:HTMLPanel>
+    </container:SimpleContainer>
 </ui:UiBinder>

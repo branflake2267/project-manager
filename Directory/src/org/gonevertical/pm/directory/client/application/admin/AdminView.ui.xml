@@ -1,11 +1,32 @@
-<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
-	<g:HTMLPanel>
-		Application Admins Only:
-		<br />
+<ui:UiBinder 
+    xmlns:ui='urn:ui:com.google.gwt.uibinder' 
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'
+    xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container">
 
-		<g:FlowPanel ui:field="urls" />
+    <!--VerticalLayoutData margins -->
+    <ui:with type="com.sencha.gxt.core.client.util.Margins" field="margins">
+        <ui:attributes top="0" right="0" bottom="10" left="0" />
+    </ui:with>
 
-		<g:SimplePanel ui:field="categories" />
-	</g:HTMLPanel>
+    <!-- VerticalLayoutData layoutData -->
+    <ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData"
+        field="layoutData">
+        <ui:attributes width="1" height="1" margins="{margins}" />
+    </ui:with>
+
+    <container:SimpleContainer>
+
+        <container:VerticalLayoutContainer>
+            <container:child layoutData="{layoutData}">
+                <g:HTML>Application Admins Only:</g:HTML>
+            </container:child>
+            <container:child layoutData="{layoutData}">
+                <g:FlowPanel ui:field="urls" />
+            </container:child>
+            <container:child layoutData="{layoutData}">
+                <g:SimplePanel ui:field="categories" />
+            </container:child>
+        </container:VerticalLayoutContainer>
+
+    </container:SimpleContainer>
 </ui:UiBinder>

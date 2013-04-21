@@ -9,8 +9,6 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
 import com.sencha.gxt.data.shared.ListStore;
@@ -18,6 +16,7 @@ import com.sencha.gxt.data.shared.loader.PagingLoadConfig;
 import com.sencha.gxt.data.shared.loader.PagingLoadResult;
 import com.sencha.gxt.data.shared.loader.PagingLoader;
 import com.sencha.gxt.widget.core.client.FramedPanel;
+import com.sencha.gxt.widget.core.client.container.SimpleContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
 import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
@@ -31,11 +30,11 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
     ArchetypeListPresenter.MyView {
   private static final int PAGE_SIZE = 15;
 
-  public interface Binder extends UiBinder<HTMLPanel, ArchetypeListView> {
+  public interface Binder extends UiBinder<SimpleContainer, ArchetypeListView> {
   }
 
   @UiField
-  FlowPanel tableContanier;
+  SimpleContainer container;
 
   private final ArchetypeProperties columnProperties;
   
@@ -114,7 +113,7 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
     vpLayoutCont.add(toolBar, new VerticalLayoutData(1, -1));
     framedPanel.setWidget(vpLayoutCont);
 
-    tableContanier.add(framedPanel);
+    container.add(framedPanel);
   }
 
   @Override
