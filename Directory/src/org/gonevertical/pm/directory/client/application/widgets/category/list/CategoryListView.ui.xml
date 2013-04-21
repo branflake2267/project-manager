@@ -1,0 +1,19 @@
+<ui:UiBinder 
+    xmlns:ui='urn:ui:com.google.gwt.uibinder' 
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'
+    xmlns:gxt='urn:import:com.sencha.gxt.widget.core.client' 
+    xmlns:util='urn:import:com.sencha.gxt.core.client.util'
+    xmlns:form='urn:import:com.sencha.gxt.widget.core.client.form' 
+    xmlns:button='urn:import:com.sencha.gxt.widget.core.client.button'>
+    <ui:style>
+        .widget {
+            
+        }
+    </ui:style>
+
+    <g:HTMLPanel styleName="{style.widget}">
+        <button:TextButton ui:field="add" text="Add" />
+        <button:TextButton ui:field="save" text="Save" />
+        <g:FlowPanel ui:field="categories"/>
+    </g:HTMLPanel>
+</ui:UiBinder>

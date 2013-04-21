@@ -1,37 +1,44 @@
-<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+<ui:UiBinder 
+    xmlns:ui='urn:ui:com.google.gwt.uibinder' 
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'
+    xmlns:gxt='urn:import:com.sencha.gxt.widget.core.client' 
+    xmlns:util='urn:import:com.sencha.gxt.core.client.util'
+    xmlns:form='urn:import:com.sencha.gxt.widget.core.client.form' 
+    xmlns:button='urn:import:com.sencha.gxt.widget.core.client.button'>
     <ui:style>
         .widget {
+        	
         }
         
         .menu {
-            margin-bottom: 10px;
+        	margin-bottom: 10px;
         }
         
         .list {
-             
+        	
         }
         
         .display {
-             margin-top: 10px
+        	margin-top: 10px
         }
     </ui:style>
-    
+
     <g:HTMLPanel styleName="{style.widget}">
-        
+
         <g:FlowPanel ui:field="displayPanel">
-        
+
             <g:HTMLPanel styleName="{style.menu}">
-                <g:Button ui:field="add">Add</g:Button>
+                <button:TextButton ui:field="add" text="Add" />
             </g:HTMLPanel>
- 			       
+
             <g:SimplePanel ui:field="archetypeList" styleName="{style.list}" />
-            
+
             <g:SimplePanel ui:field="archetypeDisplay" styleName="{style.display}" />
-            
+
         </g:FlowPanel>
-        
-        <g:SimplePanel ui:field="editPanel"/>
-        
+
+        <g:SimplePanel ui:field="editPanel" />
+
     </g:HTMLPanel>
-    
+
 </ui:UiBinder>

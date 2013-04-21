@@ -1,6 +1,7 @@
 package org.gonevertical.pm.directory.server.rest;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -33,31 +34,39 @@ public class CategoryEndpoint {
    * 
    * @return A CollectionResponse class containing the list of all entities persisted and a cursor to the next page.
    */
-  @SuppressWarnings({ "unchecked", "unused" })
+  @SuppressWarnings({"unchecked", "unused"})
   public CollectionResponse<Category> listCategory() {
     PersistenceManager mgr = null;
     Cursor cursor = null;
-    List<Category> execute = null;
+    List<Category> items = null;
 
     String cursorString = null;
     try {
       mgr = getPersistenceManager();
       Query query = mgr.newQuery(Category.class);
-      
-      execute = (List<Category>) query.execute();
-      cursor = JDOCursorHelper.getCursor(execute);
-      
+
+      items = (List<Category>) query.execute();
+      cursor = JDOCursorHelper.getCursor(items);
+
       if (cursor != null) {
         cursorString = cursor.toWebSafeString();
       }
 
-      for (Category obj : execute)
-        ;
+      for (Category obj : items);
     } finally {
       mgr.close();
     }
+    
+    if (items == null) {
+      items = new ArrayList<Category>();
+    }
+    
+    Iterator<Category> iterator = items.iterator();
+    while(iterator.hasNext()) {
+      iterator.next().setHasChildren(true);
+    }
 
-    return CollectionResponse.<Category> builder().setItems(execute).setNextPageToken(cursorString).build();
+    return CollectionResponse.<Category> builder().setItems(items).setNextPageToken(cursorString).build();
   }
 
   public Category getCategory(@Named("id") Long id) {
@@ -73,8 +82,12 @@ public class CategoryEndpoint {
     if (guser == null) {
       throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
     }
-    
+
     category = JdoUtils.persist(category);
+    
+    // TODO add children
+    category.setHasChildren(true);
+    
     return category;
   }
 
@@ -82,22 +95,31 @@ public class CategoryEndpoint {
     if (guser == null) {
       throw new UnauthorizedException(CustomErrors.MUST_LOG_IN.toString());
     }
-    
+
     Category category = getCategory(id);
     JdoUtils.remove(category);
+    
     return category;
   }
-  
-  @ApiMethod(httpMethod = "GET", name = "category.children", path = "category/children/{parentKey}")
-  public CollectionResponseExtentsion<Category> findChildren(
-      @Nullable @Named("parentKey") String parentKey) {
+
+  @ApiMethod(httpMethod = "GET", name = "category.children", path = "category/children")
+  public CollectionResponseExtentsion<Category> findChildren(@Nullable @Named("parentKey") String parentKey) {
     Key key = KeyFactory.stringToKey(parentKey);
-    
+
     ArrayList<SimpleFilter> simpleFilter = new ArrayList<SimpleFilter>();
     simpleFilter.add(new SimpleFilter("parentKey", FilterOperator.EQUAL, key));
-    
+
     List<Category> items = JdoUtils.findList(Category.class, simpleFilter, 0, 1000);
 
+    if (items == null) {
+      items = new ArrayList<Category>();
+    }
+    
+    Iterator<Category> iterator = items.iterator();
+    while(iterator.hasNext()) {
+      iterator.next().setHasChildren(true);
+    }
+    
     return new CollectionResponseExtentsion<Category>(items, null, 0);
   }
 

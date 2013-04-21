@@ -2,15 +2,15 @@ package org.gonevertical.pm.directory.client.application.widgets.archetype.edit;
 
 import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
 
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+import com.sencha.gxt.widget.core.client.button.TextButton;
+import com.sencha.gxt.widget.core.client.event.SelectEvent;
+import com.sencha.gxt.widget.core.client.form.TextField;
 
 public class ArchetypeEditView extends ViewWithUiHandlers<ArchetypeEditUiHandlers> implements
     ArchetypeEditPresenter.MyView {
@@ -19,21 +19,21 @@ public class ArchetypeEditView extends ViewWithUiHandlers<ArchetypeEditUiHandler
   }
   
   @UiField
-  Button goback;
+  TextButton goback;
   @UiField
-  Button save;
+  TextButton save;
   @UiField
-  TextBox name;
+  TextField name;
   @UiField
-  TextBox description;
+  TextField description;
   @UiField
-  TextBox repository;
+  TextField repository;
   @UiField
-  TextBox groupId;
+  TextField groupId;
   @UiField
-  TextBox artifactId;
+  TextField artifactId;
   @UiField
-  TextBox version;
+  TextField version;
   
   private ArchetypeJso archetypeJso;
 
@@ -43,12 +43,12 @@ public class ArchetypeEditView extends ViewWithUiHandlers<ArchetypeEditUiHandler
   }
 
   @UiHandler("goback")
-  void onGoBackClick(ClickEvent event) {
+  void onGoBack(SelectEvent event) {
     getUiHandlers().displayList();
   }
   
   @UiHandler("save")
-  void onSave(ClickEvent event) {
+  void onSave(SelectEvent event) {
     getUiHandlers().save(getArchetype());
   }
   

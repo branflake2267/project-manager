@@ -19,7 +19,7 @@
         <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
         <init-param>
             <param-name>services</param-name>
-            <param-value>org.gonevertical.pm.directory.server.rest.CurrentUserEndpoint,org.gonevertical.pm.directory.server.rest.SystemUserEndpoint,org.gonevertical.pm.directory.server.rest.CategoryEndpoint,org.gonevertical.pm.directory.server.rest.SessionEndpoint,org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint</param-value>
+            <param-value>org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint,org.gonevertical.pm.directory.server.rest.CategoryEndpoint,org.gonevertical.pm.directory.server.rest.CurrentUserEndpoint,org.gonevertical.pm.directory.server.rest.SystemUserEndpoint</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

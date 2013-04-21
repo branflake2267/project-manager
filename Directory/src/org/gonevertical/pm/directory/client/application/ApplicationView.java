@@ -15,7 +15,7 @@ public class ApplicationView extends ViewImpl implements ApplicationPresenter.My
   @UiField
   SimplePanel header;
   @UiField
-  SimplePanel main;
+  SimplePanel main; 
 
   @Inject
   public ApplicationView(final Binder uiBinder) {

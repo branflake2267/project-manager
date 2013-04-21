@@ -24,7 +24,7 @@
     "maxAge" : 0
   },
   "methods" : {
-    "categoryendpoint.updateCategory" : {
+    "categoryendpoint.categoryEndpoint.updateCategory" : {
       "path" : "category",
       "httpMethod" : "PUT",
       "scopes" : [ ],
@@ -39,7 +39,7 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "categoryendpoint.getCategory" : {
+    "categoryendpoint.categoryEndpoint.getCategory" : {
       "path" : "category/{id}",
       "httpMethod" : "GET",
       "scopes" : [ ],
@@ -59,7 +59,7 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "categoryendpoint.insertCategory" : {
+    "categoryendpoint.categoryEndpoint.insertCategory" : {
       "path" : "category",
       "httpMethod" : "POST",
       "scopes" : [ ],
@@ -74,7 +74,7 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "categoryendpoint.listCategory" : {
+    "categoryendpoint.categoryEndpoint.listCategory" : {
       "path" : "category",
       "httpMethod" : "GET",
       "scopes" : [ ],
@@ -82,23 +82,13 @@
       "clientIds" : [ ],
       "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.listCategory",
       "request" : {
-        "parameters" : {
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "limit" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
         "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "categoryendpoint.removeCategory" : {
+    "categoryendpoint.categoryEndpoint.removeCategory" : {
       "path" : "category/{id}",
       "httpMethod" : "DELETE",
       "scopes" : [ ],
@@ -117,6 +107,26 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
+    },
+    "categoryendpoint.category.children" : {
+      "path" : "category/children",
+      "httpMethod" : "GET",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.findChildren",
+      "request" : {
+        "parameters" : {
+          "parentKey" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
     }
   },
   "descriptor" : {
@@ -125,10 +135,37 @@
         "id" : "Category",
         "type" : "object",
         "properties" : {
+          "parent" : {
+            "type" : "string"
+          },
           "key" : {
             "type" : "string"
           },
           "name" : {
+            "type" : "string"
+          },
+          "hasChildren" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "User" : {
+        "id" : "User",
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "authDomain" : {
+            "type" : "string"
+          },
+          "userId" : {
+            "type" : "string"
+          },
+          "federatedIdentity" : {
+            "type" : "string"
+          },
+          "nickname" : {
             "type" : "string"
           }
         }
@@ -145,6 +182,24 @@
           },
           "nextPageToken" : {
             "type" : "string"
+          }
+        }
+      },
+      "CollectionResponseExtentsion_Category" : {
+        "id" : "CollectionResponseExtentsion_Category",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Category"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          },
+          "total" : {
+            "type" : "integer"
           }
         }
       }
@@ -179,6 +234,11 @@
       "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.removeCategory" : {
         "response" : {
           "$ref" : "Category"
+        }
+      },
+      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.findChildren" : {
+        "response" : {
+          "$ref" : "CollectionResponseExtentsion_Category"
         }
       }
     }

@@ -24,7 +24,7 @@
     "maxAge" : 0
   },
   "methods" : {
-    "currentuserendpoint.getCurrentUser" : {
+    "currentuserendpoint.currentUserEndpoint.getCurrentUser" : {
       "path" : "currentuser",
       "httpMethod" : "GET",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],

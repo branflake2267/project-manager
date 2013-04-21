@@ -42,7 +42,7 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
   private Grid<ArchetypeJso> grid;
 
   @Inject
-  public ArchetypeListView(final Binder binder, ArchetypeProperties columnProperties) {
+  public ArchetypeListView(Binder binder, ArchetypeProperties columnProperties) {
     this.columnProperties = columnProperties;
 
     initWidget(binder.createAndBindUi(this));

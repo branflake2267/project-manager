@@ -28,7 +28,8 @@ public class ArchetypeListPresenter extends PresenterWidget<ArchetypeListPresent
     ArchtypeListUiHandlers, ArchetypeUpdateEvent.UpdateArchetypeHandler {
 
   public interface MyView extends View, HasUiHandlers<ArchtypeListUiHandlers> {
-    void init(ListStore<ArchetypeJso> listStore, PagingLoader<PagingLoadConfig, PagingLoadResult<ArchetypeJso>> pagingLoader);
+    void init(ListStore<ArchetypeJso> listStore,
+        PagingLoader<PagingLoadConfig, PagingLoadResult<ArchetypeJso>> pagingLoader);
 
     void updateSelected(ArchetypeJso archetypeJso);
   }
@@ -36,7 +37,7 @@ public class ArchetypeListPresenter extends PresenterWidget<ArchetypeListPresent
   private final ArchetypeObserver archetypeObserver;
   private final ArchetypeJsoDao archetypeJsoDao;
   private PagingLoader<PagingLoadConfig, PagingLoadResult<ArchetypeJso>> pagingLoader;
-  
+
   private boolean initialized;
 
   @Inject
@@ -46,6 +47,7 @@ public class ArchetypeListPresenter extends PresenterWidget<ArchetypeListPresent
 
     this.archetypeObserver = archetypeObserver;
     this.archetypeJsoDao = archetypeJsoDao;
+    initialized = false;
 
     getView().setUiHandlers(this);
   }
@@ -56,19 +58,19 @@ public class ArchetypeListPresenter extends PresenterWidget<ArchetypeListPresent
 
     registerHandler(archetypeObserver.addHandler(ArchetypeUpdateEvent.getType(), this));
   }
-  
+
   @Override
   protected void onReveal() {
     super.onReveal();
-    
-    if (initialized) {
+
+    if (!initialized) {
       initialized = true;
-      
+
       ListStore<ArchetypeJso> listStore = createListStore();
       pagingLoader = createPagingLoader(listStore);
-      
       getView().init(listStore, pagingLoader);
-    } else {
+      
+    } else if (pagingLoader != null) {
       pagingLoader.load();
     }
   }
@@ -88,7 +90,8 @@ public class ArchetypeListPresenter extends PresenterWidget<ArchetypeListPresent
     pagingLoader.load();
   }
 
-  private void fetchArchetypes(final int offset, int length, final AsyncCallback<PagingLoadResult<ArchetypeJso>> callback) {
+  private void fetchArchetypes(final int offset, int length,
+      final AsyncCallback<PagingLoadResult<ArchetypeJso>> callback) {
     HashMap<String, String> parameters = new HashMap<String, String>();
     parameters.put("offset", Integer.toString(offset));
     parameters.put("limit", Integer.toString(length));
@@ -120,8 +123,7 @@ public class ArchetypeListPresenter extends PresenterWidget<ArchetypeListPresent
   private PagingLoader<PagingLoadConfig, PagingLoadResult<ArchetypeJso>> createPagingLoader(
       ListStore<ArchetypeJso> listStore) {
     // Data Provider
-    RpcProxy<PagingLoadConfig, PagingLoadResult<ArchetypeJso>> rpcProxy = new RpcProxy<PagingLoadConfig, 
-        PagingLoadResult<ArchetypeJso>>() {
+    RpcProxy<PagingLoadConfig, PagingLoadResult<ArchetypeJso>> rpcProxy = new RpcProxy<PagingLoadConfig, PagingLoadResult<ArchetypeJso>>() {
       @Override
       public void load(PagingLoadConfig loadConfig, AsyncCallback<PagingLoadResult<ArchetypeJso>> callback) {
         fetchArchetypes(loadConfig.getOffset(), loadConfig.getLimit(), callback);
@@ -129,13 +131,14 @@ public class ArchetypeListPresenter extends PresenterWidget<ArchetypeListPresent
     };
 
     // Paging Loader
-    final PagingLoader<PagingLoadConfig, PagingLoadResult<ArchetypeJso>> pagingLoader = 
-        new PagingLoader<PagingLoadConfig, PagingLoadResult<ArchetypeJso>>(rpcProxy);
+    final PagingLoader<PagingLoadConfig, PagingLoadResult<ArchetypeJso>> pagingLoader = new PagingLoader<PagingLoadConfig, PagingLoadResult<ArchetypeJso>>(
+        rpcProxy);
     pagingLoader.setRemoteSort(true);
-    pagingLoader.addLoadHandler(new LoadResultListStoreBinding<PagingLoadConfig, ArchetypeJso, 
-        PagingLoadResult<ArchetypeJso>>(listStore));
-    
+    pagingLoader
+        .addLoadHandler(new LoadResultListStoreBinding<PagingLoadConfig, ArchetypeJso, PagingLoadResult<ArchetypeJso>>(
+            listStore));
+
     return pagingLoader;
   }
-  
+
 }

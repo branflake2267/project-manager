@@ -12,8 +12,8 @@
         }
     </ui:style>
 
-    <g:HTMLPanel styleName="{style.widget}">
-        <g:SimplePanel ui:field="header" styleName="{style.header}" />
+    <g:HTMLPanel addStyleNames="{style.widget}">
+        <g:SimplePanel ui:field="header" addStyleNames="{style.header}" />
         <g:SimplePanel ui:field="main" />
     </g:HTMLPanel>
 </ui:UiBinder>

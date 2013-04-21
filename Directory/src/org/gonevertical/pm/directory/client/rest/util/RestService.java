@@ -26,12 +26,16 @@ public abstract class RestService<T extends JavaScriptObject> {
     this.oauth = oauth;
   }
   
+  public void setEndpointPath(String endppointPath) {
+    this.endpointPath = endppointPath;
+  }
+  
   public String getBaseAndEndpointPath() {
     return GWT.getHostPageBaseURL() + endpointPath;
   }
 
   public void get(HashMap<String, String> parameters,  final RestHandler<T> handler) {
-    String url = getBaseAndEndpointPath() + getQueryString(parameters);
+    final String url = getBaseAndEndpointPath() + getQueryString(parameters);
 
     RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
     builder.setHeader(RestHeaders.CONTENT_TYPE__JSON.getKey(), RestHeaders.ACCEPT__JSON.getValue());
@@ -49,7 +53,7 @@ public abstract class RestService<T extends JavaScriptObject> {
           T jso = (T) JSONParser.parseLenient(json).isObject().getJavaScriptObject().cast();
           handler.onSuccess(jso);
         } else {
-          handler.onFailure(new Exception("Exception: getStatusText=" + response.getStatusText()));
+          handler.onFailure(new Exception("Exception: url=" + url + " getStatusText=" + response.getStatusText() + " text=" + response.getText()));
         }
       }
 
@@ -99,8 +103,7 @@ public abstract class RestService<T extends JavaScriptObject> {
 
           JsArray<T> list = null;
           try {
-            list = (JsArray<T>) JSONParser.parseLenient(json).isObject().get("items").isArray().getJavaScriptObject()
-                .cast();
+            list = (JsArray<T>) JSONParser.parseLenient(json).isObject().get("items").isArray().getJavaScriptObject().cast();
           } catch (Exception e) {
           }
 

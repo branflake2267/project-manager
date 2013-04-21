@@ -24,7 +24,7 @@
     "maxAge" : 0
   },
   "methods" : {
-    "systemuserendpoint.findByUserId" : {
+    "systemuserendpoint.systemUserEndpoint.findByUserId" : {
       "path" : "findByUserId/{userId}",
       "httpMethod" : "POST",
       "scopes" : [ ],
@@ -44,7 +44,7 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "systemuserendpoint.updateSystemUser" : {
+    "systemuserendpoint.systemUserEndpoint.updateSystemUser" : {
       "path" : "systemuser",
       "httpMethod" : "PUT",
       "scopes" : [ ],
@@ -59,7 +59,7 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "systemuserendpoint.insertSystemUser" : {
+    "systemuserendpoint.systemUserEndpoint.insertSystemUser" : {
       "path" : "systemuser",
       "httpMethod" : "POST",
       "scopes" : [ ],
@@ -74,7 +74,7 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "systemuserendpoint.getSystemUser" : {
+    "systemuserendpoint.systemUserEndpoint.getSystemUser" : {
       "path" : "systemuser/{key}",
       "httpMethod" : "GET",
       "scopes" : [ ],
