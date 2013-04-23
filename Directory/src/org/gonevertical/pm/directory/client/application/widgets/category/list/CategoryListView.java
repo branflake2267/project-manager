@@ -13,7 +13,6 @@ import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.data.shared.loader.TreeLoader;
 import com.sencha.gxt.widget.core.client.FramedPanel;
 import com.sencha.gxt.widget.core.client.button.TextButton;
-import com.sencha.gxt.widget.core.client.container.BoxLayoutContainer.BoxLayoutPack;
 import com.sencha.gxt.widget.core.client.container.SimpleContainer;
 import com.sencha.gxt.widget.core.client.event.CompleteEditEvent;
 import com.sencha.gxt.widget.core.client.event.CompleteEditEvent.CompleteEditHandler;
@@ -82,8 +81,8 @@ public class CategoryListView extends ViewWithUiHandlers<CategoryListUiHandlers>
       }
     };
     framedPanel.setHeadingText("Categories");
-    framedPanel.setButtonAlign(BoxLayoutPack.CENTER);
-    framedPanel.setPixelSize(600, 300);
+    framedPanel.setCollapsible(false);
+    framedPanel.setPixelSize(400, 300);
 
     grid = new TreeGrid<CategoryJso>(treeStore, columnModel, colName);
     grid.setBorders(true);

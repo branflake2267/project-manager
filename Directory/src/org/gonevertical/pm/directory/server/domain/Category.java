@@ -11,13 +11,15 @@ import com.google.appengine.api.datastore.KeyFactory;
 
 @PersistenceCapable(detachable = "true")
 public class Category {
-
+ 
+  @Persistent
   private Key parent;
 
   @PrimaryKey
   @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
   private Key key;
 
+  @Persistent
   private String name;
   
   @Transient

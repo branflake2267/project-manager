@@ -9,5 +9,7 @@ public interface ArchetypeEditUiHandlers extends UiHandlers {
   void displayList();
 
   void save(ArchetypeJso archetypeJso);
+
+  void displayCategoryPopup();
   
 }

@@ -1,5 +1,6 @@
 package org.gonevertical.pm.directory.client.application.widgets.archetype.edit;
 
+import org.gonevertical.pm.directory.client.application.widgets.category.select.CategorySelectPresenter;
 import org.gonevertical.pm.directory.client.application.widgets.login.LoginPresenter;
 import org.gonevertical.pm.directory.client.events.archetypes.ArchetypeEditEvent;
 import org.gonevertical.pm.directory.client.events.archetypes.ArchetypeObserver;
@@ -18,16 +19,23 @@ public class ArchetypeEditPresenter extends PresenterWidget<ArchetypeEditPresent
 
   private final ArchetypeJsoDao archetypeJsoDao;
   private final ArchetypeObserver archetypeObserver;
+  private final CategorySelectPresenter categorySelectPresenter;
 
   public interface MyView extends View, HasUiHandlers<ArchetypeEditUiHandlers> {
     void display(ArchetypeJso archetypeJso);
   }
 
   @Inject
-  public ArchetypeEditPresenter(EventBus eventBus, MyView view, ArchetypeObserver archetypeObserver,
-      LoginPresenter loginPresenter, ArchetypeJsoDao archetypeJsoDao) {
+  public ArchetypeEditPresenter(
+      EventBus eventBus, 
+      MyView view, 
+      ArchetypeObserver archetypeObserver,
+      LoginPresenter loginPresenter,
+      CategorySelectPresenter categorySelectPresenter,
+      ArchetypeJsoDao archetypeJsoDao) {
     super(eventBus, view);
     
+    this.categorySelectPresenter = categorySelectPresenter;
     this.archetypeObserver = archetypeObserver;
     this.archetypeJsoDao = archetypeJsoDao;
 
@@ -64,6 +72,11 @@ public class ArchetypeEditPresenter extends PresenterWidget<ArchetypeEditPresent
         e.printStackTrace();
       }
     });
+  }
+
+  @Override
+  public void displayCategoryPopup() {
+    addToPopupSlot(categorySelectPresenter, true);
   }
 
 }

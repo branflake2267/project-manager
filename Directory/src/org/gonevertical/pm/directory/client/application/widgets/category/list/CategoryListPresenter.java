@@ -21,9 +21,8 @@ import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 import com.sencha.gxt.data.client.loader.RpcProxy;
-import com.sencha.gxt.data.shared.Store.Change;
-import com.sencha.gxt.data.shared.Store.Record;
 import com.sencha.gxt.data.shared.Store;
+import com.sencha.gxt.data.shared.Store.Change;
 import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.data.shared.loader.ChildTreeStoreBinding;
 import com.sencha.gxt.data.shared.loader.TreeLoader;
@@ -59,6 +58,10 @@ public class CategoryListPresenter extends PresenterWidget<CategoryListPresenter
   protected void onReveal() {
     super.onReveal();
 
+    display();
+  }
+
+  public void display() {
     if (!initialized) {
       initialized = true;
 

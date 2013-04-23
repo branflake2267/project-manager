@@ -1,5 +1,7 @@
 package org.gonevertical.pm.directory.client.rest.jso;
 
+import java.util.List;
+
 import com.google.gwt.core.client.JavaScriptObject;
 
 public class ArchetypeJso extends JavaScriptObject {
@@ -15,6 +17,7 @@ public class ArchetypeJso extends JavaScriptObject {
     jso.setName("");
     jso.setRepository("");
     jso.setVersion("");
+    
     return jso;
   }
   
@@ -72,6 +75,22 @@ public class ArchetypeJso extends JavaScriptObject {
   
   public final native String getVersion() /*-{
     return this.version;
+  }-*/;
+  
+  public final native List<CategoryJso> getCategories() /*-{
+    return this.categories;
+  }-*/;
+  
+  public final native void setCategories(List<CategoryJso> categories) /*-{
+    this.categories = categories;
+  }-*/;
+  
+  public final native List<TagJso> getTags() /*-{
+    return this.tags;
+  }-*/;
+  
+  public final native void setTags(List<TagJso> tags) /*-{
+    this.tags = tags;
   }-*/;
   
 }

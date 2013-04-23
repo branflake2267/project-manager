@@ -54,28 +54,29 @@ public class ArchetypeEndpoint {
         .newBuilder()
         .addField(Field.newBuilder().setName("key").setText(o.getKey()))
         .addField(Field.newBuilder().setName("name").setText(o.getName() != null ? o.getName() : ""))
-        .addField(
-            Field.newBuilder().setName("description").setText(o.getDescription() != null ? o.getDescription() : ""))
+        .addField(Field.newBuilder().setName("description").setText(o.getDescription() != null ? o.getDescription() : ""))
         .addField(Field.newBuilder().setName("repository").setText(o.getRepository() != null ? o.getRepository() : ""))
         .addField(Field.newBuilder().setName("groupId").setText(o.getGroupId() != null ? o.getGroupId() : ""))
         .addField(Field.newBuilder().setName("artifactId").setText(o.getArtifactId() != null ? o.getArtifactId() : ""))
-        .addField(Field.newBuilder().setName("version").setText(o.getVersion() != null ? o.getVersion() : ""));
-
-    // TODO add categories
-    // TODO add tags
+        .addField(Field.newBuilder().setName("version").setText(o.getVersion() != null ? o.getVersion() : ""))
+        .addField(Field.newBuilder().setName("category").setText(o.getCategoriesSearch() != null ? o.getCategoriesSearch() : ""))
+        .addField(Field.newBuilder().setName("tags").setText(o.getTagsSearch() != null ? o.getTagsSearch() : ""));
 
     docBuilder.setId(o.getKey());
     Document doc = docBuilder.build();
     INDEX.putAsync(doc);
   }
 
-  public CollectionResponseExtentsion<Archetype> listArchetype(@Nullable @Named("cursor") String cursorString,
-      @Nullable @Named("offset") Integer offset, @Nullable @Named("limit") Integer limit) {
+  public CollectionResponseExtentsion<Archetype> listArchetype(
+      @Nullable @Named("cursor") String cursorString,
+      @Nullable @Named("offset") Integer offset, 
+      @Nullable @Named("limit") Integer limit) {
     logger.info("listArchetype(): cursorString=" + cursorString + " offset=" + offset + " limit=" + limit);
 
     PersistenceManager mgr = null;
     Cursor cursor = null;
-    List<Archetype> items = null;
+    List<Archetype> archetypes = new ArrayList<Archetype>();
+    
     try {
       mgr = getPersistenceManager();
       Query query = mgr.newQuery(Archetype.class);
@@ -95,15 +96,17 @@ public class ArchetypeEndpoint {
         query.setRange(0, 15);
       }
 
-      items = (List<Archetype>) query.execute();
+      List<Archetype> items = (List<Archetype>) query.execute();
 
       cursor = JDOCursorHelper.getCursor(items);
       if (cursor != null) {
         cursorString = cursor.toWebSafeString();
       }
 
-      for (Archetype obj : items)
-        ;
+      for (Archetype archetype : items) {
+        archetypes.add(archetype);
+      }
+        
     } finally {
       mgr.close();
     }
@@ -116,14 +119,13 @@ public class ArchetypeEndpoint {
       cursorWebSafe = cursor.toWebSafeString();
     }
 
-    if (items == null || items.size() == 0) {
-      items = new ArrayList<Archetype>();
+    if (total == 0) {
       Archetype archetype = new Archetype();
-      archetype.setName("Nothing Exists Yet");
-      items.add(archetype);
+      archetype.setName("Nothing exists yet...");
+      archetypes.add(archetype);
     }
 
-    return new CollectionResponseExtentsion<Archetype>(items, cursorWebSafe, total);
+    return new CollectionResponseExtentsion<Archetype>(archetypes, cursorWebSafe, total);
   }
 
   public Archetype getArchetype(@Named("key") String key) {
