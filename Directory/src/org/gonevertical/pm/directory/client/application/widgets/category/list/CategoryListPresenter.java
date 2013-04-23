@@ -58,6 +58,10 @@ public class CategoryListPresenter extends PresenterWidget<CategoryListPresenter
   protected void onReveal() {
     super.onReveal();
 
+    display();
+  }
+
+  public void display() {
     if (!initialized) {
       initialized = true;
 
