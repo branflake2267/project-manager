@@ -23,18 +23,37 @@ public class Archetype {
   @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
   private Key key;
 
+  @Persistent
   private BlobKey blobKey;
+  
+  @Persistent
   private String name;
+  
+  @Persistent
   private Text description;
-  private LinkedHashSet<Key> categories;
-  private HashSet<Category> tags;
+  
+  @Persistent(defaultFetchGroup = "true", dependentElement = "true")
+  private HashSet<Category> categories;
+  
+  @Persistent(defaultFetchGroup = "true", dependentElement = "true")
+  private HashSet<Tag> tags;
 
+  @Persistent
   private String repository;
+  
+  @Persistent
   private String groupId;
+  
+  @Persistent
   private String artifactId;
+  
+  @Persistent
   private String version;
   
+  @Persistent
   private Date dateCreated;
+  
+  @Persistent 
   private Key systemUserKey;
   
   public Archetype() {
@@ -84,39 +103,33 @@ public class Archetype {
     }
   }
 
-  public List<String> getCategories() {
+  public List<Category> getCategories() {
     if (categories == null) {
-      return new ArrayList<String>();
-    }
-    ArrayList<String> list = new ArrayList<String>();
-    for (Key key : categories) {
-      list.add(KeyFactory.keyToString(key));
-    }
-    return list;
-  }
-
-  public void setCategories(List<String> categories) {
-    if (categories == null) {
-      return;
-    }
-    categories.clear();
-    for (String skey : categories) {
-      this.categories.add(KeyFactory.stringToKey(skey));
-    }
-  }
-
-  public List<Category> getTags() {
-    if (tags == null) {
       return new ArrayList<Category>();
     }
-    return new ArrayList<Category>(tags);
+    return new ArrayList<Category>(categories);
   }
 
-  public void setTags(List<Category> tags) {
+  public void setCategories(List<Category> categoriesList) {
+    if (categoriesList == null) {
+      this.categories = null;
+      return;
+    }
+    categories = new LinkedHashSet<Category>(categoriesList);
+  }
+
+  public List<Tag> getTags() {
     if (tags == null) {
-      this.tags = new HashSet<Category>();
+      return new ArrayList<Tag>();
+    }
+    return new ArrayList<Tag>(tags);
+  }
+
+  public void setTags(List<Tag> tagsList) {
+    if (tagsList == null) {
+      this.tags = new HashSet<Tag>();
     } else {
-      this.tags = new HashSet<Category>(tags);
+      this.tags = new HashSet<Tag>(tagsList);
     }
   }
 
@@ -172,6 +185,32 @@ public class Archetype {
       return null;
     }
     return dateCreated.getTime();
+  }
+
+  public String getCategoriesSearch() {
+    if (categories == null) {
+      return null;
+    }
+    String search = "";
+    for (Category category : categories) {
+      if (category.getName() != null) {
+        search += category.getName();
+      }
+    } 
+    return search;
+  }
+
+  public String getTagsSearch() {
+    if (tags == null) {
+      return null;
+    }
+    String search = "";
+    for (Tag tag : tags) {
+      if (tag.getName() != null) {
+        search += tag.getName();
+      }
+    }
+    return search;
   }
   
 }

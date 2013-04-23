@@ -82,7 +82,7 @@ public class CategoryListView extends ViewWithUiHandlers<CategoryListUiHandlers>
       }
     };
     framedPanel.setHeadingText("Categories");
-    framedPanel.setButtonAlign(BoxLayoutPack.CENTER);
+    framedPanel.setCollapsible(false);
     framedPanel.setPixelSize(600, 300);
 
     grid = new TreeGrid<CategoryJso>(treeStore, columnModel, colName);

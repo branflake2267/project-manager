@@ -166,13 +166,13 @@
           "categories" : {
             "type" : "array",
             "items" : {
-              "type" : "string"
+              "$ref" : "Category"
             }
           },
           "tags" : {
             "type" : "array",
             "items" : {
-              "$ref" : "Category"
+              "$ref" : "Tag"
             }
           },
           "repository" : {
@@ -192,6 +192,12 @@
             "format" : "int64"
           },
           "systemUserKey" : {
+            "type" : "string"
+          },
+          "categoriesSearch" : {
+            "type" : "string"
+          },
+          "tagsSearch" : {
             "type" : "string"
           },
           "blobUrl" : {
@@ -214,6 +220,18 @@
           },
           "hasChildren" : {
             "type" : "boolean"
+          }
+        }
+      },
+      "Tag" : {
+        "id" : "Tag",
+        "type" : "object",
+        "properties" : {
+          "key" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
           }
         }
       },

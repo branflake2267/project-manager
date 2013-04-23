@@ -102,7 +102,7 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
 
     // Frame
     FramedPanel framedPanel = new FramedPanel();
-    framedPanel.setCollapsible(true);
+    framedPanel.setCollapsible(false);
     framedPanel.setHeadingText("Archetypes");
     framedPanel.setPixelSize(500, 427);
 
