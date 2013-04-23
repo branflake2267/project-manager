@@ -27,8 +27,6 @@ public class CategorySelectView extends PopupViewWithUiHandlers<CategorySelectUi
     super(eventBus);
     
     initWidget(binder.createAndBindUi(this));
-    
-    container.setSize("400px", "300px"); 
   }
   
   @Override
