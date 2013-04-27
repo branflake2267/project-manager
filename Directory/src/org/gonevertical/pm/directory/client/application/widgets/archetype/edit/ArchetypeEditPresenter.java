@@ -4,8 +4,10 @@ import org.gonevertical.pm.directory.client.application.widgets.category.select.
 import org.gonevertical.pm.directory.client.application.widgets.login.LoginPresenter;
 import org.gonevertical.pm.directory.client.events.archetypes.ArchetypeEditEvent;
 import org.gonevertical.pm.directory.client.events.archetypes.ArchetypeObserver;
+import org.gonevertical.pm.directory.client.events.category.SelectCategoryEvent;
 import org.gonevertical.pm.directory.client.rest.ArchetypeJsoDao;
 import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
+import org.gonevertical.pm.directory.client.rest.jso.CategoryJso;
 import org.gonevertical.pm.directory.client.rest.util.RestHandler;
 
 import com.google.inject.Inject;
@@ -15,7 +17,7 @@ import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 
 public class ArchetypeEditPresenter extends PresenterWidget<ArchetypeEditPresenter.MyView> implements
-    ArchetypeEditUiHandlers, ArchetypeEditEvent.EditArchetypeHandler {
+    ArchetypeEditUiHandlers, ArchetypeEditEvent.EditArchetypeHandler, SelectCategoryEvent.SelectSelectHandler<CategoryJso> {
 
   private final ArchetypeJsoDao archetypeJsoDao;
   private final ArchetypeObserver archetypeObserver;
@@ -23,6 +25,8 @@ public class ArchetypeEditPresenter extends PresenterWidget<ArchetypeEditPresent
 
   public interface MyView extends View, HasUiHandlers<ArchetypeEditUiHandlers> {
     void display(ArchetypeJso archetypeJso);
+
+    void setCategorySelected(CategoryJso selected);
   }
 
   @Inject
@@ -47,6 +51,7 @@ public class ArchetypeEditPresenter extends PresenterWidget<ArchetypeEditPresent
     super.onBind();
     
     registerHandler(archetypeObserver.getEventBus().addHandler(ArchetypeEditEvent.getType(), this));
+    addRegisteredHandler(SelectCategoryEvent.getType(), this);
   }
 
   @Override
@@ -77,6 +82,11 @@ public class ArchetypeEditPresenter extends PresenterWidget<ArchetypeEditPresent
   @Override
   public void displayCategoryPopup() {
     addToPopupSlot(categorySelectPresenter, true);
+  }
+
+  @Override
+  public void onSelect(SelectCategoryEvent<CategoryJso> event) {
+    getView().setCategorySelected(event.getData());
   }
 
 }

@@ -14,7 +14,7 @@ public class CategorySelectPresenter extends PresenterWidget<CategorySelectPrese
   public interface MyView extends PopupView, HasUiHandlers<CategorySelectUiHandlers> {
   }
   
-  public static Object TYPE_categoryList = new Object();
+  public static Object SLOT_categoryList = new Object();
 
   private final CategoryListPresenter categoryListPresenter;
   
@@ -30,13 +30,8 @@ public class CategorySelectPresenter extends PresenterWidget<CategorySelectPrese
   @Override
   protected void onBind() {
     super.onBind();
+    
+    setInSlot(SLOT_categoryList, categoryListPresenter);
   }
   
-  @Override
-  protected void onReveal() {
-    super.onReveal();
-    
-    setInSlot(TYPE_categoryList, categoryListPresenter);
-  }
-
 }

@@ -22,6 +22,7 @@ public class CategorySelectView extends PopupViewWithUiHandlers<CategorySelectUi
   SimpleContainer container;
   @UiField
   TextButton close;
+  
   @Inject
   public CategorySelectView(Binder binder, EventBus eventBus) {
     super(eventBus);
@@ -31,7 +32,7 @@ public class CategorySelectView extends PopupViewWithUiHandlers<CategorySelectUi
   
   @Override
   public void setInSlot(Object slot, Widget content) {
-    if (slot == CategorySelectPresenter.TYPE_categoryList) {
+    if (slot == CategorySelectPresenter.SLOT_categoryList) {
       container.setWidget(content);
     } else {
       super.setInSlot(slot, content);

@@ -23,23 +23,11 @@
         <ui:attributes width="-1" height="-1" margins="{margins}" />
     </ui:with>
 
-    <container:SimpleContainer>
-       
-        <container:VerticalLayoutContainer>
-            <container:child layoutData="{layoutData}">
-                <g:HorizontalPanel>
-                    <g:cell>
-                        <button:TextButton ui:field="add" text="Add" />
-                    </g:cell>
-                    <g:cell>
-                        <button:TextButton ui:field="save" text="Save" addStyleNames="{style.space}" />
-                    </g:cell>
-                </g:HorizontalPanel>
-            </container:child>
-            <container:child layoutData="{layoutData}">
-                <container:SimpleContainer ui:field="container" />
-            </container:child>
-        </container:VerticalLayoutContainer>
+    <container:VerticalLayoutContainer>
+        <container:child layoutData="{layoutData}">
+            <container:SimpleContainer ui:field="container" />
+        </container:child>
+    </container:VerticalLayoutContainer>
         
-    </container:SimpleContainer>
+    
 </ui:UiBinder>

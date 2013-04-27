@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.gonevertical.pm.directory.client.application.widgets.login.LoginPresenter;
+import org.gonevertical.pm.directory.client.events.category.SelectCategoryEvent;
 import org.gonevertical.pm.directory.client.rest.ArchetypeJsoDao;
 import org.gonevertical.pm.directory.client.rest.CategoryJsoDao;
 import org.gonevertical.pm.directory.client.rest.jso.CategoryJso;
@@ -35,11 +36,13 @@ public class CategoryListPresenter extends PresenterWidget<CategoryListPresenter
         CategoryProperties categoryProperties);
 
     void add(CategoryJso categoryJso);
+
+    void edit(boolean edit);
   }
 
   private final CategoryJsoDao categoryJsoDao;
   private final CategoryProperties categoryProperties;
-  
+
   private boolean initialized;
   private TreeStore<CategoryJso> treeStore;
 
@@ -70,6 +73,10 @@ public class CategoryListPresenter extends PresenterWidget<CategoryListPresenter
 
       getView().initTreeGrid(treeStore, loader, categoryProperties);
     }
+  }
+
+  public void edit(boolean edit) {
+    getView().edit(edit);
   }
 
   private TreeStore<CategoryJso> createTreeStore() {
@@ -132,7 +139,7 @@ public class CategoryListPresenter extends PresenterWidget<CategoryListPresenter
       public void onSuccess(CategoryJso categoryJso) {
         getView().add(categoryJso);
       }
-      
+
       @Override
       public void onFailure(Throwable e) {
         e.printStackTrace();
@@ -143,7 +150,7 @@ public class CategoryListPresenter extends PresenterWidget<CategoryListPresenter
   @Override
   public void save() {
     Collection<Store<CategoryJso>.Record> records = treeStore.getModifiedRecords();
-    
+
     for (Store<CategoryJso>.Record record : records) {
       Collection<Change<CategoryJso, ?>> changes = record.getChanges();
       String value = (String) changes.iterator().next().getValue();
@@ -152,7 +159,7 @@ public class CategoryListPresenter extends PresenterWidget<CategoryListPresenter
       save(category);
       record.commit(true);
     }
-    
+
   }
 
   private void save(CategoryJso category) {
@@ -161,7 +168,7 @@ public class CategoryListPresenter extends PresenterWidget<CategoryListPresenter
       public void onSuccess(CategoryJso object) {
         treeStore.update(object);
       }
-      
+
       @Override
       public void onFailure(Throwable e) {
         e.printStackTrace();
@@ -169,4 +176,9 @@ public class CategoryListPresenter extends PresenterWidget<CategoryListPresenter
     });
   }
 
+  @Override
+  public void setSelected(CategoryJso selected) {
+    SelectCategoryEvent.fire(this, selected);
+  }
+  
 }

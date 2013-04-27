@@ -45,6 +45,7 @@ public class AdminPresenter extends Presenter<AdminPresenter.MyView, AdminPresen
     super.onBind();
     
     setInSlot(TYPE_CategoryPresenter, categoryListPresenter);
+    categoryListPresenter.edit(true);
   }
   
 }
