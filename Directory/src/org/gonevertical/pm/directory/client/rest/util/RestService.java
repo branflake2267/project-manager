@@ -44,7 +44,7 @@ public abstract class RestService<T extends JavaScriptObject> {
     
     if (oauth.getAccessToken() != null && oauth.getAccessToken().trim().length() > 0) {
       builder.setHeader("Authorization", "Bearer " + oauth.getAccessToken());
-    }
+    } 
 
     call(url, builder, handler, new CallNumber());
   }
@@ -60,7 +60,7 @@ public abstract class RestService<T extends JavaScriptObject> {
         } else {
           callNumber.add();
           handler.onFailure(new Exception("Exception: url=" + url + " getStatusText=" + response.getStatusText() + " text=" + response.getText()));
-          if (callNumber.get() < 3) {
+          if (callNumber.get() > 3) {
             Timer t = new Timer() {
               @Override
               public void run() {
@@ -76,6 +76,17 @@ public abstract class RestService<T extends JavaScriptObject> {
       @Override
       public void onError(Request request, Throwable e) {
         handler.onFailure(e);
+        callNumber.add();
+        if (callNumber.get() > 3) {
+          Timer t = new Timer() {
+            @Override
+            public void run() {
+              System.out.println("calling again + " + callNumber.get());
+              call(url, builder, handler, callNumber);
+            }
+          };
+          t.schedule(500 * callNumber.get() + 1);
+        }
       }
     });
 

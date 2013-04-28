@@ -3,11 +3,13 @@ package org.gonevertical.pm.directory.client.application.widgets.category.editor
 import java.util.List;
 
 import org.gonevertical.pm.directory.client.events.category.CategorySelectEvent;
+import org.gonevertical.pm.directory.client.events.category.CategorySelectEventHandler;
 import org.gonevertical.pm.directory.client.events.category.DeleteDataEvent;
 import org.gonevertical.pm.directory.client.events.category.DeleteDataEvent.DeleteHandler;
 import org.gonevertical.pm.directory.client.events.category.DisplayCategoryPopupEvent;
 import org.gonevertical.pm.directory.client.rest.jso.CategoryJso;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.editor.client.IsEditor;
 import com.google.gwt.editor.client.adapters.EditorSource;
@@ -22,7 +24,7 @@ import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 
-public class CategoryListEditor extends Composite implements IsEditor<Editor<List<CategoryJso>>>{
+public class CategoryListEditor extends Composite implements IsEditor<Editor<List<CategoryJso>>> {
 
   // ListEditor item manager
   private class ItemEditorSource extends EditorSource<CategoryItemEditor> {
@@ -49,32 +51,31 @@ public class CategoryListEditor extends Composite implements IsEditor<Editor<Lis
   private ListEditor<CategoryJso, CategoryItemEditor> listEditor = ListEditor.of(new ItemEditorSource());
 
   // UiBinder
-  public interface Binder extends UiBinder<Widget, CategoryListEditor> {}
+  private static CategoryListEditorUiBinder uiBinder = GWT.create(CategoryListEditorUiBinder.class);
+  public interface CategoryListEditorUiBinder extends UiBinder<Widget, CategoryListEditor> {}
   @UiField
   FlowPanel list;
   
   private EventBus eventBus;
   
   @Inject
-  public CategoryListEditor(Binder binder, EventBus eventBus) {
+  public CategoryListEditor() {
+    initWidget(uiBinder.createAndBindUi(this));
+  }
+  
+  public void setEventBus(EventBus eventBus) {
     this.eventBus = eventBus;
     
-    initWidget(binder.createAndBindUi(this));
-    
-    eventBus.addHandler(CategorySelectEvent.getType(), new CategorySelectEvent.SelectSelectHandler() {
+    eventBus.addHandler(CategorySelectEvent.TYPE, new CategorySelectEventHandler() {
       @Override
-      public void onCategorySelect(CategorySelectEvent event) {
+      public void onCategorySelectEvent(CategorySelectEvent event) {
         CategoryJso categoryJso = event.getData();
-        listEditor.getList().add(categoryJso);
+        List<CategoryJso> l = listEditor.getList();
+        l.add(categoryJso);
       }
     });
   }
 
-  @Override
-  public Editor<List<CategoryJso>> asEditor() {
-    return listEditor;
-  }
-  
   private void removeItem(int index) {
     listEditor.getList().remove(index);
   }
@@ -82,6 +83,11 @@ public class CategoryListEditor extends Composite implements IsEditor<Editor<Lis
   @UiHandler("add")
   void onAddSelect(SelectEvent event) {
     eventBus.fireEvent(new DisplayCategoryPopupEvent());
+  }
+
+  @Override
+  public Editor<List<CategoryJso>> asEditor() {
+    return listEditor;
   }
   
 }

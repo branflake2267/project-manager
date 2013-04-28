@@ -4,10 +4,8 @@ import org.gonevertical.pm.directory.client.application.widgets.category.select.
 import org.gonevertical.pm.directory.client.application.widgets.login.LoginPresenter;
 import org.gonevertical.pm.directory.client.events.archetypes.ArchetypeEditEvent;
 import org.gonevertical.pm.directory.client.events.archetypes.ArchetypeObserver;
-import org.gonevertical.pm.directory.client.events.category.CategorySelectEvent;
 import org.gonevertical.pm.directory.client.rest.ArchetypeJsoDao;
 import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
-import org.gonevertical.pm.directory.client.rest.jso.CategoryJso;
 import org.gonevertical.pm.directory.client.rest.util.RestHandler;
 
 import com.google.inject.Inject;

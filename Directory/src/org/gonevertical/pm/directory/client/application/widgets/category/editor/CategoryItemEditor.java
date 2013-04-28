@@ -19,10 +19,12 @@ public class CategoryItemEditor extends Composite implements Editor<CategoryJso>
 
   // UiBinder
   private static CategoryItemEditorUiBinder uiBinder = GWT.create(CategoryItemEditorUiBinder.class);
-  interface CategoryItemEditorUiBinder extends UiBinder<Widget, CategoryItemEditor> {}
 
-   @UiField
-   HTML name;
+  interface CategoryItemEditorUiBinder extends UiBinder<Widget, CategoryItemEditor> {
+  }
+
+  @UiField
+  HTML name;
 
   public CategoryItemEditor() {
     initWidget(uiBinder.createAndBindUi(this));

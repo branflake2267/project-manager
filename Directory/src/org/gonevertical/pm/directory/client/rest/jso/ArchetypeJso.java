@@ -1,8 +1,10 @@
 package org.gonevertical.pm.directory.client.rest.jso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 
 public class ArchetypeJso extends JavaScriptObject {
 
@@ -77,13 +79,36 @@ public class ArchetypeJso extends JavaScriptObject {
     return this.version;
   }-*/;
   
-  public final native List<CategoryJso> getCategories() /*-{
+  private final native JsArray<CategoryJso> getCategoriesJso() /*-{
     return this.categories;
   }-*/;
   
-  public final native void setCategories(List<CategoryJso> categories) /*-{
+  public final List<CategoryJso> getCategories() {
+    JsArray<CategoryJso> categories = getCategoriesJso();
+    if (categories == null) {
+      return new ArrayList<CategoryJso>();
+    }
+    List<CategoryJso> list = new ArrayList<CategoryJso>();    
+    for (int i=0; i < categories.length(); i++) {
+      list.add(categories.get(i));
+    }
+    return list;
+  }
+  
+  private final native void setCategoriesJso(JsArray<CategoryJso> categories) /*-{
     this.categories = categories;
   }-*/;
+  
+  public final void setCategories(List<CategoryJso> categories) {
+    if (categories == null) {
+      categories = new ArrayList<CategoryJso>();
+    }
+    JsArray<CategoryJso> list = JavaScriptObject.createArray().cast();
+    for (CategoryJso categoryJso : categories) {
+      list.push(categoryJso);
+    }
+    setCategoriesJso(list);
+  }
   
   public final native List<TagJso> getTags() /*-{
     return this.tags;

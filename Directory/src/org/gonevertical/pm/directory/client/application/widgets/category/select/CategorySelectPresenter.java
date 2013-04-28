@@ -1,6 +1,7 @@
 package org.gonevertical.pm.directory.client.application.widgets.category.select;
 
 import org.gonevertical.pm.directory.client.application.widgets.category.list.CategoryListPresenter;
+import org.gonevertical.pm.directory.client.events.category.CategorySelectEventHandler;
 import org.gonevertical.pm.directory.client.events.category.DisplayCategoryPopupEvent;
 import org.gonevertical.pm.directory.client.events.category.CategorySelectEvent;
 
@@ -11,7 +12,7 @@ import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 
 public class CategorySelectPresenter extends PresenterWidget<CategorySelectPresenter.MyView> implements
-    CategorySelectUiHandlers, DisplayCategoryPopupEvent.AddCategoryHandler, CategorySelectEvent.SelectSelectHandler {
+    CategorySelectUiHandlers, DisplayCategoryPopupEvent.AddCategoryHandler, CategorySelectEventHandler {
 
   public interface MyView extends View, HasUiHandlers<CategorySelectUiHandlers> {
     void center();
@@ -39,7 +40,7 @@ public class CategorySelectPresenter extends PresenterWidget<CategorySelectPrese
     super.onBind();
     
     addRegisteredHandler(DisplayCategoryPopupEvent.getType(), this);
-    addRegisteredHandler(CategorySelectEvent.getType(), this);
+    addRegisteredHandler(CategorySelectEvent.TYPE, this);
   }
   
   @Override
@@ -58,8 +59,8 @@ public class CategorySelectPresenter extends PresenterWidget<CategorySelectPrese
   }
 
   @Override
-  public void onCategorySelect(CategorySelectEvent event) {
-    //getView().hide();
+  public void onCategorySelectEvent(CategorySelectEvent event) {
+    getView().hide();
   }
-  
+ 
 }
