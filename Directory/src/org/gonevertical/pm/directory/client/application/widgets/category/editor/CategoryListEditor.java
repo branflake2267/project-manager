@@ -9,7 +9,7 @@ import org.gonevertical.pm.directory.client.events.category.DeleteDataEvent.Dele
 import org.gonevertical.pm.directory.client.events.category.DisplayCategoryPopupEvent;
 import org.gonevertical.pm.directory.client.rest.jso.CategoryJso;
 
-import com.google.gwt.core.shared.GWT;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.editor.client.IsEditor;
 import com.google.gwt.editor.client.adapters.EditorSource;

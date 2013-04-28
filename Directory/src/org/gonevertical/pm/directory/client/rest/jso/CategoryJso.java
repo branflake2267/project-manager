@@ -4,13 +4,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 public class CategoryJso extends JavaScriptObject {
 
-  public static CategoryJso newInstance() {
-    CategoryJso jso = JavaScriptObject.createObject().cast();
-    jso.setName("test");
-    return jso;
-  }
-  
-  public CategoryJso() {
+  protected CategoryJso() {
   }
   
   public final native void setParent(String parent) /*-{

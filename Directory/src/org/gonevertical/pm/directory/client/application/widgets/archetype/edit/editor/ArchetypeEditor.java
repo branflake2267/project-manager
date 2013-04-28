@@ -6,12 +6,12 @@ import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
+import com.google.gwt.editor.client.testing.EditorHierarchyPrinter;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
-import com.sencha.gxt.widget.core.client.container.FlowLayoutContainer;
 import com.sencha.gxt.widget.core.client.form.TextField;
 
 public class ArchetypeEditor extends Composite implements Editor<ArchetypeJso> {
@@ -24,8 +24,6 @@ public class ArchetypeEditor extends Composite implements Editor<ArchetypeJso> {
   public static ArchetypeEditorUiBinder uiBinder = GWT.create(ArchetypeEditorUiBinder.class);
   public interface ArchetypeEditorUiBinder extends UiBinder<Widget, ArchetypeEditor> {}
   
-  @UiField 
-  FlowLayoutContainer container;
   @UiField
   TextField name;
   @UiField
@@ -45,6 +43,10 @@ public class ArchetypeEditor extends Composite implements Editor<ArchetypeJso> {
     initWidget(uiBinder.createAndBindUi(this));
     
     driver.initialize(this);
+    
+    // DEBUG
+    String s = EditorHierarchyPrinter.toString(driver);
+    System.out.println("EditorHierarchyPrinter = " + s);
   }
   
   public void setEventBus(EventBus eventBus) {
