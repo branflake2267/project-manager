@@ -15,6 +15,7 @@ import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
+import com.google.gwt.user.client.Timer;
 
 public abstract class RestService<T extends JavaScriptObject> {
   
@@ -43,8 +44,12 @@ public abstract class RestService<T extends JavaScriptObject> {
     
     if (oauth.getAccessToken() != null && oauth.getAccessToken().trim().length() > 0) {
       builder.setHeader("Authorization", "Bearer " + oauth.getAccessToken());
-    }
+    } 
 
+    call(url, builder, handler, new CallNumber());
+  }
+   
+  private void call(final String url, final RequestBuilder builder, final RestHandler<T> handler, final CallNumber callNumber) {
     builder.setCallback(new RequestCallback() {
       @Override
       public void onResponseReceived(Request request, Response response) {
@@ -53,13 +58,35 @@ public abstract class RestService<T extends JavaScriptObject> {
           T jso = (T) JSONParser.parseLenient(json).isObject().getJavaScriptObject().cast();
           handler.onSuccess(jso);
         } else {
+          callNumber.add();
           handler.onFailure(new Exception("Exception: url=" + url + " getStatusText=" + response.getStatusText() + " text=" + response.getText()));
+          if (callNumber.get() > 3) {
+            Timer t = new Timer() {
+              @Override
+              public void run() {
+                System.out.println("calling again + " + callNumber.get());
+                call(url, builder, handler, callNumber);
+              }
+            };
+            t.schedule(500 * callNumber.get() + 1);
+          }
         }
       }
 
       @Override
       public void onError(Request request, Throwable e) {
         handler.onFailure(e);
+        callNumber.add();
+        if (callNumber.get() > 3) {
+          Timer t = new Timer() {
+            @Override
+            public void run() {
+              System.out.println("calling again + " + callNumber.get());
+              call(url, builder, handler, callNumber);
+            }
+          };
+          t.schedule(500 * callNumber.get() + 1);
+        }
       }
     });
 

@@ -47,4 +47,11 @@ public class AdminPresenter extends Presenter<AdminPresenter.MyView, AdminPresen
     setInSlot(TYPE_CategoryPresenter, categoryListPresenter);
   }
   
+  @Override
+  protected void onReveal() {
+    super.onReveal();
+    
+    categoryListPresenter.display();
+    categoryListPresenter.edit(true);
+  }
 }

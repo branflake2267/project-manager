@@ -1,8 +1,10 @@
 package org.gonevertical.pm.directory.client.rest.jso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 
 public class ArchetypeJso extends JavaScriptObject {
 
@@ -77,11 +79,11 @@ public class ArchetypeJso extends JavaScriptObject {
     return this.version;
   }-*/;
   
-  public final native List<CategoryJso> getCategories() /*-{
+  public final native JsArray<CategoryJso> getCategories() /*-{
     return this.categories;
   }-*/;
   
-  public final native void setCategories(List<CategoryJso> categories) /*-{
+  public final native void setCategories(JsArray<CategoryJso> categories) /*-{
     this.categories = categories;
   }-*/;
   

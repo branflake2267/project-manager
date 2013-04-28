@@ -3,8 +3,11 @@ package org.gonevertical.pm.directory.client.application.widgets.archetype.list;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.gonevertical.pm.directory.client.application.widgets.archetype.list.columns.CategoryCell;
 import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
+import org.gonevertical.pm.directory.client.rest.jso.CategoryJso;
 
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -61,12 +64,14 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
     toolBar.bind(pagingLoader);
 
     // Name Column
-    ColumnConfig<ArchetypeJso, String> nameColumn = new ColumnConfig<ArchetypeJso, String>(columnProperties.name(),
-        100, "Name");
-
+    ColumnConfig<ArchetypeJso, String> nameColumn = new ColumnConfig<ArchetypeJso, String>(columnProperties.name(), 100, "Name");
+    ColumnConfig<ArchetypeJso, JsArray<CategoryJso>> nameCategories = new ColumnConfig<ArchetypeJso, JsArray<CategoryJso>>(columnProperties.categories(), 100, "Categories");
+    nameCategories.setCell(new CategoryCell());
+    
     // Columns
     List<ColumnConfig<ArchetypeJso, ?>> columnConfigList = new ArrayList<ColumnConfig<ArchetypeJso, ?>>();
     columnConfigList.add(nameColumn);
+    columnConfigList.add(nameCategories);
     ColumnModel<ArchetypeJso> columnModel = new ColumnModel<ArchetypeJso>(columnConfigList);
     
     // Grid

@@ -17,6 +17,8 @@ import com.gwtplatform.mvp.client.View;
 public class ArchetypeEditPresenter extends PresenterWidget<ArchetypeEditPresenter.MyView> implements
     ArchetypeEditUiHandlers, ArchetypeEditEvent.EditArchetypeHandler {
 
+  public static final Object SLOT_CategorySelectPresenter = new Object();
+  
   private final ArchetypeJsoDao archetypeJsoDao;
   private final ArchetypeObserver archetypeObserver;
   private final CategorySelectPresenter categorySelectPresenter;
@@ -45,6 +47,8 @@ public class ArchetypeEditPresenter extends PresenterWidget<ArchetypeEditPresent
   @Override
   protected void onBind() {
     super.onBind();
+    
+    setInSlot(SLOT_CategorySelectPresenter, categorySelectPresenter);
     
     registerHandler(archetypeObserver.getEventBus().addHandler(ArchetypeEditEvent.getType(), this));
   }
@@ -76,7 +80,7 @@ public class ArchetypeEditPresenter extends PresenterWidget<ArchetypeEditPresent
 
   @Override
   public void displayCategoryPopup() {
-    addToPopupSlot(categorySelectPresenter, true);
+    setInSlot(CategorySelectPresenter.SLOT_categoryList, categorySelectPresenter);
   }
 
 }
