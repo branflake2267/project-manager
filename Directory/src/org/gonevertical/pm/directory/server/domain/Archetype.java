@@ -15,6 +15,7 @@ import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Text;
+import com.google.appengine.datanucleus.annotations.Unowned;
 
 @PersistenceCapable(detachable = "true")
 public class Archetype {
@@ -32,9 +33,11 @@ public class Archetype {
   @Persistent
   private Text description;
   
+  @Unowned
   @Persistent(defaultFetchGroup = "true", dependentElement = "true")
   private HashSet<Category> categories;
   
+  @Unowned
   @Persistent(defaultFetchGroup = "true", dependentElement = "true")
   private HashSet<Tag> tags;
 
