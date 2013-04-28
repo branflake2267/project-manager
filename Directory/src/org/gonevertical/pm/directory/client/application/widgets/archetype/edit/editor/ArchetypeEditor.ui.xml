@@ -1,14 +1,62 @@
-<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' 
-    xmlns:g='urn:import:com.google.gwt.user.client.ui'
-    xmlns:p1="urn:import:com.google.gwt.user.cellview.client" 
-    xmlns:gxt='urn:import:com.sencha.gxt.widget.core.client'
-    xmlns:util='urn:import:com.sencha.gxt.core.client.util' 
-    xmlns:form='urn:import:com.sencha.gxt.widget.core.client.form'
-    xmlns:button='urn:import:com.sencha.gxt.widget.core.client.button' 
-    xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" 
+    xmlns:g="urn:import:com.google.gwt.user.client.ui"
+    xmlns:gxt="urn:import:com.sencha.gxt.widget.core.client"
+    xmlns:form="urn:import:com.sencha.gxt.widget.core.client.form"
+    xmlns:button="urn:import:com.sencha.gxt.widget.core.client.button" 
+    xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
+    xmlns:category="urn:import:org.gonevertical.pm.directory.client.application.widgets.category.editor">
     <ui:style>
     </ui:style>
 
-    <container:VerticalLayoutContainer ui:field="container"/>
-
+    <container:FlowLayoutContainer ui:field="container">
+        <container:child>
+            <form:FieldLabel text="Name">
+                <form:widget>
+                    <form:TextField ui:field="name" width="350px" />
+                </form:widget>
+            </form:FieldLabel>
+        </container:child>
+        <container:child>
+            <form:FieldLabel text="Description">
+                <form:widget>
+                    <form:TextField ui:field="description" width="350px" />
+                </form:widget>
+            </form:FieldLabel>
+        </container:child>
+        <container:child>
+            <form:FieldLabel text="Repository">
+                <form:widget>
+                    <form:TextField ui:field="repository" width="350px" />
+                </form:widget>
+            </form:FieldLabel>
+        </container:child>
+        <container:child>
+            <form:FieldLabel text="GroupId">
+                <form:widget>
+                    <form:TextField ui:field="groupId" width="350px" />
+                </form:widget>
+            </form:FieldLabel>
+        </container:child>
+        <container:child>
+            <form:FieldLabel text="ArtifactId">
+                <form:widget>
+                    <form:TextField ui:field="artifactId" width="350px" />
+                </form:widget>
+            </form:FieldLabel>
+        </container:child>
+        <container:child>
+            <form:FieldLabel text="Version">
+                <form:widget>
+                    <form:TextField ui:field="version" width="350px" />
+                </form:widget>
+            </form:FieldLabel>
+        </container:child>
+        <container:child>
+            <form:FieldLabel text="Categories">
+                <form:widget>
+                    <category:CategoryListEditor ui:field="categories" width="350px" />
+                </form:widget>
+            </form:FieldLabel>
+        </container:child>
+    </container:FlowLayoutContainer>
 </ui:UiBinder>

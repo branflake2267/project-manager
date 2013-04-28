@@ -2,9 +2,11 @@
 <ui:UiBinder 
     xmlns:ui="urn:ui:com.google.gwt.uibinder" 
     xmlns:g="urn:import:com.google.gwt.user.client.ui"
-    xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container">
-    <ui:style>
-        
-    </ui:style>
-    <container:FlowLayoutContainer ui:field="container" />
+    xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
+    xmlns:button='urn:import:com.sencha.gxt.widget.core.client.button'>
+    
+    <container:FlowLayoutContainer>
+        <button:TextButton text="Add" ui:field="add" />
+        <container:FlowLayoutContainer ui:field="list" />
+    </container:FlowLayoutContainer>
 </ui:UiBinder> 

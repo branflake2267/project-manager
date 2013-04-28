@@ -5,13 +5,13 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 
-public class DeleteEvent extends GwtEvent<DeleteEvent.DeleteHandler> {
+public class DeleteDataEvent extends GwtEvent<DeleteDataEvent.DeleteHandler> {
 
-  public DeleteEvent() {
+  public DeleteDataEvent() {
   }
 
   public static void fire(HasHandlers source) {
-    DeleteEvent eventInstance = new DeleteEvent();
+    DeleteDataEvent eventInstance = new DeleteDataEvent();
     source.fireEvent(eventInstance);
   }
 
@@ -20,7 +20,7 @@ public class DeleteEvent extends GwtEvent<DeleteEvent.DeleteHandler> {
   }
 
   public interface DeleteHandler extends EventHandler {
-    public void onDelete(DeleteEvent event);
+    public void onDelete(DeleteDataEvent event);
   }
 
   private static final Type<DeleteHandler> TYPE = new Type<DeleteHandler>();

@@ -29,5 +29,4 @@
         </container:child>
     </container:VerticalLayoutContainer>
         
-    
 </ui:UiBinder>

@@ -30,11 +30,13 @@ public class ArchetypeEditView extends ViewWithUiHandlers<ArchetypeEditUiHandler
   TextButton goback;
   @UiField
   TextButton save;
-  @UiField
+  @UiField(provided = true)
   ArchetypeEditor editor;
   
   @Inject
-  public ArchetypeEditView(final Binder binder) {
+  public ArchetypeEditView(Binder binder, ArchetypeEditor editor) {
+    this.editor = editor;
+    
     initWidget(binder.createAndBindUi(this));
   }
 

@@ -81,7 +81,7 @@ public class ArchetypeEditPresenter extends PresenterWidget<ArchetypeEditPresent
 
   @Override
   public void displayCategoryPopup() {
-    addToPopupSlot(categorySelectPresenter, true);
+    setInSlot(CategorySelectPresenter.SLOT_categoryList, categorySelectPresenter);
   }
 
   @Override
