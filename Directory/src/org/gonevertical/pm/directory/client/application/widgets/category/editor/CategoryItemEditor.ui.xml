@@ -5,11 +5,14 @@
     xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
     xmlns:button="urn:import:com.sencha.gxt.widget.core.client.button">
     <ui:style>
+    	.name {
+			width: 150px;
+		}
     </ui:style>
     
     <g:HorizontalPanel>
-        <g:cell>
-            <g:HTML ui:field="name" />
+        <g:cell horizontalAlignment="ALIGN_MIDDLE">
+            <g:HTML ui:field="name" addStyleNames="{style.name}" />
         </g:cell>
         <g:cell>
             <button:TextButton text="X" ui:field="delete" />

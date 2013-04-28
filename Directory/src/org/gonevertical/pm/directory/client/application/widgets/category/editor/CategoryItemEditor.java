@@ -6,6 +6,7 @@ import org.gonevertical.pm.directory.client.rest.jso.CategoryJso;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
+import com.google.gwt.safehtml.shared.SimpleHtmlSanitizer;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -26,6 +27,8 @@ public class CategoryItemEditor extends Composite implements Editor<CategoryJso>
   @UiField
   HTML name;
 
+  private CategoryJso categoryJso;
+
   public CategoryItemEditor() {
     initWidget(uiBinder.createAndBindUi(this));
   }
@@ -34,9 +37,25 @@ public class CategoryItemEditor extends Composite implements Editor<CategoryJso>
     return addHandler(handler, DeleteDataEvent.getType());
   }
 
+  public CategoryJso getCategoryJso() {
+    return categoryJso;
+  }
+
+  public void setCategoryJso(CategoryJso categoryJso) {
+    this.categoryJso = categoryJso;
+  }
+  
+  public void display() {
+    String name = categoryJso.getName();
+    if (name == null) {
+      name = "";
+    }
+    this.name.setHTML(SimpleHtmlSanitizer.sanitizeHtml(name));
+  }
+
   @UiHandler("delete")
   void onDeleteSelect(SelectEvent event) {
-    DeleteDataEvent.fire(this);
+    removeFromParent();
   }
 
 }

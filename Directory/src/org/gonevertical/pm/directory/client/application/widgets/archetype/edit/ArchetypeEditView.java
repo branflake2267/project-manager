@@ -1,7 +1,5 @@
 package org.gonevertical.pm.directory.client.application.widgets.archetype.edit;
 
-import java.util.ArrayList;
-
 import org.gonevertical.pm.directory.client.application.widgets.archetype.edit.editor.ArchetypeEditor;
 import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
 import org.gonevertical.pm.directory.client.rest.jso.CategoryJso;
@@ -54,10 +52,6 @@ public class ArchetypeEditView extends ViewWithUiHandlers<ArchetypeEditUiHandler
   
   @Override
   public void display(ArchetypeJso archetypeJso) {
-    if (archetypeJso.getCategories() == null) {
-      archetypeJso.setCategories(new ArrayList<CategoryJso>());
-    }
-    
     editor.edit(archetypeJso);
   }
 

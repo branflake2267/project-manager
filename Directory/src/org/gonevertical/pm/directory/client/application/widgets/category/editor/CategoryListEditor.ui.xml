@@ -4,9 +4,8 @@
     xmlns:g="urn:import:com.google.gwt.user.client.ui"
     xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
     xmlns:button='urn:import:com.sencha.gxt.widget.core.client.button'>
-    
     <container:FlowLayoutContainer>
         <button:TextButton text="Add" ui:field="add" />
-        <g:FlowPanel ui:field="list" />
+        <g:FlowPanel ui:field="categories" />
     </container:FlowLayoutContainer>
 </ui:UiBinder> 

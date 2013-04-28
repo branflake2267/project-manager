@@ -1,19 +1,14 @@
 package org.gonevertical.pm.directory.client.application.widgets.category.editor;
 
-import java.util.List;
-
 import org.gonevertical.pm.directory.client.events.category.CategorySelectEvent;
 import org.gonevertical.pm.directory.client.events.category.CategorySelectEventHandler;
-import org.gonevertical.pm.directory.client.events.category.DeleteDataEvent;
-import org.gonevertical.pm.directory.client.events.category.DeleteDataEvent.DeleteHandler;
 import org.gonevertical.pm.directory.client.events.category.DisplayCategoryPopupEvent;
 import org.gonevertical.pm.directory.client.rest.jso.CategoryJso;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.editor.client.Editor;
-import com.google.gwt.editor.client.IsEditor;
-import com.google.gwt.editor.client.adapters.EditorSource;
-import com.google.gwt.editor.client.adapters.ListEditor;
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
+import com.google.gwt.editor.client.LeafValueEditor;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -24,37 +19,14 @@ import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 
-public class CategoryListEditor extends Composite implements IsEditor<Editor<List<CategoryJso>>> {
-
-  // ListEditor item manager
-  private class ItemEditorSource extends EditorSource<CategoryItemEditor> {
-    @Override
-    public CategoryItemEditor create(final int index) {
-      CategoryItemEditor item = new CategoryItemEditor();
-      list.insert(item, index);
-      item.addDeleteHandler(new DeleteHandler() {
-        public void onDelete(DeleteDataEvent event) {
-          removeItem(index);
-        }
-      });
-      return item;
-    }
-    @Override
-    public void dispose(CategoryItemEditor item) {
-      item.removeFromParent();
-    }
-    @Override
-    public void setIndex(CategoryItemEditor item, int index) {
-      list.insert(item, index);
-    }
-  }
-  private ListEditor<CategoryJso, CategoryItemEditor> listEditor = ListEditor.of(new ItemEditorSource());
+public class CategoryListEditor extends Composite implements LeafValueEditor<JsArray<CategoryJso>> {
 
   // UiBinder
   private static CategoryListEditorUiBinder uiBinder = GWT.create(CategoryListEditorUiBinder.class);
   public interface CategoryListEditorUiBinder extends UiBinder<Widget, CategoryListEditor> {}
+  
   @UiField
-  FlowPanel list;
+  FlowPanel categories;
   
   private EventBus eventBus;
   
@@ -70,14 +42,9 @@ public class CategoryListEditor extends Composite implements IsEditor<Editor<Lis
       @Override
       public void onCategorySelectEvent(CategorySelectEvent event) {
         CategoryJso categoryJso = event.getData();
-        List<CategoryJso> l = listEditor.getList();
-        l.add(categoryJso);
+        addItem(categoryJso);
       }
     });
-  }
-
-  private void removeItem(int index) {
-    listEditor.getList().remove(index);
   }
 
   @UiHandler("add")
@@ -86,8 +53,30 @@ public class CategoryListEditor extends Composite implements IsEditor<Editor<Lis
   }
 
   @Override
-  public Editor<List<CategoryJso>> asEditor() {
-    return listEditor;
+  public void setValue(JsArray<CategoryJso> value) {
+    if (value == null) {
+      return;
+    }
+    for (int i=0; i < value.length(); i++) {
+      addItem(value.get(i));
+    }
+  }
+
+  private void addItem(CategoryJso categoryJso) {
+    CategoryItemEditor w = new CategoryItemEditor();
+    categories.add(w);
+    w.setCategoryJso(categoryJso);
+    w.display();
+  }
+
+  @Override
+  public JsArray<CategoryJso> getValue() {
+    JsArray<CategoryJso> a = JavaScriptObject.createArray().cast();
+    for (int i=0; i < categories.getWidgetCount(); i++) {
+      CategoryItemEditor w = (CategoryItemEditor) categories.getWidget(i);
+      a.push(w.getCategoryJso());
+    }
+    return a;
   }
   
 }

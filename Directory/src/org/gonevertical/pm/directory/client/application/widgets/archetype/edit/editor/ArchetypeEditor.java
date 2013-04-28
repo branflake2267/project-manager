@@ -6,7 +6,6 @@ import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
-import com.google.gwt.editor.client.testing.EditorHierarchyPrinter;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -45,8 +44,8 @@ public class ArchetypeEditor extends Composite implements Editor<ArchetypeJso> {
     driver.initialize(this);
     
     // DEBUG
-    String s = EditorHierarchyPrinter.toString(driver);
-    System.out.println("EditorHierarchyPrinter = " + s);
+    //String s = EditorHierarchyPrinter.toString(driver);
+    //System.out.println("EditorHierarchyPrinter = " + s);
   }
   
   public void setEventBus(EventBus eventBus) {

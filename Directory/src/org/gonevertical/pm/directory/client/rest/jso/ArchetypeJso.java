@@ -79,36 +79,13 @@ public class ArchetypeJso extends JavaScriptObject {
     return this.version;
   }-*/;
   
-  private final native JsArray<CategoryJso> getCategoriesJso() /*-{
+  public final native JsArray<CategoryJso> getCategories() /*-{
     return this.categories;
   }-*/;
   
-  public final List<CategoryJso> getCategories() {
-    JsArray<CategoryJso> categories = getCategoriesJso();
-    if (categories == null) {
-      return new ArrayList<CategoryJso>();
-    }
-    List<CategoryJso> list = new ArrayList<CategoryJso>();    
-    for (int i=0; i < categories.length(); i++) {
-      list.add(categories.get(i));
-    }
-    return list;
-  }
-  
-  private final native void setCategoriesJso(JsArray<CategoryJso> categories) /*-{
+  private final native void setCategories(JsArray<CategoryJso> categories) /*-{
     this.categories = categories;
   }-*/;
-  
-  public final void setCategories(List<CategoryJso> categories) {
-    if (categories == null) {
-      categories = new ArrayList<CategoryJso>();
-    }
-    JsArray<CategoryJso> list = JavaScriptObject.createArray().cast();
-    for (CategoryJso categoryJso : categories) {
-      list.push(categoryJso);
-    }
-    setCategoriesJso(list);
-  }
   
   public final native List<TagJso> getTags() /*-{
     return this.tags;
