@@ -54,6 +54,8 @@ public class CategoryListEditor extends Composite implements LeafValueEditor<JsA
 
   @Override
   public void setValue(JsArray<CategoryJso> value) {
+    categories.clear();
+    
     if (value == null) {
       return;
     }

@@ -83,7 +83,7 @@ public class ArchetypeJso extends JavaScriptObject {
     return this.categories;
   }-*/;
   
-  private final native void setCategories(JsArray<CategoryJso> categories) /*-{
+  public final native void setCategories(JsArray<CategoryJso> categories) /*-{
     this.categories = categories;
   }-*/;
   

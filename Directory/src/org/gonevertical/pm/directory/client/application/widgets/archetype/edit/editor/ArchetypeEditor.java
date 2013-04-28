@@ -6,6 +6,7 @@ import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
+import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -57,7 +58,9 @@ public class ArchetypeEditor extends Composite implements Editor<ArchetypeJso> {
   }
   
   public ArchetypeJso getArchTypeJso() {
-    return driver.flush();
+    ArchetypeJso jso = driver.flush();
+    System.out.println(new JSONObject(jso).toString());
+    return jso; 
   }
   
 }

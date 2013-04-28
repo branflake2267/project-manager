@@ -6,12 +6,12 @@
     xmlns:button="urn:import:com.sencha.gxt.widget.core.client.button">
     <ui:style>
     	.name {
-			width: 150px;
+			width: 200px;
 		}
     </ui:style>
     
     <g:HorizontalPanel>
-        <g:cell horizontalAlignment="ALIGN_MIDDLE">
+        <g:cell verticalAlignment="ALIGN_MIDDLE">
             <g:HTML ui:field="name" addStyleNames="{style.name}" />
         </g:cell>
         <g:cell>
