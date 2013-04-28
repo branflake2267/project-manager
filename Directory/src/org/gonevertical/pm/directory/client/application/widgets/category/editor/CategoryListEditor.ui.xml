@@ -7,6 +7,6 @@
     
     <container:FlowLayoutContainer>
         <button:TextButton text="Add" ui:field="add" />
-        <container:FlowLayoutContainer ui:field="list" />
+        <g:FlowPanel ui:field="list" />
     </container:FlowLayoutContainer>
 </ui:UiBinder> 

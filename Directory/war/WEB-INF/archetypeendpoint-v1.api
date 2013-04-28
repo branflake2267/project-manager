@@ -194,13 +194,13 @@
           "systemUserKey" : {
             "type" : "string"
           },
+          "blobUrl" : {
+            "type" : "string"
+          },
           "categoriesSearch" : {
             "type" : "string"
           },
           "tagsSearch" : {
-            "type" : "string"
-          },
-          "blobUrl" : {
             "type" : "string"
           }
         }

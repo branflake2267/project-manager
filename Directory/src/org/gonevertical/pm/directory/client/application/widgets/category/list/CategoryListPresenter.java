@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.gonevertical.pm.directory.client.application.widgets.login.LoginPresenter;
-import org.gonevertical.pm.directory.client.events.category.SelectCategoryEvent;
+import org.gonevertical.pm.directory.client.events.category.CategorySelectEvent;
 import org.gonevertical.pm.directory.client.rest.ArchetypeJsoDao;
 import org.gonevertical.pm.directory.client.rest.CategoryJsoDao;
 import org.gonevertical.pm.directory.client.rest.jso.CategoryJso;
@@ -42,15 +42,17 @@ public class CategoryListPresenter extends PresenterWidget<CategoryListPresenter
 
   private final CategoryJsoDao categoryJsoDao;
   private final CategoryProperties categoryProperties;
-
-  private boolean initialized;
+  private final EventBus eventBus;
+  
   private TreeStore<CategoryJso> treeStore;
+  private boolean initialized;
 
   @Inject
   public CategoryListPresenter(EventBus eventBus, MyView view, LoginPresenter loginPresenter,
       ArchetypeJsoDao archetypeJsoDao, CategoryProperties categoryProperties, CategoryJsoDao categoryJsoDao) {
     super(eventBus, view);
 
+    this.eventBus = eventBus;
     this.categoryProperties = categoryProperties;
     this.categoryJsoDao = categoryJsoDao;
 
@@ -159,7 +161,6 @@ public class CategoryListPresenter extends PresenterWidget<CategoryListPresenter
       save(category);
       record.commit(true);
     }
-
   }
 
   private void save(CategoryJso category) {
@@ -178,7 +179,11 @@ public class CategoryListPresenter extends PresenterWidget<CategoryListPresenter
 
   @Override
   public void setSelected(CategoryJso selected) {
-    SelectCategoryEvent.fire(this, selected);
+    try {
+      eventBus.fireEvent(new CategorySelectEvent(selected));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
   
 }

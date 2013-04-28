@@ -4,7 +4,7 @@ import org.gonevertical.pm.directory.client.application.widgets.category.select.
 import org.gonevertical.pm.directory.client.application.widgets.login.LoginPresenter;
 import org.gonevertical.pm.directory.client.events.archetypes.ArchetypeEditEvent;
 import org.gonevertical.pm.directory.client.events.archetypes.ArchetypeObserver;
-import org.gonevertical.pm.directory.client.events.category.SelectCategoryEvent;
+import org.gonevertical.pm.directory.client.events.category.CategorySelectEvent;
 import org.gonevertical.pm.directory.client.rest.ArchetypeJsoDao;
 import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
 import org.gonevertical.pm.directory.client.rest.jso.CategoryJso;
@@ -17,16 +17,16 @@ import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
 
 public class ArchetypeEditPresenter extends PresenterWidget<ArchetypeEditPresenter.MyView> implements
-    ArchetypeEditUiHandlers, ArchetypeEditEvent.EditArchetypeHandler, SelectCategoryEvent.SelectSelectHandler<CategoryJso> {
+    ArchetypeEditUiHandlers, ArchetypeEditEvent.EditArchetypeHandler {
 
+  public static final Object SLOT_CategorySelectPresenter = new Object();
+  
   private final ArchetypeJsoDao archetypeJsoDao;
   private final ArchetypeObserver archetypeObserver;
   private final CategorySelectPresenter categorySelectPresenter;
 
   public interface MyView extends View, HasUiHandlers<ArchetypeEditUiHandlers> {
     void display(ArchetypeJso archetypeJso);
-
-    void setCategorySelected(CategoryJso selected);
   }
 
   @Inject
@@ -50,8 +50,9 @@ public class ArchetypeEditPresenter extends PresenterWidget<ArchetypeEditPresent
   protected void onBind() {
     super.onBind();
     
+    setInSlot(SLOT_CategorySelectPresenter, categorySelectPresenter);
+    
     registerHandler(archetypeObserver.getEventBus().addHandler(ArchetypeEditEvent.getType(), this));
-    addRegisteredHandler(SelectCategoryEvent.getType(), this);
   }
 
   @Override
@@ -82,11 +83,6 @@ public class ArchetypeEditPresenter extends PresenterWidget<ArchetypeEditPresent
   @Override
   public void displayCategoryPopup() {
     setInSlot(CategorySelectPresenter.SLOT_categoryList, categorySelectPresenter);
-  }
-
-  @Override
-  public void onSelect(SelectCategoryEvent<CategoryJso> event) {
-    getView().setCategorySelected(event.getData());
   }
 
 }

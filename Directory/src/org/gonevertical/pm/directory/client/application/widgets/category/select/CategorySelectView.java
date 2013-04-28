@@ -40,5 +40,10 @@ public class CategorySelectView extends ViewWithUiHandlers<CategorySelectUiHandl
   public void center() {
     container.show();
   }
+
+  @Override
+  public void hide() {
+    container.hide();
+  }
   
 }

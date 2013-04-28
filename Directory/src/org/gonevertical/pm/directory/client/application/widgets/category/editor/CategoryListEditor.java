@@ -2,9 +2,10 @@ package org.gonevertical.pm.directory.client.application.widgets.category.editor
 
 import java.util.List;
 
+import org.gonevertical.pm.directory.client.events.category.CategorySelectEvent;
 import org.gonevertical.pm.directory.client.events.category.DeleteDataEvent;
-import org.gonevertical.pm.directory.client.events.category.DisplayCategoryPopupEvent;
 import org.gonevertical.pm.directory.client.events.category.DeleteDataEvent.DeleteHandler;
+import org.gonevertical.pm.directory.client.events.category.DisplayCategoryPopupEvent;
 import org.gonevertical.pm.directory.client.rest.jso.CategoryJso;
 
 import com.google.gwt.editor.client.Editor;
@@ -15,10 +16,10 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
-import com.sencha.gxt.widget.core.client.container.FlowLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 
 public class CategoryListEditor extends Composite implements IsEditor<Editor<List<CategoryJso>>>{
@@ -50,7 +51,7 @@ public class CategoryListEditor extends Composite implements IsEditor<Editor<Lis
   // UiBinder
   public interface Binder extends UiBinder<Widget, CategoryListEditor> {}
   @UiField
-  FlowLayoutContainer list;
+  FlowPanel list;
   
   private EventBus eventBus;
   
@@ -59,6 +60,14 @@ public class CategoryListEditor extends Composite implements IsEditor<Editor<Lis
     this.eventBus = eventBus;
     
     initWidget(binder.createAndBindUi(this));
+    
+    eventBus.addHandler(CategorySelectEvent.getType(), new CategorySelectEvent.SelectSelectHandler() {
+      @Override
+      public void onCategorySelect(CategorySelectEvent event) {
+        CategoryJso categoryJso = event.getData();
+        listEditor.getList().add(categoryJso);
+      }
+    });
   }
 
   @Override

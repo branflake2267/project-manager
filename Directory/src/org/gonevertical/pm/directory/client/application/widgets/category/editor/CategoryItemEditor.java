@@ -1,4 +1,4 @@
- package org.gonevertical.pm.directory.client.application.widgets.category.editor;
+package org.gonevertical.pm.directory.client.application.widgets.category.editor;
 
 import org.gonevertical.pm.directory.client.events.category.DeleteDataEvent;
 import org.gonevertical.pm.directory.client.events.category.DeleteDataEvent.DeleteHandler;
@@ -21,17 +21,17 @@ public class CategoryItemEditor extends Composite implements Editor<CategoryJso>
   private static CategoryItemEditorUiBinder uiBinder = GWT.create(CategoryItemEditorUiBinder.class);
   interface CategoryItemEditorUiBinder extends UiBinder<Widget, CategoryItemEditor> {}
 
-  @UiField
-  HTML name;
-  
+   @UiField
+   HTML name;
+
   public CategoryItemEditor() {
     initWidget(uiBinder.createAndBindUi(this));
   }
-  
+
   public HandlerRegistration addDeleteHandler(DeleteHandler handler) {
     return addHandler(handler, DeleteDataEvent.getType());
   }
-  
+
   @UiHandler("delete")
   void onDeleteSelect(SelectEvent event) {
     DeleteDataEvent.fire(this);

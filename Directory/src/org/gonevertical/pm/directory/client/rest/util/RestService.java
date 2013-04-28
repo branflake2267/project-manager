@@ -48,7 +48,7 @@ public abstract class RestService<T extends JavaScriptObject> {
 
     call(url, builder, handler, new CallNumber());
   }
-  
+   
   private void call(final String url, final RequestBuilder builder, final RestHandler<T> handler, final CallNumber callNumber) {
     builder.setCallback(new RequestCallback() {
       @Override
