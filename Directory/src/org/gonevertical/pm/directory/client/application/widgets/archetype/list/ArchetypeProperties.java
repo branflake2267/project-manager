@@ -2,6 +2,7 @@ package org.gonevertical.pm.directory.client.application.widgets.archetype.list;
 
 import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
 import org.gonevertical.pm.directory.client.rest.jso.CategoryJso;
+import org.gonevertical.pm.directory.client.rest.jso.TagJso;
 
 import com.google.gwt.core.client.JsArray;
 import com.sencha.gxt.core.client.ValueProvider;
@@ -15,4 +16,6 @@ public interface ArchetypeProperties extends PropertyAccess<ArchetypeJso> {
   ValueProvider<ArchetypeJso, String> name();
   
   ValueProvider<ArchetypeJso, JsArray<CategoryJso>> categories();
+
+  ValueProvider<ArchetypeJso, JsArray<TagJso>> tags();
 }
