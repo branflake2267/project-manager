@@ -197,10 +197,10 @@
           "categoriesSearch" : {
             "type" : "string"
           },
-          "tagsSearch" : {
+          "blobUrl" : {
             "type" : "string"
           },
-          "blobUrl" : {
+          "tagsSearch" : {
             "type" : "string"
           }
         }

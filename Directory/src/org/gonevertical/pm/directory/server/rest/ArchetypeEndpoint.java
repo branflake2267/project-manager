@@ -51,7 +51,7 @@ public class ArchetypeEndpoint {
   }
 
   private static void addToSearchIndex(Archetype o) {
-    Document.Builder docBuilder = Document
+    Document.Builder docBuilder = Document 
         .newBuilder()
         .addField(Field.newBuilder().setName("key").setText(o.getKey()))
         .addField(Field.newBuilder().setName("name").setText(o.getName() != null ? o.getName() : ""))
