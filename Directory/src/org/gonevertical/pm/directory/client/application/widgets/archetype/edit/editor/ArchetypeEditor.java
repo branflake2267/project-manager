@@ -1,6 +1,7 @@
 package org.gonevertical.pm.directory.client.application.widgets.archetype.edit.editor;
 
 import org.gonevertical.pm.directory.client.application.widgets.category.editor.CategoryListEditor;
+import org.gonevertical.pm.directory.client.application.widgets.tag.editor.TagListEditor;
 import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
 
 import com.google.gwt.core.client.GWT;
@@ -38,6 +39,8 @@ public class ArchetypeEditor extends Composite implements Editor<ArchetypeJso> {
   TextField version;
   @UiField
   CategoryListEditor categories;
+  @UiField
+  TagListEditor tags;
 
   public ArchetypeEditor() {
     initWidget(uiBinder.createAndBindUi(this));
@@ -51,6 +54,7 @@ public class ArchetypeEditor extends Composite implements Editor<ArchetypeJso> {
   
   public void setEventBus(EventBus eventBus) {
     categories.setEventBus(eventBus);
+    tags.setEventBus(eventBus);
   }
 
   public void edit(ArchetypeJso archetypeJso) {

@@ -1,8 +1,5 @@
 package org.gonevertical.pm.directory.client.rest.jso;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 
@@ -87,11 +84,11 @@ public class ArchetypeJso extends JavaScriptObject {
     this.categories = categories;
   }-*/;
   
-  public final native List<TagJso> getTags() /*-{
+  public final native JsArray<TagJso> getTags() /*-{
     return this.tags;
   }-*/;
   
-  public final native void setTags(List<TagJso> tags) /*-{
+  public final native void setTags(JsArray<TagJso> tags) /*-{
     this.tags = tags;
   }-*/;
   

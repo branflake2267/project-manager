@@ -1,5 +1,6 @@
 package org.gonevertical.pm.directory.client.application.widgets.tag.editor;
 
+import org.gonevertical.pm.directory.client.events.tag.DisplayTagPopupEvent;
 import org.gonevertical.pm.directory.client.events.tag.TagSelectEvent;
 import org.gonevertical.pm.directory.client.events.tag.TagSelectEventHandler;
 import org.gonevertical.pm.directory.client.rest.jso.TagJso;
@@ -25,7 +26,7 @@ public class TagListEditor extends Composite implements LeafValueEditor<JsArray<
   public interface TagListEditorUiBinder extends UiBinder<Widget, TagListEditor> {}
   
   @UiField
-  FlowPanel categories;
+  FlowPanel tags;
   
   private EventBus eventBus;
   
@@ -48,12 +49,12 @@ public class TagListEditor extends Composite implements LeafValueEditor<JsArray<
 
   @UiHandler("add")
   void onAddSelect(SelectEvent event) {
-    //eventBus.fireEvent(new DisplayTagPopupEvent());
+    eventBus.fireEvent(new DisplayTagPopupEvent());
   }
 
   @Override
   public void setValue(JsArray<TagJso> value) {
-    categories.clear();
+    tags.clear();
     
     if (value == null) {
       return;
@@ -65,7 +66,7 @@ public class TagListEditor extends Composite implements LeafValueEditor<JsArray<
 
   private void addItem(TagJso TagJso) {
     TagItemEditor w = new TagItemEditor();
-    categories.add(w);
+    tags.add(w);
     w.setTagJso(TagJso);
     w.display();
   }
@@ -73,8 +74,8 @@ public class TagListEditor extends Composite implements LeafValueEditor<JsArray<
   @Override
   public JsArray<TagJso> getValue() {
     JsArray<TagJso> a = JavaScriptObject.createArray().cast();
-    for (int i=0; i < categories.getWidgetCount(); i++) {
-      TagItemEditor w = (TagItemEditor) categories.getWidget(i);
+    for (int i=0; i < tags.getWidgetCount(); i++) {
+      TagItemEditor w = (TagItemEditor) tags.getWidget(i);
       a.push(w.getTagJso());
     }
     return a;

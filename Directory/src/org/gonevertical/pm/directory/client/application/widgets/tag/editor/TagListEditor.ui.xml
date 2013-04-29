@@ -6,6 +6,6 @@
     xmlns:button='urn:import:com.sencha.gxt.widget.core.client.button'>
     <container:FlowLayoutContainer>
         <button:TextButton text="Add" ui:field="add" />
-        <g:FlowPanel ui:field="categories" />
+        <g:FlowPanel ui:field="tags" />
     </container:FlowLayoutContainer>
 </ui:UiBinder> 
