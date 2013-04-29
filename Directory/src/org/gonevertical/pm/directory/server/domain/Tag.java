@@ -16,7 +16,7 @@ public class Tag {
   private Key key;
 
   @Persistent
-  private String name;
+  private String name; 
 
   public String getKey() {
     if (key == null) {
