@@ -4,7 +4,8 @@
     xmlns:form="urn:import:com.sencha.gxt.widget.core.client.form"
     xmlns:button="urn:import:com.sencha.gxt.widget.core.client.button" 
     xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
-    xmlns:category="urn:import:org.gonevertical.pm.directory.client.application.widgets.category.editor">
+    xmlns:category="urn:import:org.gonevertical.pm.directory.client.application.widgets.category.editor"
+    xmlns:tag="urn:import:org.gonevertical.pm.directory.client.application.widgets.tag.editor">
     <ui:style>
     </ui:style>
 
@@ -55,6 +56,13 @@
             <form:FieldLabel text="Categories">
                 <form:widget>
                     <category:CategoryListEditor ui:field="categories" width="350px" />
+                </form:widget>
+            </form:FieldLabel>
+        </container:child>
+        <container:child>
+            <form:FieldLabel text="Tags">
+                <form:widget>
+                    <tag:TagListEditor ui:field="tags" width="350px" />
                 </form:widget>
             </form:FieldLabel>
         </container:child>

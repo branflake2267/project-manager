@@ -2,6 +2,7 @@ package org.gonevertical.pm.directory.client.application.widgets.archetype.edit;
 
 import org.gonevertical.pm.directory.client.application.widgets.category.select.CategorySelectPresenter;
 import org.gonevertical.pm.directory.client.application.widgets.login.LoginPresenter;
+import org.gonevertical.pm.directory.client.application.widgets.tag.select.TagSelectPresenter;
 import org.gonevertical.pm.directory.client.events.archetypes.ArchetypeEditEvent;
 import org.gonevertical.pm.directory.client.events.archetypes.ArchetypeObserver;
 import org.gonevertical.pm.directory.client.rest.ArchetypeJsoDao;
@@ -18,10 +19,12 @@ public class ArchetypeEditPresenter extends PresenterWidget<ArchetypeEditPresent
     ArchetypeEditUiHandlers, ArchetypeEditEvent.EditArchetypeHandler {
 
   public static final Object SLOT_CategorySelectPresenter = new Object();
+  public static final Object SLOT_TagSelectPresenter = new Object();
   
   private final ArchetypeJsoDao archetypeJsoDao;
   private final ArchetypeObserver archetypeObserver;
   private final CategorySelectPresenter categorySelectPresenter;
+  private final TagSelectPresenter tagSelectPresenter;
 
   public interface MyView extends View, HasUiHandlers<ArchetypeEditUiHandlers> {
     void display(ArchetypeJso archetypeJso);
@@ -34,11 +37,13 @@ public class ArchetypeEditPresenter extends PresenterWidget<ArchetypeEditPresent
       ArchetypeObserver archetypeObserver,
       LoginPresenter loginPresenter,
       CategorySelectPresenter categorySelectPresenter,
+      TagSelectPresenter tagSelectPresenter,
       ArchetypeJsoDao archetypeJsoDao) {
     super(eventBus, view);
     
     this.categorySelectPresenter = categorySelectPresenter;
     this.archetypeObserver = archetypeObserver;
+    this.tagSelectPresenter = tagSelectPresenter;
     this.archetypeJsoDao = archetypeJsoDao;
 
     getView().setUiHandlers(this);
@@ -49,6 +54,7 @@ public class ArchetypeEditPresenter extends PresenterWidget<ArchetypeEditPresent
     super.onBind();
     
     setInSlot(SLOT_CategorySelectPresenter, categorySelectPresenter);
+    setInSlot(SLOT_TagSelectPresenter, tagSelectPresenter);
     
     registerHandler(archetypeObserver.getEventBus().addHandler(ArchetypeEditEvent.getType(), this));
   }

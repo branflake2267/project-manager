@@ -17,9 +17,10 @@ public class AdminView extends ViewImpl implements AdminPresenter.MyView {
 
   @UiField
   FlowPanel urls;
-  
   @UiField
   SimplePanel categories;
+  @UiField
+  SimplePanel tags;
 
   @Inject
   public AdminView(Binder uiBinder) {
@@ -36,8 +37,10 @@ public class AdminView extends ViewImpl implements AdminPresenter.MyView {
 
   @Override
   public void setInSlot(Object slot, Widget content) {
-    if (slot == AdminPresenter.TYPE_CategoryPresenter) {
+    if (slot == AdminPresenter.TYPE_CategoryListPresenter) {
       categories.setWidget(content);
+    } else if (slot == AdminPresenter.TYPE_TagListPresenter) {
+      tags.setWidget(content);
     }
   }
   

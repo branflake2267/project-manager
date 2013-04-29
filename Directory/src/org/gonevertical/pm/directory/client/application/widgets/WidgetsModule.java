@@ -7,7 +7,7 @@ import org.gonevertical.pm.directory.client.application.widgets.category.list.Ca
 import org.gonevertical.pm.directory.client.application.widgets.category.select.CategorySelectModule;
 import org.gonevertical.pm.directory.client.application.widgets.header.HeaderModule;
 import org.gonevertical.pm.directory.client.application.widgets.login.LoginModule;
-import org.gonevertical.pm.directory.client.application.widgets.tags.TagsModule;
+import org.gonevertical.pm.directory.client.application.widgets.tag.TagsModule;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.gonevertical.pm.directory.client.application.widgets.archetype.list.columns.CategoryCell;
+import org.gonevertical.pm.directory.client.application.widgets.archetype.list.columns.TagCell;
 import org.gonevertical.pm.directory.client.rest.jso.ArchetypeJso;
 import org.gonevertical.pm.directory.client.rest.jso.CategoryJso;
+import org.gonevertical.pm.directory.client.rest.jso.TagJso;
 
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.Scheduler;
@@ -29,8 +31,7 @@ import com.sencha.gxt.widget.core.client.selection.SelectionChangedEvent;
 import com.sencha.gxt.widget.core.client.selection.SelectionChangedEvent.SelectionChangedHandler;
 import com.sencha.gxt.widget.core.client.toolbar.PagingToolBar;
 
-public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers> implements
-    ArchetypeListPresenter.MyView {
+public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers> implements ArchetypeListPresenter.MyView {
   private static final int PAGE_SIZE = 15;
 
   public interface Binder extends UiBinder<SimpleContainer, ArchetypeListView> {
@@ -63,15 +64,20 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
     toolBar.getElement().getStyle().setProperty("borderBottom", "none");
     toolBar.bind(pagingLoader);
 
-    // Name Column
-    ColumnConfig<ArchetypeJso, String> nameColumn = new ColumnConfig<ArchetypeJso, String>(columnProperties.name(), 100, "Name");
-    ColumnConfig<ArchetypeJso, JsArray<CategoryJso>> nameCategories = new ColumnConfig<ArchetypeJso, JsArray<CategoryJso>>(columnProperties.categories(), 100, "Categories");
-    nameCategories.setCell(new CategoryCell());
+    // Columns
+    ColumnConfig<ArchetypeJso, String> nameColumn = new ColumnConfig<ArchetypeJso, String>(columnProperties.name(), 150, "Name");
+    ColumnConfig<ArchetypeJso, JsArray<CategoryJso>> colCategories = new ColumnConfig<ArchetypeJso, JsArray<CategoryJso>>(columnProperties.categories(), 100, "Categories");
+    ColumnConfig<ArchetypeJso, JsArray<TagJso>> colTags = new ColumnConfig<ArchetypeJso, JsArray<TagJso>>(columnProperties.tags(), 200, "Tags");
+    
+    // Cells
+    colCategories.setCell(new CategoryCell());
+    colTags.setCell(new TagCell());
     
     // Columns
     List<ColumnConfig<ArchetypeJso, ?>> columnConfigList = new ArrayList<ColumnConfig<ArchetypeJso, ?>>();
     columnConfigList.add(nameColumn);
-    columnConfigList.add(nameCategories);
+    columnConfigList.add(colCategories);
+    columnConfigList.add(colTags);
     ColumnModel<ArchetypeJso> columnModel = new ColumnModel<ArchetypeJso>(columnConfigList);
     
     // Grid
@@ -109,7 +115,7 @@ public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers
     FramedPanel framedPanel = new FramedPanel();
     framedPanel.setCollapsible(false);
     framedPanel.setHeadingText("Archetypes");
-    framedPanel.setPixelSize(500, 427);
+    framedPanel.setPixelSize(650, 427);
 
     // Layout Container
     VerticalLayoutContainer vpLayoutCont = new VerticalLayoutContainer();

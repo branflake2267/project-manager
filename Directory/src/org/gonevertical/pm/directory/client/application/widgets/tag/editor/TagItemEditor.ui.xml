@@ -1,0 +1,21 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder 
+    xmlns:ui="urn:ui:com.google.gwt.uibinder" 
+    xmlns:g="urn:import:com.google.gwt.user.client.ui"
+    xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
+    xmlns:button="urn:import:com.sencha.gxt.widget.core.client.button">
+    <ui:style>
+    	.name {
+			width: 200px;
+		}
+    </ui:style>
+    
+    <g:HorizontalPanel>
+        <g:cell verticalAlignment="ALIGN_MIDDLE">
+            <g:HTML ui:field="name" addStyleNames="{style.name}" />
+        </g:cell>
+        <g:cell>
+            <button:TextButton text="X" ui:field="delete" />
+        </g:cell>
+    </g:HorizontalPanel>
+</ui:UiBinder> 

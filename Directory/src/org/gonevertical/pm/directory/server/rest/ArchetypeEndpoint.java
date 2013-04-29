@@ -40,6 +40,7 @@ import com.google.appengine.datanucleus.query.JDOCursorHelper;
     clientIds = { "433818979508.apps.googleusercontent.com" },
     scopes = { "https://www.googleapis.com/auth/userinfo.email" })
 public class ArchetypeEndpoint {
+  
   private static Logger logger = Logger.getLogger(ArchetypeEndpoint.class.getName());
 
   private static final Index INDEX = getIndex();
