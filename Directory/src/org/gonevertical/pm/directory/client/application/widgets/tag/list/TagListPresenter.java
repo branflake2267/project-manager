@@ -69,7 +69,7 @@ public class TagListPresenter extends PresenterWidget<TagListPresenter.MyView> i
     if (!initialized) {
       initialized = true;
 
-      ListStore<TagJso> listStore = createListStore();
+      listStore = createListStore();
       pagingLoader = createPagingLoader(listStore);
       getView().init(tagProperties, listStore, pagingLoader);
 
