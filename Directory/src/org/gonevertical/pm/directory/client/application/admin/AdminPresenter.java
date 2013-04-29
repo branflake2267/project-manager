@@ -2,9 +2,9 @@ package org.gonevertical.pm.directory.client.application.admin;
 
 import org.gonevertical.pm.directory.client.application.ApplicationPresenter;
 import org.gonevertical.pm.directory.client.application.widgets.category.list.CategoryListPresenter;
+import org.gonevertical.pm.directory.client.application.widgets.tag.list.TagListPresenter;
 import org.gonevertical.pm.directory.client.place.NameTokens;
 import org.gonevertical.pm.directory.client.security.LoggedInGatekeeper;
-import org.gonevertical.pm.directory.client.security.LoggedInUser;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -20,31 +20,34 @@ public class AdminPresenter extends Presenter<AdminPresenter.MyView, AdminPresen
   public interface MyView extends View {
   }
 
-  public static final Object TYPE_CategoryPresenter = new Object();
-
-  private final LoggedInUser loggedInuser;
-  private final CategoryListPresenter categoryListPresenter;
+  public static final Object TYPE_CategoryListPresenter = new Object();
+  public static final Object TYPE_TagListPresenter = new Object();
 
   @ProxyStandard
   @NameToken(NameTokens.admin)
   @UseGatekeeper(LoggedInGatekeeper.class)
   public interface MyProxy extends ProxyPlace<AdminPresenter> {
   }
+  
+  private final CategoryListPresenter categoryListPresenter;
+  private final TagListPresenter tagsListPresenter;
 
   @Inject
-  public AdminPresenter(EventBus eventBus, MyView view, MyProxy proxy, LoggedInUser loggedInuser,
-      CategoryListPresenter categoryListPresenter) {
+  public AdminPresenter(EventBus eventBus, MyView view, MyProxy proxy, 
+      CategoryListPresenter categoryListPresenter,
+      TagListPresenter tagListPresenter) {
     super(eventBus, view, proxy, ApplicationPresenter.TYPE_SetMainContent);
     
-    this.loggedInuser = loggedInuser;
     this.categoryListPresenter = categoryListPresenter;
+    this.tagsListPresenter = tagListPresenter;
   }
 
   @Override
   protected void onBind() {
     super.onBind();
     
-    setInSlot(TYPE_CategoryPresenter, categoryListPresenter);
+    setInSlot(TYPE_CategoryListPresenter, categoryListPresenter);
+    setInSlot(TYPE_TagListPresenter, tagsListPresenter);
   }
   
   @Override
@@ -53,5 +56,8 @@ public class AdminPresenter extends Presenter<AdminPresenter.MyView, AdminPresen
     
     categoryListPresenter.display();
     categoryListPresenter.edit(true);
+    
+    tagsListPresenter.display();
+    tagsListPresenter.edit(true);
   }
 }

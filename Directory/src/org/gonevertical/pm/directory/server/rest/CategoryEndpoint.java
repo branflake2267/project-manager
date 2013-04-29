@@ -10,6 +10,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import org.gonevertical.pm.directory.server.domain.Category;
+import org.gonevertical.pm.directory.server.domain.Tag;
 import org.gonevertical.pm.directory.server.domain.dao.JdoUtils;
 import org.gonevertical.pm.directory.server.domain.dao.PMF;
 import org.gonevertical.pm.directory.server.domain.dao.SimpleFilter;
@@ -24,16 +25,38 @@ import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.search.Document;
+import com.google.appengine.api.search.Field;
+import com.google.appengine.api.search.Index;
+import com.google.appengine.api.search.IndexSpec;
+import com.google.appengine.api.search.SearchServiceFactory;
 import com.google.appengine.datanucleus.query.JDOCursorHelper;
 
-@Api(name = "categoryendpoint")
+@Api(
+    name = "categoryendpoint",
+    version = "v1",
+    clientIds = { "433818979508.apps.googleusercontent.com" },
+    scopes = { "https://www.googleapis.com/auth/userinfo.email" })
 public class CategoryEndpoint {
 
-  /**
-   * This method lists all the entities inserted in datastore. It uses HTTP GET method and paging support.
-   * 
-   * @return A CollectionResponse class containing the list of all entities persisted and a cursor to the next page.
-   */
+  private static final Index INDEX = getIndex();
+
+  private static Index getIndex() {
+    IndexSpec indexSpec = IndexSpec.newBuilder().setName("category_index").build();
+    return SearchServiceFactory.getSearchService().getIndex(indexSpec);
+  }
+
+  private static void addToSearchIndex(Category o) {
+    Document.Builder docBuilder = Document
+        .newBuilder()
+        .addField(Field.newBuilder().setName("key").setText(o.getKey()))
+        .addField(Field.newBuilder().setName("name").setText(o.getName() != null ? o.getName() : ""));
+
+    docBuilder.setId(o.getKey());
+    Document doc = docBuilder.build();
+    INDEX.putAsync(doc);
+  }
+
   @SuppressWarnings({"unchecked", "unused"})
   public CollectionResponse<Category> listCategory() {
     PersistenceManager mgr = null;
@@ -75,6 +98,7 @@ public class CategoryEndpoint {
 
   public Category insertCategory(Category category, com.google.appengine.api.users.User guser) {
     category = JdoUtils.persist(category);
+    addToSearchIndex(category);
     return category;
   }
 
@@ -84,6 +108,7 @@ public class CategoryEndpoint {
     }
 
     category = JdoUtils.persist(category);
+    addToSearchIndex(category);
     
     // TODO add children
     category.setHasChildren(true);

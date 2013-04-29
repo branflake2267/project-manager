@@ -19,6 +19,9 @@ public class Tag {
   private String name;
 
   public String getKey() {
+    if (key == null) {
+      return null;
+    }
     return KeyFactory.keyToString(key);
   }
 

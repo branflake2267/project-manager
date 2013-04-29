@@ -2,7 +2,7 @@
   "extends" : "thirdParty.api",
   "abstract" : false,
   "root" : "https://project-manager-directory.appspot.com/_ah/api",
-  "name" : "categoryendpoint",
+  "name" : "tagendpoint",
   "version" : "v1",
   "defaultVersion" : false,
   "adapter" : {
@@ -24,63 +24,13 @@
     "maxAge" : 0
   },
   "methods" : {
-    "categoryendpoint.categoryEndpoint.updateCategory" : {
-      "path" : "category",
-      "httpMethod" : "PUT",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.updateCategory",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "categoryendpoint.categoryEndpoint.getCategory" : {
-      "path" : "category/{id}",
-      "httpMethod" : "GET",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.getCategory",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "categoryendpoint.categoryEndpoint.insertCategory" : {
-      "path" : "category",
-      "httpMethod" : "POST",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.insertCategory",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "categoryendpoint.categoryEndpoint.removeCategory" : {
-      "path" : "category/{id}",
+    "tagendpoint.tagEndpoint.removeTag" : {
+      "path" : "tag/{id}",
       "httpMethod" : "DELETE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.removeCategory",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.TagEndpoint.removeTag",
       "request" : {
         "parameters" : {
           "id" : {
@@ -94,31 +44,75 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "categoryendpoint.categoryEndpoint.listCategory" : {
-      "path" : "category",
+    "tagendpoint.tagEndpoint.updateTag" : {
+      "path" : "tag",
+      "httpMethod" : "PUT",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.TagEndpoint.updateTag",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tagendpoint.tagEndpoint.getTag" : {
+      "path" : "tag/{id}",
       "httpMethod" : "GET",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.listCategory",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.TagEndpoint.getTag",
       "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
         "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "categoryendpoint.category.children" : {
-      "path" : "category/children",
+    "tagendpoint.tagEndpoint.insertTag" : {
+      "path" : "tag",
+      "httpMethod" : "POST",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.TagEndpoint.insertTag",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tagendpoint.tagEndpoint.listTag" : {
+      "path" : "tag",
       "httpMethod" : "GET",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.findChildren",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.TagEndpoint.listTag",
       "request" : {
         "parameters" : {
-          "parentKey" : {
+          "cursor" : {
             "type" : "string",
+            "required" : false
+          },
+          "offset" : {
+            "type" : "int32",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
             "required" : false
           }
         },
@@ -131,24 +125,6 @@
   },
   "descriptor" : {
     "schemas" : {
-      "Category" : {
-        "id" : "Category",
-        "type" : "object",
-        "properties" : {
-          "parent" : {
-            "type" : "string"
-          },
-          "key" : {
-            "type" : "string"
-          },
-          "name" : {
-            "type" : "string"
-          },
-          "hasChildren" : {
-            "type" : "boolean"
-          }
-        }
-      },
       "User" : {
         "id" : "User",
         "type" : "object",
@@ -170,29 +146,26 @@
           }
         }
       },
-      "CollectionResponse_Category" : {
-        "id" : "CollectionResponse_Category",
+      "Tag" : {
+        "id" : "Tag",
         "type" : "object",
         "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Category"
-            }
+          "key" : {
+            "type" : "string"
           },
-          "nextPageToken" : {
+          "name" : {
             "type" : "string"
           }
         }
       },
-      "CollectionResponseExtentsion_Category" : {
-        "id" : "CollectionResponseExtentsion_Category",
+      "CollectionResponseExtentsion_Tag" : {
+        "id" : "CollectionResponseExtentsion_Tag",
         "type" : "object",
         "properties" : {
           "items" : {
             "type" : "array",
             "items" : {
-              "$ref" : "Category"
+              "$ref" : "Tag"
             }
           },
           "nextPageToken" : {
@@ -205,40 +178,35 @@
       }
     },
     "methods" : {
-      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.updateCategory" : {
+      "org.gonevertical.pm.directory.server.rest.TagEndpoint.removeTag" : {
+        "response" : {
+          "$ref" : "Tag"
+        }
+      },
+      "org.gonevertical.pm.directory.server.rest.TagEndpoint.updateTag" : {
         "request" : {
-          "$ref" : "Category"
+          "$ref" : "Tag"
         },
         "response" : {
-          "$ref" : "Category"
+          "$ref" : "Tag"
         }
       },
-      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.getCategory" : {
+      "org.gonevertical.pm.directory.server.rest.TagEndpoint.getTag" : {
         "response" : {
-          "$ref" : "Category"
+          "$ref" : "Tag"
         }
       },
-      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.insertCategory" : {
+      "org.gonevertical.pm.directory.server.rest.TagEndpoint.insertTag" : {
         "request" : {
-          "$ref" : "Category"
+          "$ref" : "Tag"
         },
         "response" : {
-          "$ref" : "Category"
+          "$ref" : "Tag"
         }
       },
-      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.removeCategory" : {
+      "org.gonevertical.pm.directory.server.rest.TagEndpoint.listTag" : {
         "response" : {
-          "$ref" : "Category"
-        }
-      },
-      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.listCategory" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Category"
-        }
-      },
-      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.findChildren" : {
-        "response" : {
-          "$ref" : "CollectionResponseExtentsion_Category"
+          "$ref" : "CollectionResponseExtentsion_Tag"
         }
       }
     }

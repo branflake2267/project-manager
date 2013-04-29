@@ -29,8 +29,7 @@ import com.sencha.gxt.widget.core.client.selection.SelectionChangedEvent;
 import com.sencha.gxt.widget.core.client.selection.SelectionChangedEvent.SelectionChangedHandler;
 import com.sencha.gxt.widget.core.client.toolbar.PagingToolBar;
 
-public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers> implements
-    ArchetypeListPresenter.MyView {
+public class ArchetypeListView extends ViewWithUiHandlers<ArchtypeListUiHandlers> implements ArchetypeListPresenter.MyView {
   private static final int PAGE_SIZE = 15;
 
   public interface Binder extends UiBinder<SimpleContainer, ArchetypeListView> {

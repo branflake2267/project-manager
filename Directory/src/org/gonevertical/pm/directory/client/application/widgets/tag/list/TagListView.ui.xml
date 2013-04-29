@@ -1,0 +1,32 @@
+<ui:UiBinder 
+    xmlns:ui='urn:ui:com.google.gwt.uibinder' 
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'
+    xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
+    xmlns:gxt='urn:import:com.sencha.gxt.widget.core.client' 
+    xmlns:util='urn:import:com.sencha.gxt.core.client.util'
+    xmlns:form='urn:import:com.sencha.gxt.widget.core.client.form' 
+    xmlns:button='urn:import:com.sencha.gxt.widget.core.client.button'>
+    <ui:style>
+        .space {
+			margin-left: 10px;
+		}
+    </ui:style>
+
+    <!--VerticalLayoutData margins -->
+    <ui:with type="com.sencha.gxt.core.client.util.Margins" field="margins">
+        <ui:attributes top="0" right="0" bottom="0" left="0" />
+    </ui:with>
+
+    <!-- VerticalLayoutData layoutData -->
+    <ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData"
+        field="layoutData">
+        <ui:attributes width="-1" height="-1" margins="{margins}" />
+    </ui:with>
+
+    <container:VerticalLayoutContainer>
+        <container:child layoutData="{layoutData}">
+            <container:SimpleContainer ui:field="container" />
+        </container:child>
+    </container:VerticalLayoutContainer>
+        
+</ui:UiBinder>

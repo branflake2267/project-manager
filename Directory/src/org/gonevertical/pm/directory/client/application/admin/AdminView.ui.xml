@@ -1,6 +1,6 @@
 <ui:UiBinder 
-    xmlns:ui='urn:ui:com.google.gwt.uibinder' 
-    xmlns:g='urn:import:com.google.gwt.user.client.ui'
+    xmlns:ui="urn:ui:com.google.gwt.uibinder" 
+    xmlns:g="urn:import:com.google.gwt.user.client.ui"
     xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container">
 
     <!--VerticalLayoutData margins -->
@@ -14,19 +14,31 @@
         <ui:attributes width="-1" height="-1" margins="{margins}" />
     </ui:with>
 
-    <container:SimpleContainer>
+    <container:VerticalLayoutContainer>
+        <container:child layoutData="{layoutData}">
+            <g:HTML>Application Admins Only:</g:HTML>
+        </container:child>
+        <container:child layoutData="{layoutData}">
+            <g:HTML> 
+            </g:HTML>
+        </container:child>
+        <container:child layoutData="{layoutData}">
+            <g:FlowPanel ui:field="urls" />
+        </container:child>
+        <container:child layoutData="{layoutData}">
+            <g:HTML> 
+            </g:HTML>
+        </container:child>
+        <container:child layoutData="{layoutData}">
+            <g:SimplePanel ui:field="categories" />
+        </container:child>
+        <container:child layoutData="{layoutData}">
+            <g:HTML> 
+            </g:HTML>
+        </container:child>
+        <container:child layoutData="{layoutData}">
+            <g:SimplePanel ui:field="tags" />
+        </container:child>
+    </container:VerticalLayoutContainer>
 
-        <container:VerticalLayoutContainer>
-            <container:child layoutData="{layoutData}">
-                <g:HTML>Application Admins Only:</g:HTML>
-            </container:child>
-            <container:child layoutData="{layoutData}">
-                <g:FlowPanel ui:field="urls" />
-            </container:child>
-            <container:child layoutData="{layoutData}">
-                <g:SimplePanel ui:field="categories" />
-            </container:child>
-        </container:VerticalLayoutContainer>
-
-    </container:SimpleContainer>
 </ui:UiBinder>

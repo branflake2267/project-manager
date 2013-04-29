@@ -5,7 +5,7 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gin-2.0.0.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/guice-3.0.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/guice-assistedinject-3.0.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/javax.inject-1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/javax.inject-1.jar" sourcepath="/Users/branflake2267/.m2/repository/javax/inject/javax.inject/1/javax.inject-1-sources.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gwtp-clients-common-1.0-RC-2.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gwtp-mvp-client-1.0-RC-2.jar" sourcepath="/Users/branflake2267/.m2/repository/com/gwtplatform/gwtp-mvp-client/1.0-RC-2/gwtp-mvp-client-1.0-RC-2-sources.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/velocity-1.7.jar"/>
