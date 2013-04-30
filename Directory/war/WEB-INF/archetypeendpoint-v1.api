@@ -1,13 +1,13 @@
 {
   "extends" : "thirdParty.api",
   "abstract" : false,
-  "root" : "https://project-manager-directory.appspot.com/_ah/api",
+  "root" : "https://project-manger.appspot.com/_ah/api",
   "name" : "archetypeendpoint",
   "version" : "v1",
   "description" : "This entity represents a Archetype.",
   "defaultVersion" : false,
   "adapter" : {
-    "bns" : "https://project-manager-directory.appspot.com/_ah/spi",
+    "bns" : "https://project-manger.appspot.com/_ah/spi",
     "deadline" : 10.0,
     "type" : "lily"
   },
@@ -25,21 +25,6 @@
     "maxAge" : 0
   },
   "methods" : {
-    "archetypeendpoint.archetypeEndpoint.updateArchetype" : {
-      "path" : "archetype",
-      "httpMethod" : "PUT",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.updateArchetype",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "archetypeendpoint.archetypeEndpoint.listArchetype" : {
       "path" : "archetype",
       "httpMethod" : "GET",
@@ -63,6 +48,21 @@
           }
         },
         "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "archetypeendpoint.archetypeEndpoint.updateArchetype" : {
+      "path" : "archetype",
+      "httpMethod" : "PUT",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.updateArchetype",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -150,6 +150,24 @@
   },
   "descriptor" : {
     "schemas" : {
+      "CollectionResponseExtentsion_Archetype" : {
+        "id" : "CollectionResponseExtentsion_Archetype",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Archetype"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          },
+          "total" : {
+            "type" : "integer"
+          }
+        }
+      },
       "Archetype" : {
         "id" : "Archetype",
         "type" : "object",
@@ -194,13 +212,13 @@
           "systemUserKey" : {
             "type" : "string"
           },
+          "tagsSearch" : {
+            "type" : "string"
+          },
           "categoriesSearch" : {
             "type" : "string"
           },
           "blobUrl" : {
-            "type" : "string"
-          },
-          "tagsSearch" : {
             "type" : "string"
           }
         }
@@ -255,38 +273,20 @@
             "type" : "string"
           }
         }
-      },
-      "CollectionResponseExtentsion_Archetype" : {
-        "id" : "CollectionResponseExtentsion_Archetype",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Archetype"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          },
-          "total" : {
-            "type" : "integer"
-          }
-        }
       }
     },
     "methods" : {
+      "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.listArchetype" : {
+        "response" : {
+          "$ref" : "CollectionResponseExtentsion_Archetype"
+        }
+      },
       "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.updateArchetype" : {
         "request" : {
           "$ref" : "Archetype"
         },
         "response" : {
           "$ref" : "Archetype"
-        }
-      },
-      "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.listArchetype" : {
-        "response" : {
-          "$ref" : "CollectionResponseExtentsion_Archetype"
         }
       },
       "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.search" : {
