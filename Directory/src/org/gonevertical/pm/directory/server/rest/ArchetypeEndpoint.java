@@ -10,6 +10,7 @@ import javax.inject.Named;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import org.gonevertical.pm.directory.client.rest.SystemProperties;
 import org.gonevertical.pm.directory.server.domain.Archetype;
 import org.gonevertical.pm.directory.server.domain.CurrentUser;
 import org.gonevertical.pm.directory.server.domain.dao.JdoUtils;
@@ -36,7 +37,7 @@ import com.google.appengine.datanucleus.query.JDOCursorHelper;
 @Api(
     name = "archetypeendpoint",
     description = "This entity represents a Archetype.",
-    version = "v1",
+    version = SystemProperties.VERSION,
     clientIds = { "433818979508.apps.googleusercontent.com" },
     scopes = { "https://www.googleapis.com/auth/userinfo.email" })
 public class ArchetypeEndpoint {

@@ -8,8 +8,8 @@ import com.google.inject.Inject;
 
 public class ArchetypeJsoDao extends RestService<ArchetypeJso> {
   
-  private static String endppointPath = "_ah/api/archetypeendpoint/v1/archetype";
-
+  private static String endppointPath = "_ah/api/archetypeendpoint/" + SystemProperties.VERSION + "/archetype";
+  
   @Inject
   public ArchetypeJsoDao(OAuthToken oauth) {
     super(endppointPath, oauth);

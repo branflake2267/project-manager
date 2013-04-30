@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.inject.Named;
 
+import org.gonevertical.pm.directory.client.rest.SystemProperties;
 import org.gonevertical.pm.directory.server.domain.SystemUser;
 import org.gonevertical.pm.directory.server.domain.dao.JdoUtils;
 import org.gonevertical.pm.directory.server.domain.dao.SimpleFilter;
@@ -11,7 +12,9 @@ import org.gonevertical.pm.directory.server.domain.dao.SimpleFilter;
 import com.google.api.server.spi.config.Api;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 
-@Api(name = "systemuserendpoint", version = "v1")
+@Api(
+     name = "systemuserendpoint", 
+     version = SystemProperties.VERSION)
 public class SystemUserEndpoint {
 
   public SystemUser getSystemUser(@Named("key") String encodedKey) {

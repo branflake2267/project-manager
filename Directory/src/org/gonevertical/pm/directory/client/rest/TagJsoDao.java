@@ -12,7 +12,7 @@ import com.google.inject.Inject;
 
 public class TagJsoDao extends RestService<TagJso> {
   
-  private static String endppointPath = "_ah/api/tagendpoint/v1/tag";
+  private static String endppointPath = "_ah/api/tagendpoint/" + SystemProperties.VERSION + "/tag";
 
   @Inject
   public TagJsoDao(OAuthToken oauth) {

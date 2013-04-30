@@ -12,7 +12,7 @@ import com.google.inject.Inject;
 
 public class CategoryJsoDao extends RestService<CategoryJso> {
   
-  private static String endppointPath = "_ah/api/categoryendpoint/v1/category";
+  private static String endppointPath = "_ah/api/categoryendpoint/" + SystemProperties.VERSION + "/category";
 
   @Inject
   public CategoryJsoDao(OAuthToken oauth) {
