@@ -8,7 +8,7 @@ import com.google.inject.Inject;
 
 public class CurrentUserJsoDao extends RestService<CurrentUserJso> {
   
-  private static String endpointPath = "_ah/api/currentuserendpoint/v1/currentuser";
+  private static String endpointPath = "_ah/api/currentuserendpoint/" + SystemProperties.VERSION + "/currentuser";
   
   @Inject
   public CurrentUserJsoDao(OAuthToken oauth) {

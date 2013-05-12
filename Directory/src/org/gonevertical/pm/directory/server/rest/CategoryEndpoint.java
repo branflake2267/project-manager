@@ -9,8 +9,8 @@ import javax.inject.Named;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import org.gonevertical.pm.directory.client.rest.SystemProperties;
 import org.gonevertical.pm.directory.server.domain.Category;
-import org.gonevertical.pm.directory.server.domain.Tag;
 import org.gonevertical.pm.directory.server.domain.dao.JdoUtils;
 import org.gonevertical.pm.directory.server.domain.dao.PMF;
 import org.gonevertical.pm.directory.server.domain.dao.SimpleFilter;
@@ -34,7 +34,7 @@ import com.google.appengine.datanucleus.query.JDOCursorHelper;
 
 @Api(
     name = "categoryendpoint",
-    version = "v1",
+    version = SystemProperties.VERSION,
     clientIds = { "433818979508.apps.googleusercontent.com" },
     scopes = { "https://www.googleapis.com/auth/userinfo.email" })
 public class CategoryEndpoint {

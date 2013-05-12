@@ -1,23 +1,43 @@
 package org.gonevertical.pm.directory.server.domain.dto;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
-public class Archetype {
-
+public class Archetype implements Serializable {
   private String key;
   private String blobKey;
   private String name;
   private String description;
-  private List<String> categories;
-  private List<Category> tags;
-
+  private List<Category> categories;
+  private List<Tag> tags;
   private String repository;
   private String groupId;
   private String artifactId;
   private String version;
-  
+  private Date dateCreated;
   private String systemUserKey;
-  private Long dateCreated;
+  private String categoriesSearch;
+  private String kind;
+
+  public String getCategoriesSearch() {
+    return categoriesSearch;
+  }
+
+  public void setCategoriesSearch(String categoriesSearch) {
+    this.categoriesSearch = categoriesSearch;
+  }
+
+  public String getKind() {
+    return kind;
+  }
+
+  public void setKind(String kind) {
+    this.kind = kind;
+  }
+
+  public Archetype() {
+  }
 
   public String getKey() {
     return key;
@@ -27,8 +47,12 @@ public class Archetype {
     this.key = key;
   }
 
-  public String getBlobUrl() {
+  public String getBlobKey() {
     return blobKey;
+  }
+
+  public void setBlobKey(String blobKey) {
+    this.blobKey = blobKey;
   }
 
   public String getName() {
@@ -47,19 +71,19 @@ public class Archetype {
     this.description = description;
   }
 
-  public List<String> getCategories() {
+  public List<Category> getCategories() {
     return categories;
   }
 
-  public void setCategories(List<String> categories) {
+  public void setCategories(List<Category> categories) {
     this.categories = categories;
   }
 
-  public List<Category> getTags() {
+  public List<Tag> getTags() {
     return tags;
   }
 
-  public void setTags(List<Category> tags) {
+  public void setTags(List<Tag> tags) {
     this.tags = tags;
   }
 
@@ -95,16 +119,19 @@ public class Archetype {
     this.version = version;
   }
 
-  public void setSystemUserKey(String systemUserKey) {
-    this.systemUserKey = systemUserKey;
+  public Date getDateCreated() {
+    return dateCreated;
   }
-  
+
+  public void setDateCreated(Date dateCreated) {
+    this.dateCreated = dateCreated;
+  }
+
   public String getSystemUserKey() {
     return systemUserKey;
   }
-  
-  public Long getDateCreated() {
-    return dateCreated;
+
+  public void setSystemUserKey(String systemUserKey) {
+    this.systemUserKey = systemUserKey;
   }
-  
 }

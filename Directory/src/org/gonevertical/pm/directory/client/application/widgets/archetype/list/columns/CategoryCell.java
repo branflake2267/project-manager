@@ -19,9 +19,18 @@ public class CategoryCell extends AbstractCell<JsArray<CategoryJso>> {
     
     for (int i=0; i < value.length(); i++) {
       CategoryJso category = value.get(i);
-      String s = category.getName();
-      SafeHtml sh = SimpleHtmlSanitizer.sanitizeHtml(s);
-      sb.append(sh);
+      if (category != null) {
+        String s = category.getName();
+        if (s == null) {
+          s = "";
+        }
+        SafeHtml sh = SimpleHtmlSanitizer.sanitizeHtml(s);
+        sb.append(sh);
+        
+        if (i < value.length() - 1) {
+          sb.append(SimpleHtmlSanitizer.sanitizeHtml(", "));
+        }
+      }
     }
   }
 

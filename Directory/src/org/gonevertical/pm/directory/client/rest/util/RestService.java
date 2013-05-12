@@ -3,6 +3,7 @@ package org.gonevertical.pm.directory.client.rest.util;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.gonevertical.pm.directory.client.rest.SystemProperties;
 import org.gonevertical.pm.directory.client.security.OAuthToken;
 
 import com.google.gwt.core.client.GWT;
@@ -32,7 +33,11 @@ public abstract class RestService<T extends JavaScriptObject> {
   }
   
   public String getBaseAndEndpointPath() {
-    return GWT.getHostPageBaseURL() + endpointPath;
+    String url = GWT.getHostPageBaseURL() + endpointPath;
+    if (SystemProperties.getDebugRemote()) {
+      url = "https://project-directory.appspot.com/" + endpointPath;
+    }
+    return url;
   }
 
   public void get(HashMap<String, String> parameters,  final RestHandler<T> handler) {

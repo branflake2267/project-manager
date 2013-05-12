@@ -10,6 +10,7 @@ import javax.inject.Named;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import org.gonevertical.pm.directory.client.rest.SystemProperties;
 import org.gonevertical.pm.directory.server.domain.Tag;
 import org.gonevertical.pm.directory.server.domain.dao.JdoUtils;
 import org.gonevertical.pm.directory.server.domain.dao.PMF;
@@ -18,7 +19,6 @@ import org.gonevertical.pm.directory.server.rest.dto.CollectionResponseExtentsio
 import org.gonevertical.pm.directory.server.rest.errors.CustomErrors;
 
 import com.google.api.server.spi.config.Api;
-import com.google.api.server.spi.response.CollectionResponse;
 import com.google.api.server.spi.response.UnauthorizedException;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.api.search.Document;
@@ -30,7 +30,7 @@ import com.google.appengine.datanucleus.query.JDOCursorHelper;
 
 @Api(
     name = "tagendpoint",
-    version = "v1",
+    version = SystemProperties.VERSION,
     clientIds = { "433818979508.apps.googleusercontent.com" },
     scopes = { "https://www.googleapis.com/auth/userinfo.email" })
 public class TagEndpoint {

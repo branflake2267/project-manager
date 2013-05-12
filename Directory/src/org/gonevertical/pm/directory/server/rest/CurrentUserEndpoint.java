@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javax.annotation.Nullable;
 import javax.inject.Named;
 
+import org.gonevertical.pm.directory.client.rest.SystemProperties;
 import org.gonevertical.pm.directory.server.domain.CurrentUser;
 import org.gonevertical.pm.directory.server.domain.dao.JdoUtils;
 
@@ -16,7 +17,7 @@ import com.google.appengine.api.users.UserServiceFactory;
 
 @Api(
     name = "currentuserendpoint",
-    version = "v1",
+    version = SystemProperties.VERSION,
     clientIds = { "433818979508.apps.googleusercontent.com" },
     scopes = { "https://www.googleapis.com/auth/userinfo.email" })
 public class CurrentUserEndpoint {

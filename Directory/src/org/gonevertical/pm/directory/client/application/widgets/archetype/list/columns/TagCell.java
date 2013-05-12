@@ -18,10 +18,19 @@ public class TagCell extends AbstractCell<JsArray<TagJso>> {
     }
     
     for (int i=0; i < value.length(); i++) {
-      TagJso category = value.get(i);
-      String s = category.getName();
-      SafeHtml sh = SimpleHtmlSanitizer.sanitizeHtml(s);
-      sb.append(sh);
+      TagJso tag = value.get(i);
+      if (tag != null) {
+        String s = tag.getName();
+        if (s == null) {
+          s = "";
+        }
+        SafeHtml sh = SimpleHtmlSanitizer.sanitizeHtml(s);
+        sb.append(sh);
+        
+        if (i < value.length() -1) {
+          sb.append(SimpleHtmlSanitizer.sanitizeHtml(", "));
+        }
+      }
     }
   }
 
