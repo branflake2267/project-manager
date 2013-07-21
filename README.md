@@ -5,7 +5,8 @@ This is my experiment to speed up the creation of projects using Archetypes in E
 * [GWTP Eclipse plugin](https://github.com/ArcBees/gwtp-eclipse-plugin) - Install these archetypes through Eclipse. 
 
 ##Currently
-Got the Archetype editor online working. (03/15/2013)
+* Eclipse plugin now supports creating projects by archetype. (7/21/2013)
+* Archetype editor online and working. (03/15/2013)
 
 ##Editor 
 The online directory editor is under way. 
