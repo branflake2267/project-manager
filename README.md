@@ -38,3 +38,6 @@ The online directory editor is under way.
 
 ##Why
 I was working on the GWTP eclipse plugin and didn't want to rewrite the static source writers and thought it would be faster to create the project from an Archetype. But I created a few to choose from and wanted the choice to choose the Archetype. So I figured it be faster to write my own plugin than wait for someone else to make something like this. In other words, why should spend time on redundant setups.
+
+##Thanks to
+[![Arcbees.com](http://arcbees-ads.appspot.com/ad.png)](http://arcbees.com)
