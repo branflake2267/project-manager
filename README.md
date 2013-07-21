@@ -1,6 +1,9 @@
 ##Project Manager
 This is my experiment to speed up the creation of projects using Archetypes in Eclipse, IDEA and the terminal.
 
+##Reference
+* [GWTP Eclipse plugin](https://github.com/ArcBees/gwtp-eclipse-plugin) - Install these archetypes through Eclipse. 
+
 ##Currently
 Got the Archetype editor online working. (03/15/2013)
 
