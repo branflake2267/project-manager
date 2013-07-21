@@ -11,7 +11,7 @@ This is my experiment to speed up the creation of projects using Archetypes in E
 ##Editor 
 The online directory editor is under way. 
 
-* [Directory Editor](https://project-manager-directory.appspot.com) - Online directory editor. 
+* [Directory Editor](https://project-directory.appspot.com) - Online directory editor. 
 
 ##Source Highlights
 * [Client - GWTP Desktop Archetype Directory](https://github.com/branflake2267/Project-Manager/tree/master/Directory/src/org/gonevertical/pm/directory/client) - GWTP application architecture used for the Desktop app.
