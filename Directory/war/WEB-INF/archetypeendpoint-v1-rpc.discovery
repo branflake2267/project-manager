@@ -1,0 +1,298 @@
+{
+ "kind": "discovery#rpcDescription",
+ "etag": "\"wez405KDp3av28PdV0g9gQEA_Kk/zHHtC1FmyNG7Sz9U72F4RfiL9HI\"",
+ "discoveryVersion": "v1",
+ "id": "archetypeendpoint:v1",
+ "name": "archetypeendpoint",
+ "version": "v1",
+ "description": "This entity represents a Archetype.",
+ "ownerDomain": "google.com",
+ "ownerName": "Google",
+ "icons": {
+  "x16": "http://www.google.com/images/icons/product/search-16.gif",
+  "x32": "http://www.google.com/images/icons/product/search-32.gif"
+ },
+ "protocol": "rpc",
+ "rootUrl": "https://project-directory.appspot.com/_ah/api/",
+ "rpcUrl": "https://project-directory.appspot.com/_ah/api/rpc",
+ "rpcPath": "/_ah/api/rpc",
+ "parameters": {
+  "alt": {
+   "type": "string",
+   "description": "Data format for the response.",
+   "default": "json",
+   "enum": [
+    "json"
+   ],
+   "enumDescriptions": [
+    "Responses with Content-Type of application/json"
+   ],
+   "location": "query"
+  },
+  "fields": {
+   "type": "string",
+   "description": "Selector specifying which fields to include in a partial response.",
+   "location": "query"
+  },
+  "key": {
+   "type": "string",
+   "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+   "location": "query"
+  },
+  "oauth_token": {
+   "type": "string",
+   "description": "OAuth 2.0 token for the current user.",
+   "location": "query"
+  },
+  "prettyPrint": {
+   "type": "boolean",
+   "description": "Returns response with indentations and line breaks.",
+   "default": "true",
+   "location": "query"
+  },
+  "quotaUser": {
+   "type": "string",
+   "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+   "location": "query"
+  },
+  "userIp": {
+   "type": "string",
+   "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+   "location": "query"
+  }
+ },
+ "auth": {
+  "oauth2": {
+   "scopes": {
+    "https://www.googleapis.com/auth/userinfo.email": {
+     "description": "View your email address"
+    }
+   }
+  }
+ },
+ "schemas": {
+  "Archetype": {
+   "id": "Archetype",
+   "type": "object",
+   "properties": {
+    "artifactId": {
+     "type": "string"
+    },
+    "blobUrl": {
+     "type": "string"
+    },
+    "categories": {
+     "type": "array",
+     "items": {
+      "$ref": "Category"
+     }
+    },
+    "categoriesSearch": {
+     "type": "string"
+    },
+    "dateCreated": {
+     "type": "string",
+     "format": "int64"
+    },
+    "description": {
+     "type": "string"
+    },
+    "groupId": {
+     "type": "string"
+    },
+    "key": {
+     "type": "string"
+    },
+    "name": {
+     "type": "string"
+    },
+    "repository": {
+     "type": "string"
+    },
+    "systemUserKey": {
+     "type": "string"
+    },
+    "tags": {
+     "type": "array",
+     "items": {
+      "$ref": "Tag"
+     }
+    },
+    "tagsSearch": {
+     "type": "string"
+    },
+    "version": {
+     "type": "string"
+    }
+   }
+  },
+  "Category": {
+   "id": "Category",
+   "type": "object",
+   "properties": {
+    "hasChildren": {
+     "type": "boolean"
+    },
+    "key": {
+     "type": "string"
+    },
+    "name": {
+     "type": "string"
+    },
+    "parent": {
+     "type": "string"
+    }
+   }
+  },
+  "CollectionResponseExtentsion_Archetype": {
+   "id": "CollectionResponseExtentsion_Archetype",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "Archetype"
+     }
+    },
+    "nextPageToken": {
+     "type": "string"
+    },
+    "total": {
+     "type": "integer",
+     "format": "int32"
+    }
+   }
+  },
+  "Tag": {
+   "id": "Tag",
+   "type": "object",
+   "properties": {
+    "key": {
+     "type": "string"
+    },
+    "name": {
+     "type": "string"
+    }
+   }
+  }
+ },
+ "methods": {
+  "archetypeendpoint.archetype.search": {
+   "id": "archetypeendpoint.archetype.search",
+   "allowGet": true,
+   "parameters": {
+    "limit": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "queryString": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "queryString"
+   ],
+   "returns": {
+    "$ref": "CollectionResponseExtentsion_Archetype"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "archetypeendpoint.archetypeEndpoint.getArchetype": {
+   "id": "archetypeendpoint.archetypeEndpoint.getArchetype",
+   "allowGet": true,
+   "parameters": {
+    "key": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "key"
+   ],
+   "returns": {
+    "$ref": "Archetype"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "archetypeendpoint.archetypeEndpoint.insertArchetype": {
+   "id": "archetypeendpoint.archetypeEndpoint.insertArchetype",
+   "parameters": {
+    "resource": {
+     "$ref": "Archetype"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "Archetype"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "archetypeendpoint.archetypeEndpoint.listArchetype": {
+   "id": "archetypeendpoint.archetypeEndpoint.listArchetype",
+   "allowGet": true,
+   "parameters": {
+    "cursor": {
+     "type": "string"
+    },
+    "limit": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "offset": {
+     "type": "integer",
+     "format": "int32"
+    }
+   },
+   "returns": {
+    "$ref": "CollectionResponseExtentsion_Archetype"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "archetypeendpoint.archetypeEndpoint.removeArchetype": {
+   "id": "archetypeendpoint.archetypeEndpoint.removeArchetype",
+   "parameters": {
+    "key": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "key"
+   ],
+   "returns": {
+    "$ref": "Archetype"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "archetypeendpoint.archetypeEndpoint.updateArchetype": {
+   "id": "archetypeendpoint.archetypeEndpoint.updateArchetype",
+   "parameters": {
+    "resource": {
+     "$ref": "Archetype"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "Archetype"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  }
+ }
+}
