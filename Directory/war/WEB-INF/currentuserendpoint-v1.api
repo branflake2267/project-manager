@@ -47,27 +47,6 @@
   },
   "descriptor" : {
     "schemas" : {
-      "User" : {
-        "id" : "User",
-        "type" : "object",
-        "properties" : {
-          "email" : {
-            "type" : "string"
-          },
-          "authDomain" : {
-            "type" : "string"
-          },
-          "userId" : {
-            "type" : "string"
-          },
-          "federatedIdentity" : {
-            "type" : "string"
-          },
-          "nickname" : {
-            "type" : "string"
-          }
-        }
-      },
       "CurrentUser" : {
         "id" : "CurrentUser",
         "type" : "object",

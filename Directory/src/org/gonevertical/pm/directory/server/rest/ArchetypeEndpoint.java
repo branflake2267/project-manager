@@ -95,7 +95,7 @@ public class ArchetypeEndpoint {
       } else if (limit != null) {
         query.setRange(0, limit);
       } else {
-        query.setRange(0, 15);
+        query.setRange(0, 100);
       }
 
       List<Archetype> items = (List<Archetype>) query.execute();

@@ -24,16 +24,55 @@
     "maxAge" : 0
   },
   "methods" : {
-    "categoryendpoint.categoryEndpoint.updateCategory" : {
-      "path" : "category",
-      "httpMethod" : "PUT",
+    "categoryendpoint.category.children" : {
+      "path" : "category/children",
+      "httpMethod" : "GET",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.updateCategory",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.findChildren",
       "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
+        "parameters" : {
+          "parentKey" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "categoryendpoint.categoryEndpoint.removeCategory" : {
+      "path" : "category/{id}",
+      "httpMethod" : "DELETE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.removeCategory",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "categoryendpoint.categoryEndpoint.listCategory" : {
+      "path" : "category",
+      "httpMethod" : "GET",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.listCategory",
+      "request" : {
+        "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -74,55 +113,16 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "categoryendpoint.categoryEndpoint.removeCategory" : {
-      "path" : "category/{id}",
-      "httpMethod" : "DELETE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.removeCategory",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "categoryendpoint.categoryEndpoint.listCategory" : {
+    "categoryendpoint.categoryEndpoint.updateCategory" : {
       "path" : "category",
-      "httpMethod" : "GET",
+      "httpMethod" : "PUT",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.listCategory",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.updateCategory",
       "request" : {
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "categoryendpoint.category.children" : {
-      "path" : "category/children",
-      "httpMethod" : "GET",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.findChildren",
-      "request" : {
-        "parameters" : {
-          "parentKey" : {
-            "type" : "string",
-            "required" : false
-          }
-        },
-        "body" : "empty"
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -131,6 +131,24 @@
   },
   "descriptor" : {
     "schemas" : {
+      "CollectionResponseExtentsion_Category" : {
+        "id" : "CollectionResponseExtentsion_Category",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Category"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          },
+          "total" : {
+            "type" : "integer"
+          }
+        }
+      },
       "Category" : {
         "id" : "Category",
         "type" : "object",
@@ -149,27 +167,6 @@
           }
         }
       },
-      "User" : {
-        "id" : "User",
-        "type" : "object",
-        "properties" : {
-          "email" : {
-            "type" : "string"
-          },
-          "authDomain" : {
-            "type" : "string"
-          },
-          "userId" : {
-            "type" : "string"
-          },
-          "federatedIdentity" : {
-            "type" : "string"
-          },
-          "nickname" : {
-            "type" : "string"
-          }
-        }
-      },
       "CollectionResponse_Category" : {
         "id" : "CollectionResponse_Category",
         "type" : "object",
@@ -184,33 +181,22 @@
             "type" : "string"
           }
         }
-      },
-      "CollectionResponseExtentsion_Category" : {
-        "id" : "CollectionResponseExtentsion_Category",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Category"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          },
-          "total" : {
-            "type" : "integer"
-          }
-        }
       }
     },
     "methods" : {
-      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.updateCategory" : {
-        "request" : {
-          "$ref" : "Category"
-        },
+      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.findChildren" : {
+        "response" : {
+          "$ref" : "CollectionResponseExtentsion_Category"
+        }
+      },
+      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.removeCategory" : {
         "response" : {
           "$ref" : "Category"
+        }
+      },
+      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.listCategory" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Category"
         }
       },
       "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.getCategory" : {
@@ -226,19 +212,12 @@
           "$ref" : "Category"
         }
       },
-      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.removeCategory" : {
+      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.updateCategory" : {
+        "request" : {
+          "$ref" : "Category"
+        },
         "response" : {
           "$ref" : "Category"
-        }
-      },
-      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.listCategory" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Category"
-        }
-      },
-      "org.gonevertical.pm.directory.server.rest.CategoryEndpoint.findChildren" : {
-        "response" : {
-          "$ref" : "CollectionResponseExtentsion_Category"
         }
       }
     }
