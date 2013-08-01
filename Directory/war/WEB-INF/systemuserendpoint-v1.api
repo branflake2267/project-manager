@@ -24,6 +24,21 @@
     "maxAge" : 0
   },
   "methods" : {
+    "systemuserendpoint.systemUserEndpoint.updateSystemUser" : {
+      "path" : "systemuser",
+      "httpMethod" : "PUT",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.SystemUserEndpoint.updateSystemUser",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "systemuserendpoint.systemUserEndpoint.findByUserId" : {
       "path" : "findByUserId/{userId}",
       "httpMethod" : "POST",
@@ -44,36 +59,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "systemuserendpoint.systemUserEndpoint.updateSystemUser" : {
-      "path" : "systemuser",
-      "httpMethod" : "PUT",
-      "scopes" : [ ],
-      "audiences" : [ ],
-      "clientIds" : [ ],
-      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.SystemUserEndpoint.updateSystemUser",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "systemuserendpoint.systemUserEndpoint.insertSystemUser" : {
-      "path" : "systemuser",
-      "httpMethod" : "POST",
-      "scopes" : [ ],
-      "audiences" : [ ],
-      "clientIds" : [ ],
-      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.SystemUserEndpoint.insertSystemUser",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "systemuserendpoint.systemUserEndpoint.getSystemUser" : {
       "path" : "systemuser/{key}",
       "httpMethod" : "GET",
@@ -89,6 +74,21 @@
           }
         },
         "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "systemuserendpoint.systemUserEndpoint.insertSystemUser" : {
+      "path" : "systemuser",
+      "httpMethod" : "POST",
+      "scopes" : [ ],
+      "audiences" : [ ],
+      "clientIds" : [ ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.SystemUserEndpoint.insertSystemUser",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -120,11 +120,6 @@
       }
     },
     "methods" : {
-      "org.gonevertical.pm.directory.server.rest.SystemUserEndpoint.findByUserId" : {
-        "response" : {
-          "$ref" : "SystemUser"
-        }
-      },
       "org.gonevertical.pm.directory.server.rest.SystemUserEndpoint.updateSystemUser" : {
         "request" : {
           "$ref" : "SystemUser"
@@ -133,15 +128,20 @@
           "$ref" : "SystemUser"
         }
       },
-      "org.gonevertical.pm.directory.server.rest.SystemUserEndpoint.insertSystemUser" : {
-        "request" : {
-          "$ref" : "SystemUser"
-        },
+      "org.gonevertical.pm.directory.server.rest.SystemUserEndpoint.findByUserId" : {
         "response" : {
           "$ref" : "SystemUser"
         }
       },
       "org.gonevertical.pm.directory.server.rest.SystemUserEndpoint.getSystemUser" : {
+        "response" : {
+          "$ref" : "SystemUser"
+        }
+      },
+      "org.gonevertical.pm.directory.server.rest.SystemUserEndpoint.insertSystemUser" : {
+        "request" : {
+          "$ref" : "SystemUser"
+        },
         "response" : {
           "$ref" : "SystemUser"
         }

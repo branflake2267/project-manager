@@ -24,33 +24,13 @@
     "maxAge" : 0
   },
   "methods" : {
-    "tagendpoint.tagEndpoint.removeTag" : {
-      "path" : "tag/{id}",
-      "httpMethod" : "DELETE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.TagEndpoint.removeTag",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "tagendpoint.tagEndpoint.updateTag" : {
+    "tagendpoint.tagEndpoint.insertTag" : {
       "path" : "tag",
-      "httpMethod" : "PUT",
+      "httpMethod" : "POST",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.TagEndpoint.updateTag",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.TagEndpoint.insertTag",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -79,16 +59,36 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "tagendpoint.tagEndpoint.insertTag" : {
+    "tagendpoint.tagEndpoint.updateTag" : {
       "path" : "tag",
-      "httpMethod" : "POST",
+      "httpMethod" : "PUT",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.TagEndpoint.insertTag",
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.TagEndpoint.updateTag",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tagendpoint.tagEndpoint.removeTag" : {
+      "path" : "tag/{id}",
+      "httpMethod" : "DELETE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.TagEndpoint.removeTag",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -125,27 +125,6 @@
   },
   "descriptor" : {
     "schemas" : {
-      "User" : {
-        "id" : "User",
-        "type" : "object",
-        "properties" : {
-          "email" : {
-            "type" : "string"
-          },
-          "authDomain" : {
-            "type" : "string"
-          },
-          "userId" : {
-            "type" : "string"
-          },
-          "federatedIdentity" : {
-            "type" : "string"
-          },
-          "nickname" : {
-            "type" : "string"
-          }
-        }
-      },
       "Tag" : {
         "id" : "Tag",
         "type" : "object",
@@ -178,12 +157,7 @@
       }
     },
     "methods" : {
-      "org.gonevertical.pm.directory.server.rest.TagEndpoint.removeTag" : {
-        "response" : {
-          "$ref" : "Tag"
-        }
-      },
-      "org.gonevertical.pm.directory.server.rest.TagEndpoint.updateTag" : {
+      "org.gonevertical.pm.directory.server.rest.TagEndpoint.insertTag" : {
         "request" : {
           "$ref" : "Tag"
         },
@@ -196,10 +170,15 @@
           "$ref" : "Tag"
         }
       },
-      "org.gonevertical.pm.directory.server.rest.TagEndpoint.insertTag" : {
+      "org.gonevertical.pm.directory.server.rest.TagEndpoint.updateTag" : {
         "request" : {
           "$ref" : "Tag"
         },
+        "response" : {
+          "$ref" : "Tag"
+        }
+      },
+      "org.gonevertical.pm.directory.server.rest.TagEndpoint.removeTag" : {
         "response" : {
           "$ref" : "Tag"
         }
