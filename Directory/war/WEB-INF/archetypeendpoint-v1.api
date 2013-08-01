@@ -45,21 +45,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "archetypeendpoint.archetypeEndpoint.insertArchetype" : {
-      "path" : "archetype",
-      "httpMethod" : "POST",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
-      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.insertArchetype",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "archetypeendpoint.archetypeEndpoint.removeArchetype" : {
       "path" : "archetype/{key}",
       "httpMethod" : "DELETE",
@@ -75,6 +60,21 @@
           }
         },
         "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "archetypeendpoint.archetypeEndpoint.insertArchetype" : {
+      "path" : "archetype",
+      "httpMethod" : "POST",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "433818979508.apps.googleusercontent.com" ],
+      "rosyMethod" : "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.insertArchetype",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -260,15 +260,15 @@
           "$ref" : "Archetype"
         }
       },
-      "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.insertArchetype" : {
-        "request" : {
-          "$ref" : "Archetype"
-        },
+      "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.removeArchetype" : {
         "response" : {
           "$ref" : "Archetype"
         }
       },
-      "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.removeArchetype" : {
+      "org.gonevertical.pm.directory.server.rest.ArchetypeEndpoint.insertArchetype" : {
+        "request" : {
+          "$ref" : "Archetype"
+        },
         "response" : {
           "$ref" : "Archetype"
         }
